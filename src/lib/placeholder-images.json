@@ -103,10 +103,10 @@
       "imageHint": "woman smiling"
     },
     {
-      "id": "headphone-image",
-      "description": "Person with headphones",
-      "imageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "imageHint": "headphones"
+      "id": "robot-lifecycle",
+      "description": "A robot in the center of a development lifecycle diagram",
+      "imageUrl": "https://storage.googleapis.com/aifire.co-images/app-dev-robot.png",
+      "imageHint": "robot lifecycle"
     }
   ]
 }

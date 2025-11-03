@@ -20,7 +20,7 @@ export const applicationDevelopmentServices = [
 
 export const topServices = [
   {
-    title: 'Afiliated Marketing Services',
+    title: 'Affiliated Marketing Services',
     description: 'We empower our clients with result-driven affiliate marketing strategies across SEO, PPC, social media, content, influencers, and more — ensuring seamless performance, scalability, and customer engagement.',
   },
   {

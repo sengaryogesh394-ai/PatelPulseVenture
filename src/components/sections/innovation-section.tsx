@@ -1,27 +1,56 @@
-
 'use client';
-import type { Innovation } from '@/lib/types';
 import { cn } from "@/lib/utils";
 import { Lightbulb, Bot, ShieldCheck, Zap, Briefcase, Rocket, Settings, Heart } from "lucide-react";
 import React from 'react';
 
-const iconMap: { [key: string]: React.ReactNode } = {
-  'default': <Lightbulb />,
-  '1': <Bot />,
-  '2': <ShieldCheck />,
-  '3': <Zap />,
-  '4': <Briefcase />,
-  '5': <Rocket />,
-  '6': <Settings />,
-  '7': <Heart />,
-};
+const IconEaseInOut = () => <Lightbulb />;
 
+const features = [
+    {
+      title: "Decentralized Ledger Technology",
+      description: "Exploring novel applications of blockchain for secure, transparent, and efficient data management across industries.",
+      icon: <Bot />,
+    },
+    {
+      title: "AI-Driven Drug Discovery",
+      description: "Utilizing machine learning models to accelerate the identification and development of new pharmaceuticals.",
+      icon: <IconEaseInOut />,
+    },
+    {
+      title: "Next-Gen IoT Security",
+      description: "Building robust security protocols for the Internet of Things to protect against emerging cyber threats.",
+      icon: <ShieldCheck />,
+    },
+    {
+      title: "100% Uptime guarantee",
+      description: "We just cannot be taken down by anyone.",
+      icon: <Zap />,
+    },
+    {
+      title: "Multi-tenant Architecture",
+      description: "You can simply share passwords instead of buying new seats",
+      icon: <Briefcase />,
+    },
+    {
+      title: "24/7 Customer Support",
+      description:
+        "We are available a 100% of the time. Atleast our AI Agents are.",
+      icon: <Rocket />,
+    },
+    {
+      title: "Money back guarantee",
+      description:
+        "If you donot like our services, we will convince you to like us.",
+      icon: <Settings />,
+    },
+    {
+      title: "And everything else",
+      description: "We deliver on our promises and exceed expectations.",
+      icon: <Heart />,
+    },
+  ];
 
-interface InnovationSectionProps {
-  innovations: Innovation[];
-}
-
-export default function InnovationSection({ innovations }: InnovationSectionProps) {
+export default function InnovationSection() {
   return (
     <section id="innovation" className="py-20 sm:py-28">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -29,9 +58,9 @@ export default function InnovationSection({ innovations }: InnovationSectionProp
         <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             At the forefront of research and development, we explore emerging technologies that will shape tomorrow.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative z-10 py-10 max-w-7xl mx-auto">
-            {innovations.map((feature, index) => (
-                <Feature key={feature.id} {...feature} index={index} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 py-10 max-w-7xl mx-auto">
+            {features.map((feature, index) => (
+                <Feature key={feature.title} {...feature} index={index} />
             ))}
         </div>
       </div>
@@ -40,17 +69,17 @@ export default function InnovationSection({ innovations }: InnovationSectionProp
 }
 
 const Feature = ({
-  id,
   title,
   description,
+  icon,
   index,
 }: {
-  id: string;
   title: string;
   description: string;
+  icon: React.ReactNode;
   index: number;
 }) => {
-  const totalFeatures = 3; // Assuming 3 features for grid layout
+  const totalFeatures = 4;
   return (
     <div
       className={cn(
@@ -66,7 +95,7 @@ const Feature = ({
         <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-secondary to-transparent pointer-events-none" />
       )}
       <div className="mb-4 relative z-10 px-10 text-primary">
-        {iconMap[id] || iconMap.default}
+        {icon}
       </div>
       <div className="text-lg font-bold mb-2 relative z-10 px-10">
         <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-border group-hover/feature:bg-primary transition-all duration-200 origin-center" />

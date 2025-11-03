@@ -1,73 +1,137 @@
 
 'use client';
-import type { TeamMember } from '@/lib/types';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { motion } from 'framer-motion';
 
-interface TeamSectionProps {
-  teamMembers: TeamMember[];
+import * as React from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { cn } from "@/lib/utils";
+
+// Define the type for each team member
+interface TeamMember {
+  name: string;
+  image: string;
 }
 
-export default function TeamSection({ teamMembers }: TeamSectionProps) {
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.2 } },
+// Define the props for the component
+export interface AnimatedTeamSectionProps {
+  title: string;
+  description: string;
+  members: TeamMember[];
+  className?: string;
+}
+
+// Helper function to calculate the final transform values for each card
+const getCardState = (index: number, total: number) => {
+  const centerIndex = (total - 1) / 2;
+  const distanceFromCenter = index - centerIndex;
+
+  // Horizontal spread to ensure cards are wide apart
+  const x = distanceFromCenter * 90;
+  // Vertical lift to form the curve
+  const y = Math.abs(distanceFromCenter) * -30;
+  // Rotation for the fanned effect
+  const rotate = distanceFromCenter * 12;
+
+  return { x, y, rotate };
+};
+
+const TeamSection = React.forwardRef<
+  HTMLDivElement,
+  AnimatedTeamSectionProps
+>(({ title, description, members, className, ...props }, ref) => {
+  const controls = useAnimation();
+  const [inViewRef, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
+  React.useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  // Animation for the container to stagger children
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
   };
 
+  // REBUILT ANIMATION LOGIC: Integrated positioning directly into framer-motion
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    // All cards start at the center, scaled down
+    hidden: { opacity: 0, scale: 0.5, x: 0, y: 0, rotate: 0 },
+    // Animate to the final calculated position
+    visible: (i: number) => ({
+      opacity: 1,
+      scale: 1,
+      x: getCardState(i, members.length).x,
+      y: getCardState(i, members.length).y,
+      rotate: getCardState(i, members.length).rotate,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 12,
+      },
+    }),
   };
 
   return (
-    <motion.section 
-      id="team" 
-      className="py-20 sm:py-28 bg-secondary"
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+    <section
+      id="team"
+      ref={ref}
+      className={cn("w-full py-20 lg:py-28 overflow-hidden bg-secondary", className)}
+      {...props}
     >
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div variants={itemVariants}>
-          <h2 className="text-3xl font-bold tracking-tight text-center font-headline sm:text-4xl">Our Team</h2>
-          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
-            A collective of scientists, investors, and innovators driven by a shared passion for technology.
-          </p>
-        </motion.div>
+      <div className="container mx-auto flex flex-col items-center text-center px-4">
+        {/* Section Header */}
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-3 font-headline">
+          {title}
+        </h2>
+        <p className="max-w-3xl text-muted-foreground md:text-xl">
+          {description}
+        </p>
 
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {teamMembers.map((member) => {
-            const memberImage = PlaceHolderImages.find(p => p.id === member.imageId);
-            return (
-              <motion.div
-                key={member.id}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                <Card className="text-center h-full flex flex-col items-center p-6 transition-shadow duration-300 hover:shadow-xl">
-                  {memberImage && (
-                    <Avatar className="w-32 h-32 mb-4 border-4 border-background shadow-md">
-                      <AvatarImage src={memberImage.imageUrl} alt={member.name} data-ai-hint={memberImage.imageHint} />
-                      <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                  )}
-                  <CardHeader className="p-0">
-                    <CardTitle className="font-headline">{member.name}</CardTitle>
-                    <CardDescription className="text-primary">{member.role}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-0 mt-4">
-                    <p className="text-muted-foreground">{member.bio}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            );
-          })}
-        </div>
+        {/* Sized container for the absolute positioning */}
+        <motion.div
+          ref={inViewRef}
+          className="relative mt-20 flex items-center justify-center"
+          style={{ minHeight: "250px" }}
+          variants={containerVariants}
+          initial="hidden"
+          animate={controls}
+        >
+          {members.map((member, index) => (
+            <motion.div
+              key={index}
+              className="absolute w-28 h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-xl overflow-hidden shadow-lg border-2 border-background"
+              custom={index} // Pass index to variants for calculation
+              variants={itemVariants}
+              // Set initial zIndex based on distance from center
+              style={{ zIndex: members.length - Math.abs(index - (members.length - 1) / 2) }}
+              whileHover={{
+                scale: 1.1,
+                zIndex: 99,
+                transition: { type: "spring", stiffness: 300, damping: 20 },
+              }}
+            >
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
-}
+});
+
+TeamSection.displayName = "TeamSection";
+
+export default TeamSection;

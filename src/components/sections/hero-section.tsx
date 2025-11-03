@@ -60,10 +60,10 @@ export default function HeroSection() {
         </motion.p>
         <motion.div className="mt-10 flex gap-4" variants={itemVariants}>
           <Button asChild size="lg" className="rounded-full">
-            <Link href="#services">Explore Our Work</Link>
+            <Link href="/services">Explore Our Work</Link>
           </Button>
           <Button asChild variant="secondary" size="lg" className="rounded-full">
-            <Link href="#contact">Get in Touch</Link>
+            <Link href="/contact">Get in Touch</Link>
           </Button>
         </motion.div>
       </motion.div>

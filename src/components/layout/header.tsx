@@ -12,11 +12,11 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { Logo } from '@/components/ui/logo';
 
 const navLinks = [
-  { href: '#services', label: 'Our Services' },
-  { href: '#innovation', label: 'Innovation Lab' },
-  { href: '#testimonials', label: 'Testimonials' },
-  { href: '#team', label: 'Team' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/services', label: 'Our Services' },
+  { href: '/innovation', label: 'Innovation Lab' },
+  { href: '/testimonials', label: 'Testimonials' },
+  { href: '/team', label: 'Team' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Header() {

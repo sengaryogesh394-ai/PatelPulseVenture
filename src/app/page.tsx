@@ -25,12 +25,12 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <ServicesSection services={services} />
+      <ServicesSection services={services.slice(0, 4)} />
       <ApplicationDevelopmentSection />
       <IntegrationHero />
       <InnovationSection />
       <TechStackSection />
-      <TestimonialSection testimonials={testimonials} />
+      <TestimonialSection testimonials={testimonials.slice(0, 3)} />
       <TeamSection 
         title="Our commitment to integrity and innovation"
         description="A collective of scientists, investors, and innovators driven by a shared passion for technology."

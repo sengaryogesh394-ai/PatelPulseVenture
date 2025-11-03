@@ -1,5 +1,6 @@
+
 import Link from 'next/link';
-import { Zap } from 'lucide-react';
+import { Rocket } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -11,7 +12,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             href="/"
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
           >
-            <Zap className="h-6 w-6 text-primary" />
+            <Rocket className="h-6 w-6 text-primary" />
             <span className="sr-only">Pate Pulse Venture</span>
           </Link>
           <Link

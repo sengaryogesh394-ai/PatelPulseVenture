@@ -1,3 +1,4 @@
+
 export interface Service {
   id: string;
   name: string;
@@ -17,5 +18,12 @@ export interface TeamMember {
   name: string;
   role: string;
   bio: string;
+  imageId: string;
+}
+
+export interface Venture {
+  id: string;
+  name: string;
+  description: string;
   imageId: string;
 }

@@ -1,30 +1,55 @@
-import type { Service, Innovation, TeamMember } from './types';
+
+import type { Service, Innovation, TeamMember, Venture } from './types';
 
 export const services: Service[] = [
   {
     id: '1',
-    name: 'Venture Capital',
-    description: 'Providing strategic investment and mentorship to early-stage technology startups with high growth potential.',
+    name: 'Website Development',
+    description: 'We empower our clients with dynamic, responsive website builds using PHP, Java, .NET, Wordpress, React JS, React Native, Drupal, CMS, and more — ensuring seamless performance, scalability, and user engagement.',
     imageId: 'venture-1',
   },
   {
     id: '2',
-    name: 'Technology Incubation',
-    description: 'Nurturing innovative ideas from concept to market-ready products through our in-house incubation program.',
+    name: 'Mobile app Development',
+    description: 'We build high-performance Android and iOS apps with seamless user experiences, ensuring innovation and scalability for your business.',
     imageId: 'venture-2',
   },
   {
     id: '3',
-    name: 'AI & ML Solutions',
-    description: 'Developing custom artificial intelligence and machine learning solutions to solve complex business challenges.',
+    name: 'Digital Marketing Services',
+    description: 'We craft data-driven digital marketing strategies that boost visibility, engage audiences, and drive scalable growth for your business across all online platforms.',
     imageId: 'venture-3',
   },
   {
     id: '4',
-    name: 'Strategic Advisory',
-    description: 'Offering expert guidance on technology strategy, market entry, and digital transformation for established enterprises.',
+    name: 'Software Development',
+    description: 'We build high-performance Android and iOS apps with seamless user experiences, ensuring innovation and scalability for your business.',
     imageId: 'venture-4',
   },
+  {
+    id: '5',
+    name: 'IOT DEVELOPMENT',
+    description: 'We design and develop innovative IoT solutions — connecting devices, platforms, and applications to help businesses transform ideas into smart, data-driven digital experiences',
+    imageId: 'iot-1',
+  },
+  {
+    id: '6',
+    name: 'UX & UI Designs',
+    description: 'We design and craft intuitive UX and UI experiences — helping businesses turn concepts into visually engaging and user-friendly digital products.',
+    imageId: 'venture-2'
+  },
+   {
+    id: '7',
+    name: 'Cloud & DevOps',
+    description: 'We build high-performance Android and iOS apps with seamless user experiences, ensuring innovation and scalability for your business.',
+    imageId: 'venture-3'
+  },
+  {
+    id: '8',
+    name: 'SEO/SEM',
+    description: 'Boost your website’s visibility with our SEO services. We optimize your site for higher rankings, increased traffic, and better conversions.',
+    imageId: 'venture-1'
+  }
 ];
 
 export const innovations: Innovation[] = [
@@ -71,3 +96,30 @@ export const teamMembers: TeamMember[] = [
     imageId: 'team-3',
   },
 ];
+
+export const ventures: Venture[] = [
+    {
+    id: '1',
+    name: 'QuantumLeap',
+    description: 'A quantum computing startup poised to revolutionize data encryption and solve complex computational problems.',
+    imageId: 'venture-1'
+    },
+    {
+    id: '2',
+    name: 'SynthoBio',
+    description: 'Engineering synthetic organisms for sustainable manufacturing and next-generation pharmaceuticals.',
+    imageId: 'venture-2'
+    },
+    {
+    id: '3',
+    name: 'CogniSphere',
+    description: 'An AI platform that provides deep insights into consumer behavior and market trends through advanced data analysis.',
+    imageId: 'venture-3'
+    },
+    {
+    id: '4',
+    name: 'HelioDrive',
+    description: 'Developing next-generation perovskite solar cells to make clean energy more accessible and efficient.',
+    imageId: 'venture-4'
+    }
+]

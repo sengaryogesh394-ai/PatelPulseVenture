@@ -1,8 +1,9 @@
+
 'use client';
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Menu, Zap } from 'lucide-react';
+import { Menu, Rocket } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,7 @@ import { ThemeToggle } from '@/components/theme-toggle';
 
 const navLinks = [
   { href: '#services', label: 'Our Services' },
+  { href: '#ventures', label: 'Our Ventures' },
   { href: '#innovation', label: 'Innovation Lab' },
   { href: '#team', label: 'Team' },
   { href: '#contact', label: 'Contact' },
@@ -37,7 +39,7 @@ export default function Header() {
     >
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <Zap className="h-6 w-6 text-primary" />
+          <Rocket className="h-6 w-6 text-primary" />
           <span className="font-headline">Pate Pulse Venture</span>
         </Link>
 
@@ -71,7 +73,7 @@ export default function Header() {
             <SheetContent side="left">
               <div className="flex flex-col gap-4 p-4">
                 <Link href="/" className="flex items-center gap-2 font-bold text-lg" onClick={() => setMobileMenuOpen(false)}>
-                  <Zap className="h-6 w-6 text-primary" />
+                  <Rocket className="h-6 w-6 text-primary" />
                   <span className="font-headline">Pate Pulse</span>
                 </Link>
                 <nav className="flex flex-col gap-4">

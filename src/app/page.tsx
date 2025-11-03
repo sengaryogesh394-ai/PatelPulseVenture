@@ -8,6 +8,7 @@ import TestimonialSection from '@/components/sections/testimonial-section';
 import { services, teamMembers, testimonials } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import IntegrationHero from '@/components/sections/integration-hero';
+import TechStackSection from '@/components/sections/tech-stack-section';
 
 export default function Home() {
 
@@ -26,6 +27,7 @@ export default function Home() {
       <ServicesSection services={services} />
       <IntegrationHero />
       <InnovationSection />
+      <TechStackSection />
       <TestimonialSection testimonials={testimonials} />
       <TeamSection 
         title="Our commitment to integrity and innovation"

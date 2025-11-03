@@ -15,9 +15,10 @@ type IconType =
   | 'java'
   | 'dotnet'
   | 'wordpress'
-  | 'drupal';
+  | 'drupal'
+  | 'flutter';
 
-type GlowColor = 'cyan' | 'purple' | 'green' | 'red';
+type GlowColor = 'cyan' | 'purple' | 'green' | 'red' | 'blue';
 
 interface SkillIconProps {
   type: IconType;
@@ -106,6 +107,18 @@ const iconComponents: Record<IconType, { component: () => React.JSX.Element; col
       </svg>
     ),
     color: '#61DAFB',
+  },
+  flutter: {
+    component: () => (
+      <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
+        <path
+          d="M13.69.52l-10 10L13.14 20h6.33L9.63 10.15 22.16 2.6z"
+          fill="#027DFD"
+        />
+        <path d="M13.14 20l-3.5-3.5L19.5 6.63z" fill="#02569B" />
+      </svg>
+    ),
+    color: '#027DFD',
   },
   node: {
     component: () => (
@@ -239,7 +252,7 @@ const skillsConfig: SkillConfig[] = [
     speed: -0.6,
     iconType: 'node',
     phaseShift: Math.PI,
-    glowColor: 'purple',
+    glowColor: 'green',
     label: 'Node.js',
   },
   {
@@ -269,7 +282,7 @@ const skillsConfig: SkillConfig[] = [
     size: 45,
     speed: 0.4,
     iconType: 'java',
-    phaseShift: Math.PI / 3,
+    phaseShift: Math.PI / 4,
     glowColor: 'red',
     label: 'Java',
   },
@@ -302,6 +315,16 @@ const skillsConfig: SkillConfig[] = [
     phaseShift: (4 * Math.PI) / 3,
     glowColor: 'cyan',
     label: 'Drupal',
+  },
+  {
+    id: 'flutter',
+    orbitRadius: 260,
+    size: 40,
+    speed: 0.4,
+    iconType: 'flutter',
+    phaseShift: (5 * Math.PI) / 3,
+    glowColor: 'blue',
+    label: 'Flutter',
   },
 ];
 
@@ -373,6 +396,11 @@ const GlowingOrbitPath = memo(({ radius, glowColor = 'cyan', animationDelay = 0 
       secondary: 'hsl(0 80% 50% / 0.2)',
       border: 'hsl(0 80% 50% / 0.3)',
     },
+    blue: {
+      primary: 'hsl(210 80% 50% / 0.4)',
+      secondary: 'hsl(210 80% 50% / 0.2)',
+      border: 'hsl(210 80% 50% / 0.3)',
+    }
   };
 
   const colors = glowColors[glowColor] || glowColors.cyan;

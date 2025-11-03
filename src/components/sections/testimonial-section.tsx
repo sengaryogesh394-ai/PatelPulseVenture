@@ -1,87 +1,132 @@
 'use client';
-import type { Testimonial } from '@/lib/types';
-import { Card, CardContent } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
 
-interface TestimonialSectionProps {
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import type { Testimonial } from '@/lib/types';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+
+interface AnimatedTestimonialsProps {
   testimonials: Testimonial[];
+  autoplay?: boolean;
 }
 
-export default function TestimonialSection({ testimonials }: TestimonialSectionProps) {
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+const AnimatedTestimonials = ({ testimonials, autoplay = true }: AnimatedTestimonialsProps) => {
+  const [active, setActive] = useState(0);
+
+  const handleNext = useCallback(() => {
+    setActive((prev) => (prev + 1) % testimonials.length);
+  }, [testimonials.length]);
+
+  const handlePrev = () => {
+    setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  return (
-    <motion.section
-      id="testimonials"
-      className="py-20 sm:py-28"
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div variants={sectionVariants}>
-          <h2 className="text-3xl font-bold tracking-tight text-center font-headline sm:text-4xl">What Our Clients Say</h2>
-          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
-            We are trusted by leading companies and visionary founders.
-          </p>
-        </motion.div>
+  useEffect(() => {
+    if (!autoplay) return;
+    const interval = setInterval(handleNext, 5000);
+    return () => clearInterval(interval);
+  }, [autoplay, handleNext]);
 
-        <motion.div className="mt-16" variants={sectionVariants}>
-          <Carousel
-            opts={{
-              align: 'start',
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent>
-              {testimonials.map((testimonial) => {
-                const testimonialImage = PlaceHolderImages.find(p => p.id === testimonial.imageId);
-                return (
-                  <CarouselItem key={testimonial.id} className="md:basis-1/2 lg:basis-1/3">
-                    <div className="p-4 h-full">
-                      <Card className="h-full flex flex-col justify-between p-6 bg-secondary/50">
-                        <CardContent className="p-0">
-                          <Quote className="w-8 h-8 text-primary mb-4" />
-                          <p className="text-muted-foreground italic">&quot;{testimonial.quote}&quot;</p>
-                        </CardContent>
-                        <div className="mt-6 flex items-center gap-4">
-                          {testimonialImage && (
-                            <Avatar className="w-14 h-14 border-2 border-primary">
-                              <AvatarImage src={testimonialImage.imageUrl} alt={testimonial.name} data-ai-hint={testimonialImage.imageHint} />
-                              <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                          )}
-                          <div>
-                            <p className="font-semibold text-foreground">{testimonial.name}</p>
-                            <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                          </div>
-                        </div>
-                      </Card>
+  const isActive = (index: number) => index === active;
+
+  const randomRotate = () => `${Math.floor(Math.random() * 16) - 8}deg`;
+
+  return (
+    <section id="testimonials" className="py-20 sm:py-28">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold tracking-tight text-center font-headline sm:text-4xl">What Our Clients Say</h2>
+            <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
+                We are trusted by leading companies and visionary founders.
+            </p>
+            <div className="relative grid grid-cols-1 gap-y-12 md:grid-cols-2 md:gap-x-20 mt-16">
+                {/* Image Section */}
+                <div className="flex items-center justify-center">
+                    <div className="relative h-80 w-full max-w-xs">
+                    <AnimatePresence>
+                        {testimonials.map((testimonial, index) => {
+                        const testimonialImage = PlaceHolderImages.find(p => p.id === testimonial.imageId);
+                        return (
+                            <motion.div
+                                key={testimonial.id}
+                                initial={{ opacity: 0, scale: 0.9, y: 50, rotate: randomRotate() }}
+                                animate={{
+                                    opacity: isActive(index) ? 1 : 0.5,
+                                    scale: isActive(index) ? 1 : 0.9,
+                                    y: isActive(index) ? 0 : 20,
+                                    zIndex: isActive(index) ? testimonials.length : testimonials.length - Math.abs(index - active),
+                                    rotate: isActive(index) ? '0deg' : randomRotate(),
+                                }}
+                                exit={{ opacity: 0, scale: 0.9, y: -50 }}
+                                transition={{ duration: 0.5, ease: "easeInOut" }}
+                                className="absolute inset-0 origin-bottom"
+                                style={{ perspective: '1000px' }}
+                            >
+                                {testimonialImage && (
+                                    <Image
+                                        src={testimonialImage.imageUrl}
+                                        alt={testimonial.name}
+                                        width={500}
+                                        height={500}
+                                        draggable={false}
+                                        className="h-full w-full rounded-3xl object-cover shadow-2xl"
+                                    />
+                                )}
+                            </motion.div>
+                        )})}
+                    </AnimatePresence>
                     </div>
-                  </CarouselItem>
-                );
-              })}
-            </CarouselContent>
-            <CarouselPrevious className="hidden md:flex" />
-            <CarouselNext className="hidden md:flex" />
-          </Carousel>
-        </motion.div>
-      </div>
-    </motion.section>
+                </div>
+
+                {/* Text and Controls Section */}
+                <div className="flex flex-col justify-center py-4">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                    key={active}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="flex flex-col justify-between"
+                    >
+                        <div>
+                            <h3 className="text-2xl font-bold text-foreground">
+                                {testimonials[active].name}
+                            </h3>
+                            <p className="text-sm text-muted-foreground">
+                                {testimonials[active].role}
+                            </p>
+                            <motion.p className="mt-8 text-lg text-muted-foreground">
+                                &quot;{testimonials[active].quote}&quot;
+                            </motion.p>
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
+                <div className="flex gap-4 pt-12">
+                    <button
+                    onClick={handlePrev}
+                    aria-label="Previous testimonial"
+                    className="group flex h-10 w-10 items-center justify-center rounded-full bg-secondary transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                    >
+                    <ArrowLeft className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:-translate-x-1" />
+                    </button>
+                    <button
+                    onClick={handleNext}
+                    aria-label="Next testimonial"
+                    className="group flex h-10 w-10 items-center justify-center rounded-full bg-secondary transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                    >
+                    <ArrowRight className="h-5 w-5 text-foreground transition-transform duration-300 group-hover:translate-x-1" />
+                    </button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
   );
+};
+
+
+export default function TestimonialSection({ testimonials }: { testimonials: Testimonial[] }) {
+    return <AnimatedTestimonials testimonials={testimonials} />;
 }

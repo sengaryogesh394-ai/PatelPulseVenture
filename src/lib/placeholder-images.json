@@ -74,21 +74,33 @@
     },
     {
       "id": "testimonial-1",
-      "description": "Placeholder for testimonial author 1",
-      "imageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNXx8cHJvZmVzc2lvbmFsJTIwaGVhZHNob3R8ZW58MHx8fHwxNzYyMDg0ODI3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "professional headshot"
+      "description": "Priya Sharma",
+      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "woman portrait"
     },
     {
       "id": "testimonial-2",
-      "description": "Placeholder for testimonial author 2",
-      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdCUyMHdvbWFufGVufDB8fHx8MTc2MjA3NTE3NXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "professional portrait"
+      "description": "Marcus Johnson",
+      "imageUrl": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "man portrait"
     },
     {
       "id": "testimonial-3",
-      "description": "Placeholder for testimonial author 3",
-      "imageUrl": "https://images.unsplash.com/photo-1557862921-37829c790f19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdCUyMG1hbnxlbnwwfHx8fDE3NjIwNzUxNzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "professional portrait"
+      "description": "Isabella Rossi",
+      "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "woman headshot"
+    },
+    {
+      "id": "testimonial-4",
+      "description": "Kenji Tanaka",
+      "imageUrl": "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "man headshot"
+    },
+    {
+      "id": "testimonial-5",
+      "description": "Fatima Al-Jamil",
+      "imageUrl": "https://images.unsplash.com/photo-1557053910-d9eadeed1c58?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "woman smiling"
     }
   ]
 }

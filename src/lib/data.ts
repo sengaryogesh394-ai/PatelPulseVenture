@@ -127,23 +127,42 @@ export const ventures: Venture[] = [
 export const testimonials: Testimonial[] = [
   {
     id: '1',
-    quote: 'Working with this team has been a transformative experience. Their expertise in deep tech and market strategy is unparalleled. They turned our raw concept into a market-leading product.',
-    name: 'John Doe',
-    role: 'CEO, QuantumLeap',
-    imageId: 'testimonial-1',
+    quote:
+      "This platform revolutionized our data analysis process. The speed and accuracy are unparalleled. A must-have for any data-driven team.",
+    name: "Priya Sharma",
+    role: "Data Scientist at QuantumLeap",
+    imageId: "testimonial-1",
   },
   {
     id: '2',
-    quote: 'The insights and support we received were instrumental in our growth. Their hands-on approach and commitment to innovation are what set them apart.',
-    name: 'Jane Smith',
-    role: 'Founder, SynthoBio',
-    imageId: 'testimonial-2',
+    quote:
+      "The user interface is incredibly intuitive, which made the onboarding process for my team a breeze. We were up and running in hours, not days.",
+    name: "Marcus Johnson",
+    role: "Head of Operations at Synergy Corp",
+    imageId: "testimonial-2",
   },
   {
     id: '3',
-    quote: 'A truly visionary partner. They understood our technology at a fundamental level and helped us navigate the complex landscape of venture capital. We couldn’t have done it without them.',
-    name: 'Samuel Lee',
-    role: 'CTO, CogniSphere',
-    imageId: 'testimonial-3',
+    quote:
+      "Customer support is top-notch. They are responsive, knowledgeable, and genuinely invested in our success. It feels like a true partnership.",
+    name: "Isabella Rossi",
+    role: "Client Success Manager at Horizon",
+    imageId: "testimonial-3",
+  },
+    {
+    id: '4',
+    quote:
+      "I'm impressed by the constant stream of updates and new features. The development team is clearly passionate and listens to user feedback.",
+    name: "Kenji Tanaka",
+    role: "Software Engineer at CodeCrafters",
+    imageId: "testimonial-4",
+  },
+  {
+    id: '5',
+    quote:
+      "The ROI was almost immediate. It streamlined our workflows so effectively that we cut project delivery times by nearly 30%.",
+    name: "Fatima Al-Jamil",
+    role: "CFO at Apex Financial",
+    imageId: "testimonial-5",
   },
 ];

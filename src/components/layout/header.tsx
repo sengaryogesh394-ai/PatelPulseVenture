@@ -3,12 +3,13 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Menu, Rocket } from 'lucide-react';
+import { Menu } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { Logo } from '@/components/ui/logo';
 
 const navLinks = [
   { href: '#services', label: 'Our Services' },
@@ -39,8 +40,8 @@ export default function Header() {
     >
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <Rocket className="h-6 w-6 text-primary" />
-          <span className="font-headline">Pate Pulse Venture</span>
+          <Logo className="h-8 w-auto" />
+          <span className="font-headline hidden sm:inline-block">Patel Pulse Ventures</span>
         </Link>
 
         <nav className="hidden md:flex md:items-center md:gap-6">
@@ -73,8 +74,8 @@ export default function Header() {
             <SheetContent side="left">
               <div className="flex flex-col gap-4 p-4">
                 <Link href="/" className="flex items-center gap-2 font-bold text-lg" onClick={() => setMobileMenuOpen(false)}>
-                  <Rocket className="h-6 w-6 text-primary" />
-                  <span className="font-headline">Pate Pulse</span>
+                  <Logo className="h-8 w-auto" />
+                  <span className="font-headline">Patel Pulse Ventures</span>
                 </Link>
                 <nav className="flex flex-col gap-4">
                   {navLinks.map((link) => (

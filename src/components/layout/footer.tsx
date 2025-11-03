@@ -15,6 +15,7 @@ import {
 import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter, Rocket } from "lucide-react"
 import { ThemeToggle } from "../theme-toggle"
 import Link from "next/link"
+import { Logo } from "../ui/logo"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -25,8 +26,8 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="relative">
             <Link href="/" className="flex items-center gap-2 font-bold text-lg mb-4">
-              <Rocket className="h-6 w-6 text-primary" />
-              <span className="font-headline">Pate Pulse Venture</span>
+              <Logo className="h-8 w-auto" />
+              <span className="font-headline">Patel Pulse Ventures</span>
             </Link>
             <p className="mb-6 text-muted-foreground">
               Join our newsletter for the latest updates and exclusive offers.
@@ -62,7 +63,7 @@ export default function Footer() {
             <address className="space-y-2 text-sm not-italic">
               <p>123 Innovation Drive, Tech City, 12345</p>
               <p>Phone: (123) 456-7890</p>
-              <p>Email: contact@patepulse.com</p>
+              <p>Email: contact@patelpulse.com</p>
             </address>
           </div>
           <div className="relative">
@@ -129,7 +130,7 @@ export default function Footer() {
         </div>
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 text-center md:flex-row">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Pate Pulse Venture. All rights reserved.
+            © {currentYear} Patel Pulse Ventures. All rights reserved.
           </p>
           <nav className="flex gap-4 text-sm">
             <a href="#" className="transition-colors hover:text-primary">

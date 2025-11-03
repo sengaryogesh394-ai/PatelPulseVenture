@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { Rocket } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { Logo } from '@/components/ui/logo';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,8 +13,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             href="/"
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
           >
-            <Rocket className="h-6 w-6 text-primary" />
-            <span className="sr-only">Pate Pulse Venture</span>
+            <Logo className="h-8 w-auto" />
+            <span className="sr-only">Patel Pulse Ventures</span>
           </Link>
           <Link
             href="/"

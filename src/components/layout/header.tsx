@@ -54,12 +54,6 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/admin"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-          >
-            Admin
-          </Link>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -88,13 +82,6 @@ export default function Header() {
                       {link.label}
                     </Link>
                   ))}
-                   <Link
-                    href="/admin"
-                    className="text-base font-medium text-muted-foreground transition-colors hover:text-primary"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Admin
-                  </Link>
                 </nav>
               </div>
             </SheetContent>

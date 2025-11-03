@@ -9,6 +9,7 @@ import { services, teamMembers, testimonials } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import IntegrationHero from '@/components/sections/integration-hero';
 import TechStackSection from '@/components/sections/tech-stack-section';
+import ApplicationDevelopmentSection from '@/components/sections/application-development-section';
 
 export default function Home() {
 
@@ -25,6 +26,7 @@ export default function Home() {
     <>
       <HeroSection />
       <ServicesSection services={services} />
+      <ApplicationDevelopmentSection />
       <IntegrationHero />
       <InnovationSection />
       <TechStackSection />

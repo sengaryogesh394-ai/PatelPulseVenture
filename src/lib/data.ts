@@ -151,7 +151,7 @@ export const testimonials: Testimonial[] = [
     id: '1',
     quote:
       "This platform revolutionized our data analysis process. The speed and accuracy are unparalleled. A must-have for any data-driven team.",
-    name: "Priya Sharma",
+    name: "Aarav Singh",
     role: "Data Scientist at QuantumLeap",
     imageId: "testimonial-1",
   },
@@ -159,7 +159,7 @@ export const testimonials: Testimonial[] = [
     id: '2',
     quote:
       "The user interface is incredibly intuitive, which made the onboarding process for my team a breeze. We were up and running in hours, not days.",
-    name: "Marcus Johnson",
+    name: "Ananya Gupta",
     role: "Head of Operations at Synergy Corp",
     imageId: "testimonial-2",
   },
@@ -167,7 +167,7 @@ export const testimonials: Testimonial[] = [
     id: '3',
     quote:
       "Customer support is top-notch. They are responsive, knowledgeable, and genuinely invested in our success. It feels like a true partnership.",
-    name: "Isabella Rossi",
+    name: "Rohan Mehta",
     role: "Client Success Manager at Horizon",
     imageId: "testimonial-3",
   },
@@ -175,7 +175,7 @@ export const testimonials: Testimonial[] = [
     id: '4',
     quote:
       "I'm impressed by the constant stream of updates and new features. The development team is clearly passionate and listens to user feedback.",
-    name: "Kenji Tanaka",
+    name: "Diya Patel",
     role: "Software Engineer at CodeCrafters",
     imageId: "testimonial-4",
   },
@@ -183,7 +183,7 @@ export const testimonials: Testimonial[] = [
     id: '5',
     quote:
       "The ROI was almost immediate. It streamlined our workflows so effectively that we cut project delivery times by nearly 30%.",
-    name: "Fatima Al-Jamil",
+    name: "Vikram Rao",
     role: "CFO at Apex Financial",
     imageId: "testimonial-5",
   },

@@ -74,33 +74,33 @@
     },
     {
       "id": "testimonial-1",
-      "description": "Priya Sharma",
-      "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "imageHint": "woman portrait"
+      "description": "Aarav Singh",
+      "imageUrl": "https://images.unsplash.com/photo-1595152772252-323449c24368?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "indian man"
     },
     {
       "id": "testimonial-2",
-      "description": "Marcus Johnson",
-      "imageUrl": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "imageHint": "man portrait"
+      "description": "Ananya Gupta",
+      "imageUrl": "https://images.unsplash.com/photo-1598605273898-c921751334b3?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "indian woman"
     },
     {
       "id": "testimonial-3",
-      "description": "Isabella Rossi",
-      "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "imageHint": "woman headshot"
+      "description": "Rohan Mehta",
+      "imageUrl": "https://images.unsplash.com/photo-1615598818277-c33fab222b46?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "indian man"
     },
     {
       "id": "testimonial-4",
-      "description": "Kenji Tanaka",
-      "imageUrl": "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "imageHint": "man headshot"
+      "description": "Diya Patel",
+      "imageUrl": "https://images.unsplash.com/photo-1618754137837-142502c3f87b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "indian woman"
     },
     {
       "id": "testimonial-5",
-      "description": "Fatima Al-Jamil",
-      "imageUrl": "https://images.unsplash.com/photo-1557053910-d9eadeed1c58?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "imageHint": "woman smiling"
+      "description": "Vikram Rao",
+      "imageUrl": "https://images.unsplash.com/photo-1564564321837-a57b7070ac5c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "indian man"
     },
     {
       "id": "robot-lifecycle",

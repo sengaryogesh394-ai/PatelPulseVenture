@@ -62,7 +62,7 @@ export default function Footer() {
             <h3 className="mb-4 text-lg font-semibold">Contact Us</h3>
             <address className="space-y-2 text-sm not-italic">
               <p>123 Innovation Drive, Tech City, 12345</p>
-              <p>Phone: (123) 456-7890</p>
+              <p>Phone: (+91) 98765-43210</p>
               <p>Email: contact@patelpulse.com</p>
             </address>
           </div>
@@ -145,3 +145,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+    

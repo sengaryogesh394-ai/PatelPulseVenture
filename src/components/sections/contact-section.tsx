@@ -140,16 +140,16 @@ export default function ContactSection() {
                     <FormControl>
                       <div className="relative mt-2">
                         <div className="absolute inset-y-0 left-3 my-auto h-6 flex items-center border-r pr-2">
-                            <Select defaultValue='US'>
+                            <Select defaultValue='IN'>
                                 <SelectTrigger className="border-none bg-transparent outline-none p-0 h-full text-sm !ring-0 !ring-offset-0 !focus:ring-0 !focus:ring-offset-0"></SelectTrigger>
                                 <SelectContent>
+                                    <SelectItem value="IN">IN</SelectItem>
                                     <SelectItem value="US">US</SelectItem>
                                     <SelectItem value="ES">ES</SelectItem>
-                                    <SelectItem value="MR">MR</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
-                        <Input type="tel" placeholder="+1 (555) 000-000" className="w-full pl-[5.5rem]" {...field} />
+                        <Input type="tel" placeholder="+91 98765 43210" className="w-full pl-[5.5rem]" {...field} />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -209,7 +209,7 @@ export default function ContactSection() {
             <div className="max-w-screen-xl mx-auto px-4 text-muted-foreground gap-12 md:px-8">
                 <div className="rounded-lg overflow-hidden">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.296061325275!2d-73.98845368459395!3d40.7554911793272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c65f2b89%3A0x252b391d34e99557!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1689781264811!5m2!1sen!2sus" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224346.48011753383!2d77.0688975492211!3d28.52728033816447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1692882928156!5m2!1sen!2sin"
                         width="100%" 
                         height="450" 
                         style={{ border: 0 }} 
@@ -224,3 +224,5 @@ export default function ContactSection() {
     </section>
   );
 }
+
+    

@@ -12,14 +12,15 @@ export async function submitContactForm(values: z.infer<typeof formSchema>) {
   const parsed = formSchema.safeParse(values);
 
   if (!parsed.success) {
+    // In a real app, you'd want to return a more detailed error
     return { success: false, message: 'Invalid form data.' };
   }
 
   try {
-    // Here you would typically save the data to Firestore
+    // Here you would typically save the data to a database like Firestore
     console.log('New contact form submission:', parsed.data);
     
-    // Simulate a delay
+    // Simulate a network delay
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     return { success: true };

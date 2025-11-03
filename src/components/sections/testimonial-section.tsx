@@ -1,4 +1,3 @@
-
 'use client';
 import type { Testimonial } from '@/lib/types';
 import { Card, CardContent } from '@/components/ui/card';

@@ -27,28 +27,16 @@ export const services: Service[] = [
     imageId: 'venture-4',
   },
   {
-    id: '5',
-    name: 'IOT DEVELOPMENT',
-    description: 'We design and develop innovative IoT solutions — connecting devices, platforms, and applications to help businesses transform ideas into smart, data-driven digital experiences',
-    imageId: 'innovation-3',
-  },
-  {
     id: '6',
     name: 'UX & UI Designs',
     description: 'We design and craft intuitive UX and UI experiences — helping businesses turn concepts into visually engaging and user-friendly digital products.',
     imageId: 'venture-2'
   },
-   {
-    id: '7',
-    name: 'Cloud & DevOps',
-    description: 'We build high-performance Android and iOS apps with seamless user experiences, ensuring innovation and scalability for your business.',
-    imageId: 'venture-3'
-  },
   {
-    id: '8',
-    name: 'SEO/SEM',
-    description: 'Boost your website’s visibility with our SEO services. We optimize your site for higher rankings, increased traffic, and better conversions.',
-    imageId: 'venture-1'
+    id: '9',
+    name: 'Graphic Designing',
+    description: 'Our graphic design services create stunning visuals that capture your brand\'s essence, from logos and branding to marketing materials and web graphics.',
+    imageId: 'graphic-design-1',
   }
 ];
 

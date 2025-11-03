@@ -75,7 +75,7 @@
     {
       "id": "testimonial-1",
       "description": "Aarav Singh",
-      "imageUrl": "https://images.unsplash.com/photo-1534339480783-6816b68be29c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1616002851413-ebcc9611139d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indian man"
     },
     {
@@ -87,19 +87,19 @@
     {
       "id": "testimonial-3",
       "description": "Rohan Mehta",
-      "imageUrl": "https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/flagged/photo-1571367034861-e6729ad9c2d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indian man"
     },
     {
       "id": "testimonial-4",
       "description": "Diya Patel",
-      "imageUrl": "https://images.unsplash.com/photo-1573165850883-9b0e18c44bd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxpbmRpYW4lMjB3b21hbnxlbnwwfHx8fDE3NjIxNjQ0MDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1607189200597-4d0923ef98c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxpbmRpYW4lMjB3b21hbnxlbnwwfHx8fDE3NjIxNjQ0MDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indian woman"
     },
     {
       "id": "testimonial-5",
       "description": "Vikram Rao",
-      "imageUrl": "https://images.unsplash.com/photo-1729157661483-ed21901ed892?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/flagged/photo-1571367034861-e6729ad9c2d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indian man"
     },
     {
@@ -107,6 +107,12 @@
       "description": "A headphone in the center of a development lifecycle diagram",
       "imageUrl": "https://www.visvik.in/headphone.jpg",
       "imageHint": "headphone"
+    },
+    {
+      "id": "graphic-design-1",
+      "description": "Abstract graphic design elements",
+      "imageUrl": "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxncmFwaGljJTIwZGVzaWdufGVufDB8fHx8MTc2MjA2NjkxMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "graphic design"
     }
   ]
 }

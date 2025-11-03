@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -9,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { submitContactForm } from '@/lib/actions';
-import { FadeIn } from '../fade-in';
+import { motion } from 'framer-motion';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -46,17 +47,35 @@ export default function ContactSection() {
     }
   }
 
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0-
+, transition: { duration: 0.5, staggerChildren: 0.3 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
   return (
-    <section id="contact" className="py-20 sm:py-28">
+    <motion.section 
+      id="contact" 
+      className="py-20 sm:py-28"
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <FadeIn>
+        <motion.div variants={itemVariants}>
           <h2 className="text-3xl font-bold tracking-tight text-center font-headline sm:text-4xl">Get in Touch</h2>
           <p className="mt-4 text-lg text-center text-muted-foreground">
             Have a question or a brilliant idea? We&apos;d love to hear from you.
           </p>
-        </FadeIn>
+        </motion.div>
         
-        <FadeIn className="mt-12" delay={200}>
+        <motion.div className="mt-12" variants={itemVariants}>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
@@ -103,8 +122,8 @@ export default function ContactSection() {
               </Button>
             </form>
           </Form>
-        </FadeIn>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -30,7 +30,7 @@ export const services: Service[] = [
     id: '5',
     name: 'IOT DEVELOPMENT',
     description: 'We design and develop innovative IoT solutions — connecting devices, platforms, and applications to help businesses transform ideas into smart, data-driven digital experiences',
-    imageId: 'iot-1',
+    imageId: 'innovation-3',
   },
   {
     id: '6',

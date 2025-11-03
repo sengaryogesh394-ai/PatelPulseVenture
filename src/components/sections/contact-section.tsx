@@ -49,8 +49,7 @@ export default function ContactSection() {
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0-
-, transition: { duration: 0.5, staggerChildren: 0.3 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.3 } },
   };
 
   const itemVariants = {

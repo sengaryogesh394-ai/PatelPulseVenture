@@ -104,9 +104,9 @@
     },
     {
       "id": "robot-lifecycle",
-      "description": "A robot in the center of a development lifecycle diagram",
-      "imageUrl": "https://storage.googleapis.com/aifire.co-images/app-dev-robot-2.png",
-      "imageHint": "robot lifecycle"
+      "description": "A headphone in the center of a development lifecycle diagram",
+      "imageUrl": "https://www.visvik.in/headphone.jpg",
+      "imageHint": "headphone"
     }
   ]
 }

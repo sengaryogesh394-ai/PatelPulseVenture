@@ -35,6 +35,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.visvik.in',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

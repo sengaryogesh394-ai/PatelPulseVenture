@@ -7,6 +7,7 @@ import ContactSection from '@/components/sections/contact-section';
 import TestimonialSection from '@/components/sections/testimonial-section';
 import { services, teamMembers, testimonials } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import IntegrationHero from '@/components/sections/integration-hero';
 
 export default function Home() {
 
@@ -23,6 +24,7 @@ export default function Home() {
     <>
       <HeroSection />
       <ServicesSection services={services} />
+      <IntegrationHero />
       <InnovationSection />
       <TestimonialSection testimonials={testimonials} />
       <TeamSection 

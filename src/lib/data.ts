@@ -105,31 +105,65 @@ export const services: Service[] = [
     longDescription: 'We specialize in creating beautiful, high-performance mobile applications for both iOS and Android. Using modern frameworks like React Native and Flutter, we deliver native-like experiences with a single codebase, reducing development time and cost while ensuring wide-reaching market compatibility.',
     details: [
         {
-            title: 'Native & Cross-Platform',
+            title: 'Cross-Platform Development',
             points: [
-                'React Native Development',
-                'Flutter Development',
-                'Native iOS (Swift) & Android (Kotlin) apps',
-                'Push Notifications & In-App Purchases',
-                'Offline Support & Synchronization',
+                'React Native for iOS and Android',
+                'Flutter for high-performance apps',
+                'Shared codebase for faster development',
+                'Native look and feel with custom components',
+                'Access to native device APIs',
             ]
         },
         {
-            title: 'App Store Deployment',
+            title: 'Native App Development',
+            points: [
+                'Swift for robust iOS applications',
+                'Kotlin for modern Android applications',
+                'Optimized for device-specific performance',
+                'Integration with iOS and Android SDKs',
+                'Best practices for platform guidelines',
+            ]
+        },
+        {
+            title: 'UI/UX Design for Mobile',
+            points: [
+                'Mobile-first design approach',
+                'Interactive prototypes and wireframes',
+                'User-centric design for intuitive navigation',
+                'App store screenshots and promotional graphics',
+                'Adherence to Human Interface and Material Design guidelines',
+            ]
+        },
+        {
+            title: 'Backend & API Integration',
+            points: [
+                'Secure RESTful and GraphQL APIs',
+                'Firebase and AWS Amplify integration',
+                'Push notifications and real-time data sync',
+                'User authentication (OAuth, Biometrics)',
+                'Offline data storage and synchronization',
+            ]
+        },
+        {
+            title: 'App Store Deployment & ASO',
             points: [
                 'Apple App Store & Google Play Store submission',
-                'App Store Optimization (ASO)',
-                'Beta testing with TestFlight and Google Play Console',
+                'App Store Optimization (ASO) for visibility',
+                'Managing beta testing via TestFlight & Google Play Console',
+                'Handling app updates and versioning',
+                'Privacy policy and compliance management',
             ]
         },
         {
-            title: 'Mobile Backend Services',
+            title: 'Testing & Quality Assurance',
             points: [
-                'Secure API development for mobile apps',
-                'Firebase and AWS Amplify integration',
-                'User authentication and data storage',
+                'Unit, integration, and end-to-end testing',
+                'Automated testing with Jest and Detox',
+                'Performance and battery usage testing',
+                'Cross-device and cross-OS compatibility checks',
+                'User acceptance testing (UAT)',
             ]
-        }
+        },
     ]
   },
   {
@@ -143,28 +177,61 @@ export const services: Service[] = [
         {
             title: 'Search Engine Optimization (SEO)',
             points: [
+                'Comprehensive Website Audits',
+                'Keyword Research & Competitive Analysis',
                 'On-Page, Off-Page, and Technical SEO',
-                'Keyword Research & Strategy',
-                'Content Marketing & Link Building',
-                'Local SEO & Google My Business Optimization',
+                'Local SEO & Google Business Profile Management',
+                'Content Strategy & Link Building Campaigns',
             ]
         },
         {
             title: 'Paid Advertising (SEM/PPC)',
             points: [
                 'Google Ads & Microsoft Advertising',
-                'Social Media Advertising (Facebook, Instagram, LinkedIn)',
-                'Campaign Management & A/B Testing',
-                'Landing Page Optimization',
+                'Social Media Ads (Facebook, Instagram, LinkedIn)',
+                'Campaign Setup, Management & A/B Testing',
+                'Landing Page Design & Optimization',
+                'Remarketing and Audience Targeting',
             ]
         },
         {
-            title: 'Social Media & Content',
+            title: 'Social Media Marketing',
             points: [
-                'Content strategy and creation',
-                'Social media account management',
-                'Email marketing campaigns',
-                'Analytics and performance reporting',
+                'Strategy development for various platforms',
+                'Content creation, scheduling, and community management',
+                'Influencer marketing campaigns',
+                'Social listening and brand monitoring',
+                'Performance tracking and reporting',
+            ]
+        },
+        {
+            title: 'Content Marketing',
+            points: [
+                'Blog posts, articles, and whitepapers',
+                'Infographics and video content',
+                'Content calendars and editorial planning',
+                'SEO-driven content to attract organic traffic',
+                'Content distribution and promotion',
+            ]
+        },
+        {
+            title: 'Email Marketing',
+            points: [
+                'Campaign strategy and automation workflows',
+                'Template design and A/B testing',
+                'List segmentation and personalization',
+                'Performance analytics (open rates, CTR)',
+                'Lead nurturing and drip campaigns',
+            ]
+        },
+        {
+            title: 'Analytics & Reporting',
+            points: [
+                'Google Analytics & Tag Manager setup',
+                'Custom dashboard creation',
+                'Conversion rate optimization (CRO)',
+                'Data analysis to identify growth opportunities',
+                'Regular performance reports and insights',
             ]
         }
     ]
@@ -178,30 +245,63 @@ export const services: Service[] = [
     longDescription: 'We build powerful e-commerce solutions that drive sales and provide a seamless shopping experience for your customers. Whether you need a custom-built store, a Shopify or WooCommerce implementation, or complex integrations, our team has the expertise to deliver a platform that is scalable, secure, and easy to manage.',
     details: [
         {
-            title: 'Platform Expertise',
+            title: 'Platform Development',
             points: [
-                'Shopify & Shopify Plus Development',
-                'WooCommerce Integration',
-                'Custom E-commerce Platforms',
-                'Headless Commerce with Next.js',
+                'Shopify & Shopify Plus Theme Customization',
+                'WooCommerce & WordPress Development',
+                'Custom E-commerce solutions with Next.js',
+                'Headless Commerce architecture',
+                'Magento and BigCommerce solutions',
             ]
         },
         {
-            title: 'Core Features',
+            title: 'Payment & Shipping Integration',
             points: [
-                'Payment Gateway Integration (Stripe, PayPal)',
-                'Product & Inventory Management Systems',
-                'Shopping Cart & Checkout Optimization',
-                'Subscription & Recurring Billing Models',
+                'Integration with Stripe, PayPal, Razorpay',
+                'Support for multiple currencies and payment methods',
+                'Shipping provider API integration (FedEx, UPS)',
+                'Tax calculation and compliance',
+                'Subscription and recurring billing setup',
             ]
         },
         {
-            title: 'Marketing & Growth',
+            title: 'Inventory & Order Management',
             points: [
-                'E-commerce SEO and SEM',
-                'Conversion rate optimization (CRO)',
-                'Email marketing automation',
-                'Customer loyalty programs',
+                'Custom admin dashboards for products',
+                'Real-time inventory tracking',
+                'Order processing and fulfillment workflows',
+                'Integration with ERP and warehouse systems',
+                'Automated notifications and order tracking',
+            ]
+        },
+        {
+            title: 'Conversion Rate Optimization (CRO)',
+            points: [
+                'A/B testing of product pages and checkout flows',
+                'Optimizing for mobile and desktop experiences',
+                'Abandoned cart recovery strategies',
+                'User behavior analysis with heatmaps',
+                'Implementing customer reviews and social proof',
+            ]
+        },
+        {
+            title: 'E-commerce SEO & Marketing',
+            points: [
+                'Product schema and rich snippets',
+                'Category and product page SEO',
+                'Google Shopping and paid ad campaigns',
+                'Email marketing automation for e-commerce',
+                'Customer loyalty and referral programs',
+            ]
+        },
+        {
+            title: 'Security & Performance',
+            points: [
+                'PCI compliance and secure payment processing',
+                'Performance optimization for fast load times',
+                'DDoS protection and website security',
+                'Regular backups and maintenance',
+                'Scalable cloud hosting solutions',
             ]
         }
     ]
@@ -215,30 +315,63 @@ export const services: Service[] = [
     longDescription: 'Good design is good business. Our UI/UX design process focuses on creating beautiful, human-centered interfaces that are a joy to use. From initial research and wireframing to interactive prototypes and final visual design, we ensure your digital product is both aesthetically pleasing and highly functional.',
     details: [
         {
-            title: 'Design Process',
+            title: 'User Experience (UX) Research',
             points: [
-                'User Interface (UI) Design',
-                'User Experience (UX) Research',
-                'Wireframing & Interactive Prototyping',
-                'Usability Testing & Feedback Analysis',
+                'User interviews, surveys, and persona creation',
+                'Competitor analysis and market research',
+                'User journey and workflow mapping',
+                'Information architecture design',
+                'Usability testing and heuristic evaluation',
             ]
         },
         {
-            title: 'Tools & Systems',
+            title: 'User Interface (UI) Design',
             points: [
-                'Figma & Adobe XD',
-                'Design System & Component Library Creation',
-                'Branding & Visual Identity Integration',
-                'Accessibility (A11y) Optimization',
+                'High-fidelity mockups for web and mobile',
+                'Visual design, color theory, and typography',
+                'Iconography and illustration',
+                'Creating a consistent visual language',
+                'Dark mode and multi-theme design',
             ]
         },
         {
-            title: 'Strategy & Research',
+            title: 'Wireframing & Prototyping',
             points: [
-                'User personas and journey mapping',
-                'Competitive analysis',
-                'Information architecture',
-                'User interviews and surveys',
+                'Low and high-fidelity wireframes',
+                'Interactive prototypes with Figma and Adobe XD',
+                'Clickable prototypes for user testing',
+                'Demonstrating user flows and interactions',
+                'Rapid iteration based on feedback',
+            ]
+        },
+        {
+            title: 'Design Systems',
+            points: [
+                'Creating and maintaining component libraries',
+                'Reusable UI components for consistency',
+                'Style guides and documentation',
+                'Ensuring scalability and design consistency',
+                'Collaboration between designers and developers',
+            ]
+        },
+        {
+            title: 'Accessibility (A11y)',
+            points: [
+                'Designing for WCAG compliance',
+                'Ensuring color contrast and readability',
+                'Keyboard navigation and screen reader support',
+                'Accessible forms and interactive elements',
+                'Inclusive design for all users',
+            ]
+        },
+        {
+            title: 'Branding & Visual Identity',
+            points: [
+                'Logo design and brand guidelines',
+                'Marketing collateral design',
+                'Consistent branding across all digital touchpoints',
+                'Brand strategy and positioning',
+                'Creating a memorable brand experience',
             ]
         }
     ]
@@ -254,28 +387,62 @@ export const services: Service[] = [
         {
             title: 'Branding & Identity',
             points: [
-                'Logo Design & Brand Guidelines',
-                'Business Cards & Stationery',
-                'Brand StyleScapes',
-                'Visual Identity Systems',
+                'Logo Design & Visual Identity Systems',
+                'Brand Style Guides & Guidelines',
+                'Business Cards & Corporate Stationery',
+                'Brand Identity Refresh & Redesign',
+                'Mission & Vision Statement Development',
             ]
         },
         {
-            title: 'Digital & Print',
+            title: 'Marketing & Advertising',
             points: [
                 'Social Media Graphics & Ad Creatives',
                 'Brochures, Flyers, and Posters',
                 'Infographics & Data Visualization',
-                'Website & App Graphics',
+                'Presentation & Pitch Deck Design (PPT, Keynote)',
+                'Email Newsletter Templates',
             ]
         },
         {
-            title: 'Marketing Materials',
+            title: 'Digital Graphics',
+            points:
+            [
+                'Website Banners & Hero Images',
+                'Custom Icons and Illustrations',
+                'App Store Screenshots',
+                'Blog & Article Feature Images',
+                'Digital Signage & Billboards',
+            ]
+        },
+        {
+            title: 'Print Design',
             points: [
-                'Presentation design',
-                'Packaging design',
-                'Email newsletter templates',
-                'Trade show booths and banners',
+                'Packaging Design',
+                'Magazine Layouts & Book Covers',
+                'Trade Show Booths & Banners',
+                'Restaurant Menus',
+                'Annual Reports & Corporate Documents',
+            ]
+        },
+        {
+            title: 'Motion Graphics',
+            points: [
+                'Animated Logos & Intros',
+                'Explainer Videos & Product Demos',
+                'Social Media Video Ads & Stories',
+                'Animated GIFs & Web Banners',
+                'Lower Thirds & Video Overlays',
+            ]
+        },
+        {
+            title: 'Illustration',
+            points: [
+                'Custom Illustrations for Web & Print',
+                'Character Design & Mascots',
+                'Infographic Illustrations',
+                'Editorial & Spot Illustrations',
+                'Icon Set Design',
             ]
         }
     ]
@@ -418,3 +585,4 @@ export const testimonials: Testimonial[] = [
     imageId: "testimonial-5",
   },
 ];
+

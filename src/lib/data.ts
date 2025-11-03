@@ -73,29 +73,51 @@ export const innovations: Innovation[] = [
   },
 ];
 
-export const teamMembers: TeamMember[] = [
-  {
-    id: '1',
-    name: 'Dr. Evelyn Reed',
-    role: 'Founder &amp; Chief Scientist',
-    bio: 'With a Ph.D. in Quantum Physics, Evelyn leads our deep-tech initiatives, turning theoretical science into tangible innovations.',
-    imageId: 'team-1',
-  },
-  {
-    id: '2',
-    name: 'Marcus Chen',
-    role: 'Managing Partner',
-    bio: 'An experienced venture capitalist with a keen eye for disruptive technologies and a passion for mentoring startups.',
-    imageId: 'team-2',
-  },
-  {
-    id: '3',
-    name: 'Aria Sharma',
-    role: 'Head of Innovation',
-    bio: 'Aria bridges the gap between creative ideas and market-ready products, fostering a culture of experimentation and growth.',
-    imageId: 'team-3',
-  },
-];
+export const teamMembers = [
+    {
+        id: '1',
+        name: 'Liam Brown',
+        role: 'Founder - CEO',
+        avatar: 'https://alt.tailus.io/images/team/member-one.webp',
+        link: '#',
+    },
+    {
+        id: '2',
+        name: 'Elijah Jones',
+        role: 'Co-Founder - CTO',
+        avatar: 'https://alt.tailus.io/images/team/member-two.webp',
+        link: '#',
+    },
+    {
+        id: '3',
+        name: 'Isabella Garcia',
+        role: 'Sales Manager',
+        avatar: 'https://alt.tailus.io/images/team/member-three.webp',
+        link: '#',
+    },
+    {
+        id: '4',
+        name: 'Henry Lee',
+        role: 'UX Engeneer',
+        avatar: 'https://alt.tailus.io/images/team/member-four.webp',
+        link: '#',
+    },
+    {
+        id: '5',
+        name: 'Ava Williams',
+        role: 'Interaction Designer',
+        avatar: 'https://alt.tailus.io/images/team/member-five.webp',
+        link: '#',
+    },
+    {
+        id: '6',
+        name: 'Olivia Miller',
+        role: 'Visual Designer',
+        avatar: 'https://alt.tailus.io/images/team/member-six.webp',
+        link: '#',
+    },
+]
+
 
 export const ventures: Venture[] = [
     {

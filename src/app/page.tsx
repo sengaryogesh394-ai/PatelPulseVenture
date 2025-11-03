@@ -14,10 +14,11 @@ import ApplicationDevelopmentSection from '@/components/sections/application-dev
 export default function Home() {
 
   const animatedTeamMembers = teamMembers.map(member => {
-    const memberImage = PlaceHolderImages.find(p => p.id === member.imageId);
     return {
       name: member.name,
-      image: memberImage?.imageUrl || `https://placehold.co/200x200?text=${member.name.charAt(0)}`
+      image: member.avatar,
+      role: member.role,
+      link: member.link,
     }
   });
 
@@ -34,7 +35,7 @@ export default function Home() {
       <TeamSection 
         title="Our commitment to integrity and innovation"
         description="A collective of scientists, investors, and innovators driven by a shared passion for technology."
-        members={animatedTeamMembers} 
+        members={animatedTeamMembers.slice(0,3)} 
       />
       <ContactSection />
     </>

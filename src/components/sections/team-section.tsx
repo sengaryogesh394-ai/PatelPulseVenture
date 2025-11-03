@@ -5,128 +5,60 @@ import * as React from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { cn } from "@/lib/utils";
+import Image from 'next/image';
 
-// Define the type for each team member
 interface TeamMember {
   name: string;
   image: string;
 }
 
-// Define the props for the component
 export interface AnimatedTeamSectionProps {
   title: string;
   description: string;
-  members: TeamMember[];
+  members: { name: string, image: string, role?: string, link?: string }[];
   className?: string;
 }
-
-// Helper function to calculate the final transform values for each card
-const getCardState = (index: number, total: number) => {
-  const centerIndex = (total - 1) / 2;
-  const distanceFromCenter = index - centerIndex;
-
-  // Horizontal spread to ensure cards are wide apart
-  const x = distanceFromCenter * 90;
-  // Vertical lift to form the curve
-  const y = Math.abs(distanceFromCenter) * -30;
-  // Rotation for the fanned effect
-  const rotate = distanceFromCenter * 12;
-
-  return { x, y, rotate };
-};
 
 const TeamSection = React.forwardRef<
   HTMLDivElement,
   AnimatedTeamSectionProps
 >(({ title, description, members, className, ...props }, ref) => {
-  const controls = useAnimation();
-  const [inViewRef, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  });
-
-  React.useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    }
-  }, [controls, inView]);
-
-  // Animation for the container to stagger children
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  // REBUILT ANIMATION LOGIC: Integrated positioning directly into framer-motion
-  const itemVariants = {
-    // All cards start at the center, scaled down
-    hidden: { opacity: 0, scale: 0.5, x: 0, y: 0, rotate: 0 },
-    // Animate to the final calculated position
-    visible: (i: number) => ({
-      opacity: 1,
-      scale: 1,
-      x: getCardState(i, members.length).x,
-      y: getCardState(i, members.length).y,
-      rotate: getCardState(i, members.length).rotate,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 12,
-      },
-    }),
-  };
-
   return (
     <section
       id="team"
       ref={ref}
-      className={cn("w-full py-20 lg:py-28 overflow-hidden bg-secondary", className)}
+      className={cn("w-full py-20 lg:py-28 bg-secondary", className)}
       {...props}
     >
       <div className="container mx-auto flex flex-col items-center text-center px-4">
-        {/* Section Header */}
         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-3 font-headline">
           {title}
         </h2>
         <p className="max-w-3xl text-muted-foreground md:text-xl">
           {description}
         </p>
-
-        {/* Sized container for the absolute positioning */}
-        <motion.div
-          ref={inViewRef}
-          className="relative mt-20 flex items-center justify-center"
-          style={{ minHeight: "250px" }}
-          variants={containerVariants}
-          initial="hidden"
-          animate={controls}
-        >
-          {members.map((member, index) => (
-            <motion.div
-              key={index}
-              className="absolute w-28 h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-xl overflow-hidden shadow-lg border-2 border-background"
-              custom={index} // Pass index to variants for calculation
-              variants={itemVariants}
-              // Set initial zIndex based on distance from center
-              style={{ zIndex: members.length - Math.abs(index - (members.length - 1) / 2) }}
-              whileHover={{
-                scale: 1.1,
-                zIndex: 99,
-                transition: { type: "spring", stiffness: 300, damping: 20 },
-              }}
-            >
-              <img
-                src={member.image}
-                alt={member.name}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+      </div>
+      <div className="mt-12 md:mt-24 max-w-5xl mx-auto">
+          <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {members.map((member, index) => (
+                  <div key={index} className="group overflow-hidden">
+                      <Image className="h-96 w-full rounded-md object-cover object-top grayscale transition-all duration-500 hover:grayscale-0 group-hover:h-[22.5rem] group-hover:rounded-xl" src={member.image} alt={member.name} width="826" height="1239" />
+                      <div className="px-2 pt-2 sm:pb-0 sm:pt-4">
+                          <div className="flex justify-between">
+                              <h3 className="text-title text-base font-medium transition-all duration-500 group-hover:tracking-wider">{member.name}</h3>
+                              <span className="text-xs">_0{index + 1}</span>
+                          </div>
+                          <div className="mt-1 flex items-center justify-between">
+                              <span className="text-muted-foreground inline-block translate-y-6 text-sm opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">{member.role}</span>
+                              <a href={member.link} className="group-hover:text-primary-600 dark:group-hover:text-primary-400 inline-block translate-y-8 text-sm tracking-wide opacity-0 transition-all duration-500 hover:underline group-hover:translate-y-0 group-hover:opacity-100">
+                                  {' '}
+                                  Linktree
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              ))}
+          </div>
       </div>
     </section>
   );

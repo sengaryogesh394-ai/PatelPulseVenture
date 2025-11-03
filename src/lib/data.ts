@@ -10,34 +10,90 @@ export const services: Service[] = [
     imageId: 'venture-1',
     longDescription: 'From simple landing pages to complex web applications, our team builds fast, interactive, and responsive user interfaces that deliver an exceptional user experience across all devices. We stay at the forefront of frontend technologies to ensure your project is modern, scalable, and maintainable.',
     details: [
-      {
-        title: 'Frontend Development',
-        points: [
-          'React.js / Next.js Development',
-          'HTML5, CSS3, and JavaScript',
-          'Tailwind CSS, Bootstrap, Material-UI',
-          'Responsive Website Design',
-          'Progressive Web Apps (PWAs)',
-        ],
-      },
-      {
-        title: 'Backend Development',
-        points: [
-          'Node.js / Express.js Development',
-          'RESTful & GraphQL API Development',
-          'Database Design (MongoDB, PostgreSQL, MySQL)',
-          'Authentication & Authorization (JWT, OAuth)',
-          'Cloud Functions & Serverless Architecture',
-        ],
-      },
-      {
-        title: 'Full Stack Expertise',
-        points: [
-            'MERN / MEAN / Next.js + Node.js Stacks',
-            'End-to-end development combining frontend & backend.',
-            'API Integration & Middleware',
-        ]
-      }
+        {
+          title: 'Frontend Development',
+          points: [
+            'React.js / Next.js Development',
+            'HTML5, CSS3, and JavaScript',
+            'Tailwind CSS, Chakra UI, Bootstrap',
+            'Progressive Web Apps (PWA)',
+            'Responsive & Cross-browser Design',
+            'Single Page Applications (SPA)',
+          ],
+        },
+        {
+          title: 'Backend Development',
+          points: [
+            'Node.js / Express.js Development',
+            'RESTful & GraphQL APIs',
+            'Authentication (JWT, OAuth)',
+            'Database Design (MongoDB, PostgreSQL, MySQL)',
+            'Cloud Functions (AWS Lambda, Vercel, Firebase)',
+            'Real-time Systems (Socket.io, WebSockets)',
+          ],
+        },
+        {
+          title: 'Full Stack Development',
+          points: [
+              'MERN / MEAN / Next.js + Node.js Stacks',
+              'Admin & Analytics Dashboards',
+              'API Integrations (Stripe, Google APIs, Twilio, etc.)',
+              'Custom Web Applications',
+              'Business Process Automation',
+          ]
+        },
+        {
+            title: 'E-Commerce Development',
+            points: [
+              'Shopify Store Development & Customization',
+              'WooCommerce & WordPress E-Commerce',
+              'Custom E-Commerce Platforms',
+              'Payment Gateway Integration (Razorpay, Stripe, PayPal)',
+              'Inventory Management & Order Tracking Systems',
+              'Product Dashboard & Analytics',
+            ],
+          },
+          {
+            title: 'CRM & ERP Solutions',
+            points: [
+              'Custom CRM Development',
+              'ERP Systems for sales, HR, and inventory',
+              'Salesforce / HubSpot Integration',
+              'Customer Analytics Dashboards',
+              'Workflow & Task Automation',
+              'API-based Data Sync with other platforms',
+            ],
+          },
+          {
+            title: 'Website Optimization & SEO',
+            points: [
+              'Technical SEO & Schema Setup',
+              'Core Web Vitals Optimization',
+              'Lazy Loading & Code Splitting',
+              'Image Optimization & CDN Setup',
+              'Page Speed Optimization',
+            ],
+          },
+          {
+            title: 'Maintenance & Cloud Deployment',
+            points: [
+              'Continuous Maintenance & Bug Fixes',
+              'Version Control (Git, GitHub)',
+              'Cloud Deployment (Vercel, AWS, Netlify)',
+              'Automated Backups & Monitoring',
+              'Ongoing Feature Enhancements',
+            ],
+          },
+          {
+            title: 'Custom Business Applications',
+            points: [
+              'Booking & Scheduling Systems',
+              'Analytics & Reporting Dashboards',
+              'AI-powered Web Apps (Chatbots, Automation)',
+              'Custom Portals for Employees & Clients',
+              'Workflow Automation Tools',
+            ],
+          },
     ],
   },
   {
@@ -64,6 +120,14 @@ export const services: Service[] = [
                 'Apple App Store & Google Play Store submission',
                 'App Store Optimization (ASO)',
                 'Beta testing with TestFlight and Google Play Console',
+            ]
+        },
+        {
+            title: 'Mobile Backend Services',
+            points: [
+                'Secure API development for mobile apps',
+                'Firebase and AWS Amplify integration',
+                'User authentication and data storage',
             ]
         }
     ]
@@ -93,6 +157,15 @@ export const services: Service[] = [
                 'Campaign Management & A/B Testing',
                 'Landing Page Optimization',
             ]
+        },
+        {
+            title: 'Social Media & Content',
+            points: [
+                'Content strategy and creation',
+                'Social media account management',
+                'Email marketing campaigns',
+                'Analytics and performance reporting',
+            ]
         }
     ]
   },
@@ -120,6 +193,15 @@ export const services: Service[] = [
                 'Product & Inventory Management Systems',
                 'Shopping Cart & Checkout Optimization',
                 'Subscription & Recurring Billing Models',
+            ]
+        },
+        {
+            title: 'Marketing & Growth',
+            points: [
+                'E-commerce SEO and SEM',
+                'Conversion rate optimization (CRO)',
+                'Email marketing automation',
+                'Customer loyalty programs',
             ]
         }
     ]
@@ -149,6 +231,15 @@ export const services: Service[] = [
                 'Branding & Visual Identity Integration',
                 'Accessibility (A11y) Optimization',
             ]
+        },
+        {
+            title: 'Strategy & Research',
+            points: [
+                'User personas and journey mapping',
+                'Competitive analysis',
+                'Information architecture',
+                'User interviews and surveys',
+            ]
         }
     ]
   },
@@ -166,6 +257,7 @@ export const services: Service[] = [
                 'Logo Design & Brand Guidelines',
                 'Business Cards & Stationery',
                 'Brand StyleScapes',
+                'Visual Identity Systems',
             ]
         },
         {
@@ -175,6 +267,15 @@ export const services: Service[] = [
                 'Brochures, Flyers, and Posters',
                 'Infographics & Data Visualization',
                 'Website & App Graphics',
+            ]
+        },
+        {
+            title: 'Marketing Materials',
+            points: [
+                'Presentation design',
+                'Packaging design',
+                'Email newsletter templates',
+                'Trade show booths and banners',
             ]
         }
     ]

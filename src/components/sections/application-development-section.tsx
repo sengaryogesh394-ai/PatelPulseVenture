@@ -9,14 +9,14 @@ import { Code, Smartphone, ShoppingCart, Search, Cloud, FlaskConical, Settings2,
 import { motion } from 'framer-motion';
 
 const iconMap: { [key: string]: React.ReactNode } = {
-  'Website Development': <Code className="w-8 h-8 text-blue-500" />,
-  'Mobile app Development': <Smartphone className="w-8 h-8 text-blue-500" />,
-  'Software Development': <GitBranch className="w-8 h-8 text-blue-500" />,
-  'Digital marketing Services': <ShoppingCart className="w-8 h-8 text-blue-500" />,
-  'Affiliated Marketing Services': <Settings2 className="w-8 h-8 text-blue-500" />,
-  'SEM/SEM': <Search className="w-8 h-8 text-blue-500" />,
-  'Cloud & DevOps': <Cloud className="w-8 h-8 text-blue-500" />,
-  'Software Testing': <FlaskConical className="w-8 h-8 text-blue-500" />,
+  'Website Development': <Code className="w-8 h-8 text-primary" />,
+  'Mobile app Development': <Smartphone className="w-8 h-8 text-primary" />,
+  'Software Development': <GitBranch className="w-8 h-8 text-primary" />,
+  'Digital marketing Services': <ShoppingCart className="w-8 h-8 text-primary" />,
+  'Affiliated Marketing Services': <Settings2 className="w-8 h-8 text-primary" />,
+  'SEM/SEM': <Search className="w-8 h-8 text-primary" />,
+  'Cloud & DevOps': <Cloud className="w-8 h-8 text-primary" />,
+  'Software Testing': <FlaskConical className="w-8 h-8 text-primary" />,
 };
 
 const ServiceCard = ({ title, description }: { title: string; description: string }) => {
@@ -28,10 +28,10 @@ const ServiceCard = ({ title, description }: { title: string; description: strin
     >
       <Card className="bg-card/90 backdrop-blur-sm shadow-lg text-left transition-shadow duration-300 cursor-pointer h-full">
         <CardHeader className="flex flex-row items-center gap-4">
-           <div className="text-blue-500">
+           <div className="text-primary">
             {iconMap[title] || <Code className="w-8 h-8" />}
           </div>
-          <CardTitle className="text-orange-500 font-semibold text-lg">{title}</CardTitle>
+          <CardTitle className="text-[hsl(var(--chart-1))] font-semibold text-lg">{title}</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>

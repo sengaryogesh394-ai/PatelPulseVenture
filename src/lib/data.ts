@@ -76,30 +76,30 @@ export const innovations: Innovation[] = [
 export const teamMembers = [
     {
         id: '1',
-        name: 'Aadarsh',
-        role: 'Creator',
-        avatar: 'https://avatars.githubusercontent.com/u/47919550?v=4',
+        name: 'Liam Brown',
+        role: 'Founder - CEO',
+        avatar: 'https://alt.tailus.io/images/team/member-one.webp',
         link: '#',
     },
     {
         id: '2',
-        name: 'Théo Balick',
-        role: 'Frontend Dev',
-        avatar: 'https://avatars.githubusercontent.com/u/68236786?v=4',
+        name: 'Elijah Jones',
+        role: 'Co-Founder - CTO',
+        avatar: 'https://alt.tailus.io/images/team/member-two.webp',
         link: '#',
     },
     {
         id: '3',
-        name: 'Glodie Lukose',
-        role: 'Frontend Dev',
-        avatar: 'https://avatars.githubusercontent.com/u/99137927?v=4',
+        name: 'Isabella Garcia',
+        role: 'Sales Manager',
+        avatar: 'https://alt.tailus.io/images/team/member-three.webp',
         link: '#',
     },
     {
         id: '4',
-        name: 'Bernard Ngandu',
-        role: 'Backend Dev',
-        avatar: 'https://avatars.githubusercontent.com/u/31113941?v=4',
+        name: 'Henry Lee',
+        role: 'UX Engeneer',
+        avatar: 'https://alt.tailus.io/images/team/member-four.webp',
         link: '#',
     },
     {
@@ -188,3 +188,4 @@ export const testimonials: Testimonial[] = [
     imageId: "testimonial-5",
   },
 ];
+

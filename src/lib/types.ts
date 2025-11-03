@@ -2,8 +2,14 @@
 export interface Service {
   id: string;
   name: string;
+  slug: string;
   description: string;
   imageId: string;
+  longDescription: string;
+  details: {
+    title: string;
+    points: string[];
+  }[];
 }
 
 export interface Innovation {

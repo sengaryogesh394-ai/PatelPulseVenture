@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { motion } from 'framer-motion';
 import { Briefcase } from 'lucide-react';
+import Link from 'next/link';
 
 interface ServicesSectionProps {
   services: Service[];
@@ -42,37 +43,39 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
           {services.map((service, index) => {
             const serviceImage = PlaceHolderImages.find(p => p.id === service.imageId);
             return (
-              <motion.div
-                key={service.id}
-                variants={itemVariants}
-                whileHover={{ scale: 1.03, y: -5 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                <Card className="overflow-hidden h-full flex flex-col transition-shadow duration-300 hover:shadow-xl">
-                  {serviceImage && (
-                    <div className="aspect-video relative">
-                      <Image
-                        src={serviceImage.imageUrl}
-                        alt={serviceImage.description}
-                        data-ai-hint={serviceImage.imageHint}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
-                   <CardHeader>
-                    <div className="flex items-center gap-4">
-                       <div className="bg-primary/10 p-3 rounded-full">
-                         <Briefcase className="h-6 w-6 text-primary" />
-                       </div>
-                       <CardTitle className="font-headline text-lg">{service.name}</CardTitle>
-                    </div>
-                   </CardHeader>
-                  <CardContent className="flex-grow flex flex-col">
-                    <CardDescription className="flex-grow">{service.description}</CardDescription>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                <Link href={`/services/${service.slug}`} key={service.id} className="block">
+                    <motion.div
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.03, y: -5 }}
+                        transition={{ type: 'spring', stiffness: 300 }}
+                        className="h-full"
+                    >
+                        <Card className="overflow-hidden h-full flex flex-col transition-shadow duration-300 hover:shadow-xl">
+                        {serviceImage && (
+                            <div className="aspect-video relative">
+                            <Image
+                                src={serviceImage.imageUrl}
+                                alt={serviceImage.description}
+                                data-ai-hint={serviceImage.imageHint}
+                                fill
+                                className="object-cover"
+                            />
+                            </div>
+                        )}
+                        <CardHeader>
+                            <div className="flex items-center gap-4">
+                            <div className="bg-primary/10 p-3 rounded-full">
+                                <Briefcase className="h-6 w-6 text-primary" />
+                            </div>
+                            <CardTitle className="font-headline text-lg">{service.name}</CardTitle>
+                            </div>
+                        </CardHeader>
+                        <CardContent className="flex-grow flex flex-col">
+                            <CardDescription className="flex-grow">{service.description}</CardDescription>
+                        </CardContent>
+                        </Card>
+                    </motion.div>
+              </Link>
             );
           })}
         </div>

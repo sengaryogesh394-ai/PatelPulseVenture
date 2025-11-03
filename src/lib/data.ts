@@ -1,5 +1,5 @@
 
-import type { Service, Innovation, TeamMember, Venture, Testimonial } from './types';
+import type { Service, Innovation, TeamMember, Venture, Testimonial, Project } from './types';
 
 export const services: Service[] = [
   {
@@ -586,3 +586,95 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
+export const projects: Project[] = [
+    {
+      id: 'ecom-1',
+      title: 'TechPyro',
+      description: 'A modern e-commerce platform offering a wide range of tech gadgets and accessories.',
+      link: 'https://www.techpyro.com/',
+      technologies: ['React', 'Next.js', 'Node.js', 'Stripe'],
+      category: 'E-Commerce',
+      imageId: 'project-ecom-1',
+    },
+    {
+      id: 'ecom-2',
+      title: 'Shopping Cart',
+      description: 'A simple and effective shopping cart implementation, showcasing core e-commerce functionalities.',
+      link: 'https://shopping-cart-mfs3.vercel.app',
+      technologies: ['React', 'Vercel', 'JavaScript'],
+      category: 'E-Commerce',
+      imageId: 'project-ecom-2',
+    },
+    {
+      id: 'edu-1',
+      title: 'Eurotech Maritime',
+      description: 'A comprehensive educational platform for maritime studies and certifications.',
+      link: 'https://eurotechmaritime.org',
+      technologies: ['PHP', 'CMS', 'MySQL'],
+      category: 'Education',
+      imageId: 'project-edu-1',
+    },
+    {
+      id: 'edu-2',
+      title: 'iGauge',
+      description: 'An intelligent assessment platform for educational institutions.',
+      link: 'https://igauge.intellicent.in/',
+      technologies: ['Angular', 'Node.js', 'MongoDB'],
+      category: 'Education',
+      imageId: 'project-edu-2',
+    },
+    {
+      id: 'llm-1',
+      title: 'Stru.ai',
+      description: 'An AI-powered platform leveraging Large Language Models for advanced data structuring and analysis.',
+      link: 'https://stru.ai',
+      technologies: ['Python', 'Genkit', 'Next.js', 'AI/ML'],
+      category: 'LLM (ML/AI)',
+      imageId: 'project-llm-1',
+    },
+    {
+      id: 'llm-2',
+      title: 'LilithAI',
+      description: 'A conversational AI assistant focused on providing personalized user experiences.',
+      link: 'https://lilithai.tech',
+      technologies: ['Genkit', 'React', 'Firebase', 'AI/ML'],
+      category: 'LLM (ML/AI)',
+      imageId: 'project-llm-2',
+    },
+    {
+      id: 'crypto-1',
+      title: 'Cryptoland',
+      description: 'A blockchain-based gaming platform where users can trade and own virtual assets.',
+      link: 'https://game.cryptoland.io/',
+      technologies: ['Solidity', 'React', 'ethers.js', 'Blockchain'],
+      category: 'Blockchain (Crypto)',
+      imageId: 'project-crypto-1',
+    },
+    {
+      id: 'crypto-2',
+      title: 'NFTStars',
+      description: 'A marketplace for discovering, buying, and selling exclusive digital collectibles as NFTs.',
+      link: 'https://nftstars.shop/',
+      technologies: ['Next.js', 'Solidity', 'IPFS', 'Blockchain'],
+      category: 'Blockchain (Crypto)',
+      imageId: 'project-crypto-2',
+    },
+    {
+      id: 'cms-1',
+      title: 'Pinki Dashboard',
+      description: 'A custom content management system with a focus on intuitive UI and flexible content modeling.',
+      link: 'https://pinki-dashboard.vercel.app',
+      technologies: ['React', 'Next.js', 'Tailwind CSS', 'Vercel'],
+      category: 'Dashboards (CMS)',
+      imageId: 'project-cms-1',
+    },
+     {
+      id: 'cms-2',
+      title: 'Baxia Admin Panel',
+      description: 'A powerful admin panel for managing accounts, users, and application data.',
+      link: 'https://baxia-adminpanel.vercel.app/accounts',
+      technologies: ['React', 'Node.js', 'PostgreSQL', 'Charts'],
+      category: 'Dashboards (CMS)',
+      imageId: 'project-cms-2',
+    },
+];

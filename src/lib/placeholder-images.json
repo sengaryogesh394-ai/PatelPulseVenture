@@ -45,25 +45,25 @@
     {
       "id": "innovation-3",
       "description": "Placeholder for innovation 3",
-      "imageUrl": "https://images.unsplash.com/photo-1667487935540-f59515f6c7fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxdWFudHVtJTIwY29tcHV0aW5nfGVufDB8fHx8MTc2MjE0NDUxMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1667487935540-f59515f6c7fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxdWFudHVtJTIwY29tcHV0aW5nfGVufDB8fHx8MTc2MjE0NDUxMHww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "quantum computing"
     },
     {
       "id": "team-1",
       "description": "Placeholder for team member 1",
-      "imageUrl": "https://images.unsplash.com/photo-1544168190-79c17527004f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cHJvZmVzc2lvbmFsJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzYyMDc1MTc1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjIwNzUxNzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "professional portrait"
     },
     {
       "id": "team-2",
       "description": "Placeholder for team member 2",
-      "imageUrl": "https://images.unsplash.com/photo-1701096374092-bb70915fdc5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjIwODQ4Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjIwODQ4MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "professional headshot"
     },
     {
       "id": "team-3",
       "description": "Placeholder for team member 3",
-      "imageUrl": "https://images.unsplash.com/photo-1635131902146-6957477a4ff4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBzbWlsaW5nfGVufDB8fHx8MTc2MjA3MDcxN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1635131902146-6957477a4ff4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBzbWlsaW5nfGVufDB8fHx8MTc2MjE2NDU4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "person smiling"
     },
     {
@@ -75,31 +75,31 @@
     {
       "id": "testimonial-1",
       "description": "Aarav Singh",
-      "imageUrl": "https://images.unsplash.com/photo-1616002851413-ebcc9611139d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1552642986-ccb41e7059e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indian man"
     },
     {
       "id": "testimonial-2",
       "description": "Ananya Gupta",
-      "imageUrl": "https://images.unsplash.com/photo-1533128361669-69c065857a13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8aW5kaWFuJTIwd29tYW58ZW58MHx8fHwxNzYyMTY0NDAzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1607189200597-4d0923ef98c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxpbmRpYW4lMjB3b21hbnxlbnwwfHx8fDE3NjIxNjQ0MDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indian woman"
     },
     {
       "id": "testimonial-3",
       "description": "Rohan Mehta",
-      "imageUrl": "https://images.unsplash.com/flagged/photo-1571367034861-e6729ad9c2d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1729157661483-ed21901ed892?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indian man"
     },
     {
       "id": "testimonial-4",
       "description": "Diya Patel",
-      "imageUrl": "https://images.unsplash.com/photo-1607189200597-4d0923ef98c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxpbmRpYW4lMjB3b21hbnxlbnwwfHx8fDE3NjIxNjQ0MDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1626193082710-a16206f819f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxpbmRpYW4lMjB3b21hbnxlbnwwfHx8fDE3NjIxNjQ0MDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indian woman"
     },
     {
       "id": "testimonial-5",
       "description": "Vikram Rao",
-      "imageUrl": "https://images.unsplash.com/flagged/photo-1571367034861-e6729ad9c2d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1618926749434-0578ceecdfab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYyMTE0MTExfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "indian man"
     },
     {
@@ -113,6 +113,66 @@
       "description": "Abstract graphic design elements",
       "imageUrl": "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxncmFwaGljJTIwZGVzaWdufGVufDB8fHx8MTc2MjA2NjkxMnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "graphic design"
+    },
+    {
+      "id": "project-ecom-1",
+      "description": "E-commerce project",
+      "imageUrl": "https://images.unsplash.com/photo-1688561807403-ba262590f86f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjBvbmxpbmV8ZW58MHx8fHwxNzYyMTY3MDU1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ecommerce online"
+    },
+    {
+      "id": "project-ecom-2",
+      "description": "Shopping cart",
+      "imageUrl": "https://images.unsplash.com/photo-1575898201154-d65111ab78b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzaG9wcGluZyUyMGNhcnR8ZW58MHx8fHwxNzYyMDk2ODg0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "shopping cart"
+    },
+    {
+      "id": "project-edu-1",
+      "description": "Maritime education",
+      "imageUrl": "https://images.unsplash.com/photo-1666961897920-7b58eac5af56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxtYXJpdGltZSUyMHNoaXB8ZW58MHx8fHwxNzYyMTY3MDU1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "maritime ship"
+    },
+    {
+      "id": "project-edu-2",
+      "description": "Education assessment",
+      "imageUrl": "https://images.unsplash.com/photo-1512851685250-bfa0aa982a1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZWR1Y2F0aW9uJTIwdGVzdHxlbnwwfHx8fDE3NjIxNjcwNTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "education test"
+    },
+    {
+      "id": "project-llm-1",
+      "description": "AI project",
+      "imageUrl": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlfGVufDB8fHx8MTc2MjE1MzI4OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "artificial intelligence"
+    },
+    {
+      "id": "project-llm-2",
+      "description": "Conversational AI",
+      "imageUrl": "https://images.unsplash.com/photo-1683104691469-7b40f22caec1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjaGF0Ym90JTIwY29udmVyc2F0aW9ufGVufDB8fHx8MTc2MjE2NzA1NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "chatbot conversation"
+    },
+    {
+      "id": "project-crypto-1",
+      "description": "Blockchain game",
+      "imageUrl": "https://images.unsplash.com/photo-1642432556591-72cbc671b707?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YmxvY2tjaGFpbiUyMGdhbWV8ZW58MHx8fHwxNzYyMTY3MDU1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "blockchain game"
+    },
+    {
+      "id": "project-crypto-2",
+      "description": "NFT Marketplace",
+      "imageUrl": "https://images.unsplash.com/photo-1757940059931-6e3c6572d989?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxuZnQlMjBtYXJrZXRwbGFjZXxlbnwwfHx8fDE3NjIxNjcwNTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "nft marketplace"
+    },
+    {
+      "id": "project-cms-1",
+      "description": "CMS Dashboard",
+      "imageUrl": "https://images.unsplash.com/photo-1622816188655-9e99d5197616?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkYXNoYm9hcmQlMjB1aXxlbnwwfHx8fDE3NjIxNTExNTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dashboard ui"
+    },
+    {
+      "id": "project-cms-2",
+      "description": "Admin Panel",
+      "imageUrl": "https://images.unsplash.com/photo-1511995352296-e02a292767e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhZG1pbiUyMHBhbmVsfGVufDB8fHx8MTc2MjE2NzA1NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "admin panel"
     }
   ]
 }

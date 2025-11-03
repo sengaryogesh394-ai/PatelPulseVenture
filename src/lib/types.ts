@@ -41,3 +41,13 @@ export interface Testimonial {
   role: string;
   imageId: string;
 }
+
+export interface Project {
+    id: string;
+    title: string;
+    description: string;
+    link: string;
+    technologies: string[];
+    category: 'E-Commerce' | 'Education' | 'LLM (ML/AI)' | 'Blockchain (Crypto)' | 'Dashboards (CMS)';
+    imageId: string;
+}

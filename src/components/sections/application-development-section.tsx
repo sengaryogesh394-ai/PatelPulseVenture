@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -22,7 +23,7 @@ const iconMap: { [key: string]: React.ReactNode } = {
 const ServiceCard = ({ title, description }: { title: string; description: string }) => {
   return (
     <motion.div
-      className="w-full"
+      className="w-full h-full"
       whileHover={{ scale: 1.05, y: -5 }}
       transition={{ type: 'spring', stiffness: 300 }}
     >
@@ -77,7 +78,7 @@ export default function ApplicationDevelopmentSection() {
           {/* Left Column */}
           <motion.div className="flex flex-col gap-8" variants={sectionVariants}>
             {applicationDevelopmentServices.map(service => (
-              <motion.div key={service.title} variants={itemVariants}>
+              <motion.div key={service.title} variants={itemVariants} className="h-full">
                 <ServiceCard {...service} />
               </motion.div>
             ))}
@@ -100,7 +101,7 @@ export default function ApplicationDevelopmentSection() {
           {/* Right Column */}
           <motion.div className="flex flex-col gap-8" variants={sectionVariants}>
             {topServices.map(service => (
-              <motion.div key={service.title} variants={itemVariants}>
+              <motion.div key={service.title} variants={itemVariants} className="h-full">
                 <ServiceCard {...service} />
               </motion.div>
             ))}

@@ -1,9 +1,26 @@
 
+'use client';
 import Link from 'next/link'
 import { teamMembers } from '@/lib/data';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 export default function TeamPage() {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 },
+    };
+
     return (
         <section className="bg-gray-50 py-16 md:py-32 dark:bg-transparent">
             <div className="mx-auto max-w-5xl border-t px-6">
@@ -16,10 +33,22 @@ export default function TeamPage() {
                         <p>During the working process, we perform regular fitting with the client because he is the only person who can feel whether a new suit fits or not.</p>
                     </div>
                 </div>
-                <div className="mt-12 md:mt-24">
+                <motion.div 
+                    className="mt-12 md:mt-24"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                >
                     <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                         {teamMembers.map((member, index) => (
-                            <div key={member.id} className="group overflow-hidden">
+                            <motion.div 
+                                key={member.id} 
+                                className="group overflow-hidden"
+                                variants={itemVariants}
+                                whileHover={{ y: -8 }}
+                                transition={{ type: 'spring', stiffness: 300 }}
+                            >
                                 <Image 
                                     className="h-96 w-full rounded-md object-cover object-top grayscale transition-all duration-500 hover:grayscale-0 group-hover:h-[22.5rem] group-hover:rounded-xl" 
                                     src={member.avatar} 
@@ -40,10 +69,10 @@ export default function TeamPage() {
                                         </Link>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     )

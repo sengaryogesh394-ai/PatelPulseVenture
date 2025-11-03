@@ -14,6 +14,13 @@ interface AnimatedTestimonialsProps {
 
 const AnimatedTestimonials = ({ testimonials, autoplay = true }: AnimatedTestimonialsProps) => {
   const [active, setActive] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+  const [rotations, setRotations] = useState<string[]>([]);
+
+  useEffect(() => {
+    setIsClient(true);
+    setRotations(testimonials.map(() => `${Math.floor(Math.random() * 16) - 8}deg`));
+  }, [testimonials]);
 
   const handleNext = useCallback(() => {
     setActive((prev) => (prev + 1) % testimonials.length);
@@ -24,14 +31,16 @@ const AnimatedTestimonials = ({ testimonials, autoplay = true }: AnimatedTestimo
   };
 
   useEffect(() => {
-    if (!autoplay) return;
+    if (!autoplay || !isClient) return;
     const interval = setInterval(handleNext, 5000);
     return () => clearInterval(interval);
-  }, [autoplay, handleNext]);
+  }, [autoplay, handleNext, isClient]);
 
   const isActive = (index: number) => index === active;
 
-  const randomRotate = () => `${Math.floor(Math.random() * 16) - 8}deg`;
+  if (!isClient) {
+    return null; // Or a loading skeleton
+  }
 
   return (
     <section id="testimonials" className="py-20 sm:py-28">
@@ -50,13 +59,13 @@ const AnimatedTestimonials = ({ testimonials, autoplay = true }: AnimatedTestimo
                         return (
                             <motion.div
                                 key={testimonial.id}
-                                initial={{ opacity: 0, scale: 0.9, y: 50, rotate: randomRotate() }}
+                                initial={{ opacity: 0, scale: 0.9, y: 50, rotate: rotations[index] || '0deg' }}
                                 animate={{
                                     opacity: isActive(index) ? 1 : 0.5,
                                     scale: isActive(index) ? 1 : 0.9,
                                     y: isActive(index) ? 0 : 20,
                                     zIndex: isActive(index) ? testimonials.length : testimonials.length - Math.abs(index - active),
-                                    rotate: isActive(index) ? '0deg' : randomRotate(),
+                                    rotate: isActive(index) ? '0deg' : rotations[index] || '0deg',
                                 }}
                                 exit={{ opacity: 0, scale: 0.9, y: -50 }}
                                 transition={{ duration: 0.5, ease: "easeInOut" }}

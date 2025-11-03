@@ -3,9 +3,11 @@ import Image from 'next/image';
 import React from "react";
 
 export const Logo = ({ className }: { className?: string }) => (
-  <img
-    src="/logo.png"
+  <Image
+    src="/logo.svg"
     alt="Patel Pulse Ventures Logo"
-    className={cn("h-10 w-auto", className)}
+    width={150}
+    height={56}
+    className={cn("h-14 w-auto", className)}
   />
 );

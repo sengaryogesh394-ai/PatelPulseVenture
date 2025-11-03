@@ -10,7 +10,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 const navLinks = [
-  { href: '#ventures', label: 'Our Ventures' },
+  { href: '#services', label: 'Our Services' },
   { href: '#innovation', label: 'Innovation Lab' },
   { href: '#team', label: 'Team' },
   { href: '#contact', label: 'Contact' },

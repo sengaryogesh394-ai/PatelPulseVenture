@@ -31,7 +31,7 @@ export default function HeroSection() {
         </p>
         <div className="mt-10 flex gap-4">
           <Button asChild size="lg" className="rounded-full">
-            <Link href="#ventures">Explore Our Work</Link>
+            <Link href="#services">Explore Our Work</Link>
           </Button>
           <Button asChild variant="secondary" size="lg" className="rounded-full">
             <Link href="#contact">Get in Touch</Link>

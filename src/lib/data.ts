@@ -1,33 +1,29 @@
-import type { Venture, Innovation, TeamMember } from './types';
+import type { Service, Innovation, TeamMember } from './types';
 
-export const ventures: Venture[] = [
+export const services: Service[] = [
   {
     id: '1',
-    name: 'QuantumLeap',
-    description: 'Pioneering next-generation quantum computing solutions for complex problem-solving.',
+    name: 'Venture Capital',
+    description: 'Providing strategic investment and mentorship to early-stage technology startups with high growth potential.',
     imageId: 'venture-1',
-    website: '#',
   },
   {
     id: '2',
-    name: 'BioSynth',
-    description: 'Engineering synthetic biology to revolutionize medicine and sustainable materials.',
+    name: 'Technology Incubation',
+    description: 'Nurturing innovative ideas from concept to market-ready products through our in-house incubation program.',
     imageId: 'venture-2',
-    website: '#',
   },
   {
     id: '3',
-    name: 'CogniCore AI',
-    description: 'Developing advanced AI platforms for enterprise automation and data analysis.',
+    name: 'AI & ML Solutions',
+    description: 'Developing custom artificial intelligence and machine learning solutions to solve complex business challenges.',
     imageId: 'venture-3',
-    website: '#',
   },
-    {
+  {
     id: '4',
-    name: 'Helios Energy',
-    description: 'Innovating in solar technology to create a sustainable energy future.',
+    name: 'Strategic Advisory',
+    description: 'Offering expert guidance on technology strategy, market entry, and digital transformation for established enterprises.',
     imageId: 'venture-4',
-    website: '#',
   },
 ];
 

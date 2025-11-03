@@ -1,15 +1,15 @@
 import HeroSection from '@/components/sections/hero-section';
-import VenturesSection from '@/components/sections/ventures-section';
+import ServicesSection from '@/components/sections/services-section';
 import InnovationSection from '@/components/sections/innovation-section';
 import TeamSection from '@/components/sections/team-section';
 import ContactSection from '@/components/sections/contact-section';
-import { ventures, innovations, teamMembers } from '@/lib/data';
+import { services, innovations, teamMembers } from '@/lib/data';
 
 export default function Home() {
   return (
     <>
       <HeroSection />
-      <VenturesSection ventures={ventures} />
+      <ServicesSection services={services} />
       <InnovationSection innovations={innovations} />
       <TeamSection teamMembers={teamMembers} />
       <ContactSection />

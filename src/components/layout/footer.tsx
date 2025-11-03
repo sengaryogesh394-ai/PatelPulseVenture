@@ -20,7 +20,7 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">Navigate</h3>
             <ul className="mt-4 space-y-2">
-              <li><Link href="#ventures" className="text-sm text-muted-foreground hover:text-primary">Ventures</Link></li>
+              <li><Link href="#services" className="text-sm text-muted-foreground hover:text-primary">Services</Link></li>
               <li><Link href="#innovation" className="text-sm text-muted-foreground hover:text-primary">Innovation</Link></li>
               <li><Link href="#team" className="text-sm text-muted-foreground hover:text-primary">Team</Link></li>
               <li><Link href="#contact" className="text-sm text-muted-foreground hover:text-primary">Contact</Link></li>

@@ -1,9 +1,8 @@
-export interface Venture {
+export interface Service {
   id: string;
   name: string;
   description: string;
   imageId: string;
-  website: string;
 }
 
 export interface Innovation {

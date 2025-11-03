@@ -76,15 +76,15 @@ export const innovations: Innovation[] = [
 export const teamMembers = [
     {
         id: '1',
-        name: 'Liam Brown',
-        role: 'Founder - CEO',
+        name: 'Aadarsh',
+        role: 'Founder',
         avatar: 'https://alt.tailus.io/images/team/member-one.webp',
         link: '#',
     },
     {
         id: '2',
         name: 'Elijah Jones',
-        role: 'Co-Founder - CTO',
+        role: 'Co-Founder',
         avatar: 'https://alt.tailus.io/images/team/member-two.webp',
         link: '#',
     },
@@ -98,7 +98,7 @@ export const teamMembers = [
     {
         id: '4',
         name: 'Henry Lee',
-        role: 'UX Engeneer',
+        role: 'UX Engineer',
         avatar: 'https://alt.tailus.io/images/team/member-four.webp',
         link: '#',
     },

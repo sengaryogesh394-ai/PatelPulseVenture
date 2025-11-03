@@ -12,7 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter, Rocket } from "lucide-react"
+import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter, Rocket, Youtube } from "lucide-react"
 import { ThemeToggle } from "../theme-toggle"
 import Link from "next/link"
 import { Logo } from "../ui/logo"
@@ -61,7 +61,7 @@ export default function Footer() {
           <div>
             <h3 className="mb-4 text-lg font-semibold">Contact Us</h3>
             <address className="space-y-2 text-sm not-italic">
-              <p>123 Innovation Drive, Tech City, 12345</p>
+              <p>OC 1125, Sector 4, Greater Noida West, Uttar Pradesh 201009, India</p>
               <p>Phone: (+91) 98765-43210</p>
               <p>Email: contact@patelpulse.com</p>
             </address>
@@ -72,10 +72,12 @@ export default function Footer() {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="icon" className="rounded-full">
-                      <Facebook className="h-4 w-4" />
-                      <span className="sr-only">Facebook</span>
-                    </Button>
+                    <a href="https://www.facebook.com/profile.php?id=61582011557077" target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" size="icon" className="rounded-full">
+                        <Facebook className="h-4 w-4" />
+                        <span className="sr-only">Facebook</span>
+                      </Button>
+                    </a>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Follow us on Facebook</p>
@@ -85,10 +87,12 @@ export default function Footer() {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="icon" className="rounded-full">
-                      <Twitter className="h-4 w-4" />
-                      <span className="sr-only">Twitter</span>
-                    </Button>
+                     <a href="https://x.com/patel_puls43877" target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" size="icon" className="rounded-full">
+                        <Twitter className="h-4 w-4" />
+                        <span className="sr-only">Twitter</span>
+                      </Button>
+                     </a>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Follow us on Twitter</p>
@@ -98,10 +102,12 @@ export default function Footer() {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="icon" className="rounded-full">
-                      <Instagram className="h-4 w-4" />
-                      <span className="sr-only">Instagram</span>
-                    </Button>
+                    <a href="https://www.instagram.com/patel_pulse_ventures/?hl=en" target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" size="icon" className="rounded-full">
+                        <Instagram className="h-4 w-4" />
+                        <span className="sr-only">Instagram</span>
+                      </Button>
+                    </a>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Follow us on Instagram</p>
@@ -111,13 +117,15 @@ export default function Footer() {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="icon" className="rounded-full">
-                      <Linkedin className="h-4 w-4" />
-                      <span className="sr-only">LinkedIn</span>
-                    </Button>
+                    <a href="https://youtube.com/@patelpulseventures?si=FvwL5VT3tQgmN4IC" target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" size="icon" className="rounded-full">
+                        <Youtube className="h-4 w-4" />
+                        <span className="sr-only">YouTube</span>
+                      </Button>
+                    </a>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>Connect with us on LinkedIn</p>
+                    <p>Subscribe on YouTube</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -145,5 +153,3 @@ export default function Footer() {
     </footer>
   )
 }
-
-    

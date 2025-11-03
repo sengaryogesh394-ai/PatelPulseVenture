@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -9,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { submitContactForm } from '@/lib/actions';
-import { Globe, Twitter, ArrowRight } from 'lucide-react';
+import { Facebook, Twitter, ArrowRight } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 const formSchema = z.object({
@@ -59,12 +60,12 @@ export default function ContactSection() {
 
   const contactMethods = [
     {
-      icon: <Globe className="w-6 h-6" />,
-      title: 'Join our community',
+      icon: <Facebook className="w-6 h-6" />,
+      title: 'Find us on Facebook',
       desc: 'Join our community to stay updated with the latest news and announcements.',
       link: {
-        name: 'Join our Discord',
-        href: 'javascript:void(0)',
+        name: 'Go to Facebook',
+        href: 'https://www.facebook.com/profile.php?id=61582011557077',
       },
     },
     {
@@ -73,7 +74,7 @@ export default function ContactSection() {
       desc: 'Follow us on Twitter to get the latest updates and news.',
       link: {
         name: 'Send us DMs',
-        href: 'javascript:void(0)',
+        href: 'https://x.com/patel_puls43877',
       },
     },
   ];
@@ -194,7 +195,7 @@ export default function ContactSection() {
                   </div>
                   <h4 className="text-foreground text-lg font-medium xl:text-xl">{item.title}</h4>
                   <p>{item.desc}</p>
-                  <a href={item.link.href} className="flex items-center gap-1 text-sm text-primary duration-150 hover:text-primary/80 font-medium">
+                  <a href={item.link.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-sm text-primary duration-150 hover:text-primary/80 font-medium">
                     {item.link.name}
                     <ArrowRight className="w-5 h-5" />
                   </a>
@@ -209,7 +210,7 @@ export default function ContactSection() {
             <div className="max-w-screen-xl mx-auto px-4 text-muted-foreground gap-12 md:px-8">
                 <div className="rounded-lg overflow-hidden">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224346.48011753383!2d77.0688975492211!3d28.52728033816447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1692882928156!5m2!1sen!2sin"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.921396951244!2d77.4334333150805!3d28.54203498245598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ceb5059ffffff%3A0x42998a694b8455b3!2sOC%201125%2C%20ACE%20City%2C%20Sector%201%2C%20Greater%20Noida%2C%20Ghaziabad%2C%20Uttar%20Pradesh%20201009!5e0!3m2!1sen!2sin!4v1730624503615!5m2!1sen!2sin"
                         width="100%" 
                         height="450" 
                         style={{ border: 0 }} 
@@ -224,5 +225,3 @@ export default function ContactSection() {
     </section>
   );
 }
-
-    

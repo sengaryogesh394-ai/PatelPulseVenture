@@ -76,8 +76,8 @@ export const innovations: Innovation[] = [
 export const teamMembers = [
     {
         id: '1',
-        name: 'Liam Brown',
-        role: 'Founder - CEO',
+        name: 'Aadarsh',
+        role: 'Founder',
         avatar: 'https://alt.tailus.io/images/team/member-one.webp',
         link: '#',
     },
@@ -188,4 +188,3 @@ export const testimonials: Testimonial[] = [
     imageId: "testimonial-5",
   },
 ];
-

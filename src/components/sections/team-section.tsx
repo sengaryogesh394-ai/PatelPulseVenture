@@ -23,6 +23,21 @@ const TeamSection = React.forwardRef<
   HTMLDivElement,
   AnimatedTeamSectionProps
 >(({ title, description, members, className, ...props }, ref) => {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 },
+    };
+
   return (
     <section
       id="team"
@@ -38,10 +53,22 @@ const TeamSection = React.forwardRef<
           {description}
         </p>
       </div>
-      <div className="mt-12 md:mt-24 max-w-5xl mx-auto">
+      <motion.div 
+        className="mt-12 md:mt-24 max-w-5xl mx-auto"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
           <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {members.map((member, index) => (
-                  <div key={index} className="group overflow-hidden">
+                  <motion.div 
+                    key={index} 
+                    className="group overflow-hidden"
+                    variants={itemVariants}
+                    whileHover={{ y: -8 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
                       <Image className="h-96 w-full rounded-md object-cover object-top grayscale transition-all duration-500 hover:grayscale-0 group-hover:h-[22.5rem] group-hover:rounded-xl" src={member.image} alt={member.name} width="826" height="1239" />
                       <div className="px-2 pt-2 sm:pb-0 sm:pt-4">
                           <div className="flex justify-between">
@@ -56,10 +83,10 @@ const TeamSection = React.forwardRef<
                               </a>
                           </div>
                       </div>
-                  </div>
+                  </motion.div>
               ))}
           </div>
-      </div>
+      </motion.div>
     </section>
   );
 });

@@ -54,10 +54,12 @@ export default function ServiceDetailSection({ service }: ServiceDetailProps) {
             <motion.div
               key={detail.title}
               initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 + index * 0.2 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -5, scale: 1.02 }}
             >
-              <Card className="h-full bg-secondary/50">
+              <Card className="h-full bg-secondary/50 transition-shadow duration-300 hover:shadow-xl">
                 <CardHeader>
                   <CardTitle className="text-2xl font-semibold text-primary/90">{detail.title}</CardTitle>
                 </CardHeader>

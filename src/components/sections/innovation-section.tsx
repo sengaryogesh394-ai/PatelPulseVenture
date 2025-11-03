@@ -1,73 +1,82 @@
 
 'use client';
 import type { Innovation } from '@/lib/types';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Lightbulb } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { cn } from "@/lib/utils";
+import { Lightbulb, Bot, ShieldCheck, Zap, Briefcase, Rocket, Settings, Heart } from "lucide-react";
+import React from 'react';
+
+const iconMap: { [key: string]: React.ReactNode } = {
+  'default': <Lightbulb />,
+  '1': <Bot />,
+  '2': <ShieldCheck />,
+  '3': <Zap />,
+  '4': <Briefcase />,
+  '5': <Rocket />,
+  '6': <Settings />,
+  '7': <Heart />,
+};
+
 
 interface InnovationSectionProps {
   innovations: Innovation[];
 }
 
 export default function InnovationSection({ innovations }: InnovationSectionProps) {
-
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.2 } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-  
   return (
-    <motion.section 
-      id="innovation" 
-      className="py-20 sm:py-28"
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
+    <section id="innovation" className="py-20 sm:py-28">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div variants={itemVariants}>
-          <h2 className="text-3xl font-bold tracking-tight text-center font-headline sm:text-4xl">Innovation Lab</h2>
-          <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
+        <h2 className="text-3xl font-bold tracking-tight text-center font-headline sm:text-4xl">Innovation Lab</h2>
+        <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
             At the forefront of research and development, we explore emerging technologies that will shape tomorrow.
-          </p>
-        </motion.div>
-        
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
-          {innovations.map((innovation) => {
-            const innovationImage = PlaceHolderImages.find(p => p.id === innovation.imageId);
-            return (
-              <motion.div
-                key={innovation.id}
-                variants={itemVariants}
-                whileHover={{ scale: 1.03, y: -5 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                <Card className="h-full border-2 border-transparent hover:border-primary hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex items-center gap-4">
-                      <div className="bg-primary/10 p-3 rounded-full">
-                        <Lightbulb className="h-6 w-6 text-primary" />
-                      </div>
-                      <CardTitle className="font-headline text-lg">{innovation.title}</CardTitle>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">{innovation.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            );
-          })}
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative z-10 py-10 max-w-7xl mx-auto">
+            {innovations.map((feature, index) => (
+                <Feature key={feature.id} {...feature} index={index} />
+            ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
+
+const Feature = ({
+  id,
+  title,
+  description,
+  index,
+}: {
+  id: string;
+  title: string;
+  description: string;
+  index: number;
+}) => {
+  const totalFeatures = 3; // Assuming 3 features for grid layout
+  return (
+    <div
+      className={cn(
+        "flex flex-col lg:border-r py-10 relative group/feature dark:border-neutral-800",
+        (index === 0 || index === 4) && "lg:border-l dark:border-neutral-800",
+         index < totalFeatures && "lg:border-b dark:border-neutral-800"
+      )}
+    >
+      {index < 4 && (
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-secondary to-transparent pointer-events-none" />
+      )}
+      {index >= 4 && (
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-secondary to-transparent pointer-events-none" />
+      )}
+      <div className="mb-4 relative z-10 px-10 text-primary">
+        {iconMap[id] || iconMap.default}
+      </div>
+      <div className="text-lg font-bold mb-2 relative z-10 px-10">
+        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-border group-hover/feature:bg-primary transition-all duration-200 origin-center" />
+        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-foreground">
+          {title}
+        </span>
+      </div>
+      <p className="text-sm text-muted-foreground max-w-xs relative z-10 px-10">
+        {description}
+      </p>
+    </div>
+  );
+};

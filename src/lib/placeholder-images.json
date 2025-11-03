@@ -71,6 +71,24 @@
       "description": "Placeholder for IOT",
       "imageUrl": "https://images.unsplash.com/photo-1586894317143-b91c09204369?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzE3MDB8MHwxfHNlYXJjaHwxfHxJT1R8ZW58MHx8fHwxNzE5OTI0MTU4fDA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "iot"
+    },
+    {
+      "id": "testimonial-1",
+      "description": "Placeholder for testimonial author 1",
+      "imageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNXx8cHJvZmVzc2lvbmFsJTIwaGVhZHNob3R8ZW58MHx8fHwxNzYyMDg0ODI3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional headshot"
+    },
+    {
+      "id": "testimonial-2",
+      "description": "Placeholder for testimonial author 2",
+      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdCUyMHdvbWFufGVufDB8fHx8MTc2MjA3NTE3NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional portrait"
+    },
+    {
+      "id": "testimonial-3",
+      "description": "Placeholder for testimonial author 3",
+      "imageUrl": "https://images.unsplash.com/photo-1557862921-37829c790f19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdCUyMG1hbnxlbnwwfHx8fDE3NjIwNzUxNzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional portrait"
     }
   ]
 }

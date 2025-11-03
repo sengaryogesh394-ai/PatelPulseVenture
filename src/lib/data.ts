@@ -1,5 +1,5 @@
 
-import type { Service, Innovation, TeamMember, Venture } from './types';
+import type { Service, Innovation, TeamMember, Venture, Testimonial } from './types';
 
 export const services: Service[] = [
   {
@@ -122,4 +122,28 @@ export const ventures: Venture[] = [
     description: 'Developing next-generation perovskite solar cells to make clean energy more accessible and efficient.',
     imageId: 'venture-4'
     }
-]
+];
+
+export const testimonials: Testimonial[] = [
+  {
+    id: '1',
+    quote: 'Working with this team has been a transformative experience. Their expertise in deep tech and market strategy is unparalleled. They turned our raw concept into a market-leading product.',
+    name: 'John Doe',
+    role: 'CEO, QuantumLeap',
+    imageId: 'testimonial-1',
+  },
+  {
+    id: '2',
+    quote: 'The insights and support we received were instrumental in our growth. Their hands-on approach and commitment to innovation are what set them apart.',
+    name: 'Jane Smith',
+    role: 'Founder, SynthoBio',
+    imageId: 'testimonial-2',
+  },
+  {
+    id: '3',
+    quote: 'A truly visionary partner. They understood our technology at a fundamental level and helped us navigate the complex landscape of venture capital. We couldn’t have done it without them.',
+    name: 'Samuel Lee',
+    role: 'CTO, CogniSphere',
+    imageId: 'testimonial-3',
+  },
+];

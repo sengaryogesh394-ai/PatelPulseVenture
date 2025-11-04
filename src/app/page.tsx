@@ -1,5 +1,6 @@
 
 import HeroSection from '@/components/sections/hero-section';
+import BlogPage from '@/components/sections/Blog-page';
 import ServicesSection from '@/components/sections/services-section';
 import InnovationSection from '@/components/sections/innovation-section';
 import TeamSection from '@/components/sections/team-section';
@@ -31,6 +32,8 @@ export default function Home() {
       <IntegrationHero />
       <InnovationSection />
       <TechStackSection />
+      <BlogPage/>
+
       <TestimonialSection testimonials={testimonials.slice(0, 3)} />
       <TeamSection 
         title="Our commitment to integrity and innovation"

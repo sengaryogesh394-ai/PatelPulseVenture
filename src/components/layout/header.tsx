@@ -3,12 +3,14 @@
 // import * as React from 'react';
 // import Link from 'next/link';
 // import { Menu } from 'lucide-react';
+// import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 // import { cn } from '@/lib/utils';
 // import { Button } from '@/components/ui/button';
 // import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 // import { ThemeToggle } from '@/components/theme-toggle';
 // import { Logo } from '@/components/ui/logo';
+// import { DialogTitle } from '@/components/ui/dialog'; // ✅ Import DialogTitle from your shadcn dialog component
 
 // const navLinks = [
 //   { href: '/services', label: 'Our Services' },
@@ -41,7 +43,6 @@
 //       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
 //         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
 //           <Logo className="h-36 w-40" />
-         
 //         </Link>
 
 //         <nav className="hidden md:flex md:items-center md:gap-6">
@@ -57,17 +58,27 @@
 //         </nav>
 
 //         <div className="flex items-center gap-2">
-//            <ThemeToggle />
-//            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+//           <ThemeToggle />
+//           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
 //             <SheetTrigger asChild>
 //               <Button variant="ghost" size="icon" className="md:hidden">
 //                 <Menu className="h-6 w-6" />
 //                 <span className="sr-only">Open menu</span>
 //               </Button>
 //             </SheetTrigger>
+
+//             {/* ✅ FIX: Added VisuallyHidden DialogTitle for accessibility */}
 //             <SheetContent side="left">
+//               <VisuallyHidden>
+//                 <DialogTitle>Mobile Navigation Menu</DialogTitle>
+//               </VisuallyHidden>
+
 //               <div className="flex flex-col gap-4 p-4">
-//                 <Link href="/" className="flex items-center gap-2 font-bold text-lg" onClick={() => setMobileMenuOpen(false)}>
+//                 <Link
+//                   href="/"
+//                   className="flex items-center gap-2 font-bold text-lg"
+//                   onClick={() => setMobileMenuOpen(false)}
+//                 >
 //                   <Logo className="h-8 w-auto" />
 //                   <span className="font-headline">Patel Pulse Ventures</span>
 //                 </Link>
@@ -104,7 +115,8 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Logo } from '@/components/ui/logo';
-import { DialogTitle } from '@/components/ui/dialog'; // ✅ Import DialogTitle from your shadcn dialog component
+import { DialogTitle } from '@/components/ui/dialog';
+
 
 const navLinks = [
   { href: '/services', label: 'Our Services' },
@@ -113,11 +125,13 @@ const navLinks = [
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/team', label: 'Team' },
   { href: '/contact', label: 'Contact' },
+   { href: '/blog', label: 'Blogs' },
 ];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [showHoverText, setShowHoverText] = React.useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -139,6 +153,7 @@ export default function Header() {
           <Logo className="h-36 w-40" />
         </Link>
 
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex md:items-center md:gap-6">
           {navLinks.map((link) => (
             <Link
@@ -151,8 +166,27 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
+        <div className="flex items-center gap-4 relative">
+          {/* Theme Toggle + Hover Text */}
+          <div
+            className="relative flex items-center"
+            onMouseEnter={() => setShowHoverText(true)}
+            onMouseLeave={() => setShowHoverText(false)}
+          >
+            <ThemeToggle />
+            <span
+              className={cn(
+                'absolute left-full ml-2 text-sm transition-opacity duration-300',
+                showHoverText ? 'opacity-100' : 'opacity-0',
+                // dark/light mode color control:
+                'text-foreground'
+              )}
+            >
+              Toggle Theme
+            </span>
+          </div>
+
+          {/* Mobile Menu */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
@@ -161,7 +195,6 @@ export default function Header() {
               </Button>
             </SheetTrigger>
 
-            {/* ✅ FIX: Added VisuallyHidden DialogTitle for accessibility */}
             <SheetContent side="left">
               <VisuallyHidden>
                 <DialogTitle>Mobile Navigation Menu</DialogTitle>
@@ -176,6 +209,7 @@ export default function Header() {
                   <Logo className="h-8 w-auto" />
                   <span className="font-headline">Patel Pulse Ventures</span>
                 </Link>
+
                 <nav className="flex flex-col gap-4">
                   {navLinks.map((link) => (
                     <Link

@@ -43,9 +43,7 @@ export default function IntegrationHero() {
         <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
           250+ top apps are available to integrate seamlessly with your workflow.
         </p>
-        <Button variant="default" className="mt-8 px-6 py-3 rounded-lg">
-          Get started
-        </Button>
+       
 
         {/* Carousel */}
         <div className="mt-12 overflow-hidden relative pb-2">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm, useFormState } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
@@ -61,82 +61,85 @@ export default function AdminContentForm() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
-            control={form.control}
-            name="contentType"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Content Type</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+    <FormProvider {...form}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="contentType"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Content Type</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a content type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="venturePortfolio">Venture Portfolio</SelectItem>
+                      <SelectItem value="innovationHighlight">Innovation Highlight</SelectItem>
+                      <SelectItem value="teamBio">Team Bio</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="topic"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Topic / Subject</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a content type" />
-                    </SelectTrigger>
+                    <Input placeholder="e.g., QuantumLeap, AI in Healthcare, Dr. Evelyn Reed" {...field} />
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="venturePortfolio">Venture Portfolio</SelectItem>
-                    <SelectItem value="innovationHighlight">Innovation Highlight</SelectItem>
-                    <SelectItem value="teamBio">Team Bio</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="keywords"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Keywords (optional)</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g., quantum computing, enterprise, PhD" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="w-full" disabled={isGenerating}>
+              {isGenerating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isGenerating ? 'Generating...' : 'Generate Draft'}
+            </Button>
+          </form>
+        </Form>
+
+        <div className="space-y-2">
+          <FormLabel>Generated Content</FormLabel>
+          <Textarea
+            placeholder="Your generated content will appear here..."
+            value={generatedContent}
+            readOnly={isGenerating}
+            onChange={(e) => setGeneratedContent(e.target.value)}
+            className="min-h-[300px] bg-muted/50"
           />
-          <FormField
-            control={form.control}
-            name="topic"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Topic / Subject</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g., QuantumLeap, AI in Healthcare, Dr. Evelyn Reed" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="keywords"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Keywords (optional)</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g., quantum computing, enterprise, PhD" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" className="w-full" disabled={isGenerating}>
-            {isGenerating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isGenerating ? 'Generating...' : 'Generate Draft'}
-          </Button>
-        </form>
-      </Form>
-      <div className="space-y-2">
-        <FormLabel>Generated Content</FormLabel>
-        <Textarea
-          placeholder="Your generated content will appear here..."
-          value={generatedContent}
-          readOnly={isGenerating}
-          onChange={(e) => setGeneratedContent(e.target.value)}
-          className="min-h-[300px] bg-muted/50"
-        />
-        <Button 
-            variant="outline" 
-            size="sm" 
-            className="w-full" 
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full"
             onClick={() => navigator.clipboard.writeText(generatedContent)}
             disabled={!generatedContent || isGenerating}
-        >
+          >
             Copy to Clipboard
-        </Button>
+          </Button>
+        </div>
       </div>
-    </div>
+    </FormProvider>
   );
 }

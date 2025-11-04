@@ -2,7 +2,12 @@
 
 // import Image from 'next/image';
 // import Link from 'next/link';
+// import { useEffect, useRef } from 'react';
 // import { motion } from 'framer-motion';
+// import gsap from 'gsap';
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// gsap.registerPlugin(ScrollTrigger);
 
 // const blogs = [
 //   {
@@ -56,9 +61,53 @@
 // ];
 
 // export default function BlogPage() {
+//   const sectionRef = useRef<HTMLDivElement>(null);
+
+//   useEffect(() => {
+//     const ctx = gsap.context(() => {
+//       // Fade-in for the section header
+//       gsap.from('.blog-header', {
+//         y: 50,
+//         opacity: 0,
+//         duration: 1,
+//         ease: 'power3.out',
+//         scrollTrigger: {
+//           trigger: '.blog-header',
+//           start: 'top 80%',
+//         },
+//       });
+
+//       // Animate each blog card on scroll
+//       gsap.utils.toArray('.blog-card').forEach((card: any, i) => {
+//         gsap.from(card, {
+//           opacity: 0,
+//           y: 60,
+//           duration: 0.8,
+//           delay: i * 0.1,
+//           ease: 'power2.out',
+//           scrollTrigger: {
+//             trigger: card,
+//             start: 'top 85%',
+//           },
+//         });
+//       });
+//     }, sectionRef);
+
+//     return () => ctx.revert();
+//   }, []);
+
 //   return (
-//     <section className="min-h-screen bg-background py-20 px-6 sm:px-10 lg:px-20">
-//       <div className="max-w-6xl mx-auto text-center mb-16">
+//     <section ref={sectionRef} className="relative min-h-screen bg-background py-20 px-6 sm:px-10 lg:px-20 overflow-hidden">
+//       {/* Floating background animation */}
+//       <motion.div
+//         initial={{ opacity: 0 }}
+//         animate={{ opacity: 0.15, scale: [1, 1.2, 1], rotate: [0, 10, 0] }}
+//         transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+//         className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-400/20 via-purple-400/10 to-pink-300/10 blur-3xl"
+//       />
+
+//       {/* Section Header */}
+//       <div className="max-w-6xl mx-auto text-center mb-16 relative z-10 blog-header">
 //         <motion.h1
 //           initial={{ opacity: 0, y: 40 }}
 //           whileInView={{ opacity: 1, y: 0 }}
@@ -72,23 +121,27 @@
 //         </p>
 //       </div>
 
-//       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+//       {/* Blog Cards */}
+//       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 relative z-10">
 //         {blogs.map((blog, index) => (
 //           <motion.div
 //             key={blog.id}
-//             initial={{ opacity: 0, y: 30 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.4, delay: index * 0.1 }}
-//             whileHover={{ scale: 1.03 }}
-//             className="rounded-2xl overflow-hidden shadow-lg bg-card border border-border hover:shadow-xl transition-all duration-300 flex flex-col"
+//             className="blog-card rounded-2xl overflow-hidden shadow-lg bg-card border border-border hover:shadow-2xl transition-all duration-300 flex flex-col group"
+//             whileHover={{ y: -8 }}
 //           >
-//             <div className="relative w-full h-56">
-//               <Image
-//                 src={blog.image}
-//                 alt={blog.title}
-//                 fill
-//                 className="object-cover transition-transform duration-500 hover:scale-110"
-//               />
+//             <div className="relative w-full h-56 overflow-hidden">
+//               <motion.div
+//                 whileHover={{ scale: 1.1 }}
+//                 transition={{ duration: 0.6, ease: 'easeOut' }}
+//                 className="w-full h-full"
+//               >
+//                 <Image
+//                   src={blog.image}
+//                   alt={blog.title}
+//                   fill
+//                   className="object-cover"
+//                 />
+//               </motion.div>
 //             </div>
 
 //             <div className="p-6 flex flex-col flex-1">
@@ -97,7 +150,7 @@
 
 //               <Link
 //                 href={blog.link}
-//                 className="inline-block mt-auto text-primary font-medium hover:underline"
+//                 className="inline-block mt-auto text-primary font-medium hover:underline transition-all"
 //               >
 //                 Read More →
 //               </Link>
@@ -176,7 +229,6 @@ export default function BlogPage() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Fade-in for the section header
       gsap.from('.blog-header', {
         y: 50,
         opacity: 0,
@@ -188,7 +240,6 @@ export default function BlogPage() {
         },
       });
 
-      // Animate each blog card on scroll
       gsap.utils.toArray('.blog-card').forEach((card: any, i) => {
         gsap.from(card, {
           opacity: 0,
@@ -208,7 +259,10 @@ export default function BlogPage() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen bg-background py-20 px-6 sm:px-10 lg:px-20 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen bg-background py-20 px-6 sm:px-10 lg:px-20 overflow-hidden"
+    >
       {/* Floating background animation */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -228,45 +282,41 @@ export default function BlogPage() {
           Our Latest Insights
         </motion.h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Stay updated with Patel Pulse Ventures. Read the latest blogs on technology, innovation, and business strategy.
+          Stay updated with Patel Pulse Ventures. Read the latest blogs on technology, innovation,
+          and business strategy.
         </p>
       </div>
 
       {/* Blog Cards */}
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 relative z-10">
-        {blogs.map((blog, index) => (
-          <motion.div
-            key={blog.id}
-            className="blog-card rounded-2xl overflow-hidden shadow-lg bg-card border border-border hover:shadow-2xl transition-all duration-300 flex flex-col group"
-            whileHover={{ y: -8 }}
-          >
-            <div className="relative w-full h-56 overflow-hidden">
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="w-full h-full"
-              >
-                <Image
-                  src={blog.image}
-                  alt={blog.title}
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
-            </div>
+        {blogs.map((blog) => (
+          <Link key={blog.id} href={blog.link} className="group">
+            <motion.div
+              className="blog-card rounded-2xl overflow-hidden shadow-lg bg-card border border-border hover:shadow-2xl transition-all duration-300 flex flex-col cursor-pointer"
+              whileHover={{ y: -8 }}
+            >
+              <div className="relative w-full h-56 overflow-hidden">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.6, ease: 'easeOut' }}
+                  className="w-full h-full"
+                >
+                  <Image src={blog.image} alt={blog.title} fill className="object-cover" />
+                </motion.div>
+              </div>
 
-            <div className="p-6 flex flex-col flex-1">
-              <h2 className="text-xl font-semibold mb-3 text-foreground">{blog.title}</h2>
-              <p className="text-muted-foreground flex-1 mb-6">{blog.excerpt}</p>
+              <div className="p-6 flex flex-col flex-1">
+                <h2 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
+                  {blog.title}
+                </h2>
+                <p className="text-muted-foreground flex-1 mb-6">{blog.excerpt}</p>
 
-              <Link
-                href={blog.link}
-                className="inline-block mt-auto text-primary font-medium hover:underline transition-all"
-              >
-                Read More →
-              </Link>
-            </div>
-          </motion.div>
+                <span className="inline-block mt-auto text-primary font-medium hover:underline transition-all">
+                  Read More →
+                </span>
+              </div>
+            </motion.div>
+          </Link>
         ))}
       </div>
     </section>

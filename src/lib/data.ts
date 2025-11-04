@@ -487,7 +487,7 @@ export const teamMembers = [
     },
     {
         id: '3',
-        name: 'Isabella Garcia',
+        name: 'Alisha',
         role: 'Sales Manager',
         avatar: 'https://alt.tailus.io/images/team/member-three.webp',
         link: '#',
@@ -501,14 +501,14 @@ export const teamMembers = [
     },
     {
         id: '5',
-        name: 'Ava Williams',
+        name: 'Shruti Sachan',
         role: 'Interaction Designer',
         avatar: 'https://alt.tailus.io/images/team/member-five.webp',
         link: '#',
     },
     {
         id: '6',
-        name: 'Olivia Miller',
+        name: 'Sanya Bhatia',
         role: 'Visual Designer',
         avatar: 'https://alt.tailus.io/images/team/member-six.webp',
         link: '#',

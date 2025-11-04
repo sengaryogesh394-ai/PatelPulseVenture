@@ -183,7 +183,7 @@
     {
       "id": "project-edu-3",
       "description": "Online learning platform",
-      "imageUrl": "https://images.unsplash.com/photo-1541829076-248995240217?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzE3MDB8MHwxfHNlYXJjaHwxfHxlLWxlYXJuaW5nfGVufDB8fHx8MTczMTM0Mzg2OXww&ixlib=rb-4.0.3&q=80&w=1080",
+     "imageUrl": "https://images.unsplash.com/photo-1556155092-490a1ba16284?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzE3MDB8MHwxfHNlYXJjaHwxfHxjustomerJTIwZmVlZGJhY2t8ZW58MHx8fHwxNzI5OTkyNTMxfDA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "e-learning"
     },
     {
@@ -195,7 +195,7 @@
     {
       "id": "project-crypto-3",
       "description": "DeFi wallet",
-      "imageUrl": "https://images.unsplash.com/photo-1631603090989-b226e9e1c3a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzE3MDB8MHwxfHNlYXJjaHwxfHxjcnlwdG8lMjB3YWxsZXR8ZW58MHx8fHwxNzMxMzQzOTIzfDA&ixlib=rb-4.0.3&q=80&w=1080",
+"imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzE3MDB8MHwxfHNlYXJjaHwxfHxkYXRhJTIwdmlzdWFsaXphdGlvbnxlbnwwfHx8fDE3Mjk5OTI1Nzh8MA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "crypto wallet"
     },
     {

@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -61,8 +62,9 @@ export default function Footer() {
             <h3 className="mb-4 text-lg font-semibold">Contact Us</h3>
             <address className="space-y-2 text-sm not-italic">
               <p>OC 1125, Sector 4, Greater Noida West, Uttar Pradesh 201009, India</p>
-              <p>Phone: (+91) 98765-43210</p>
-              <p>Email: contact@patelpulse.com</p>
+              <p>Phone: (+91) 78381 30064</p>
+              <p>TelePhone: (+91)  120 510 6926</p>
+              <p>Email: contact@patelpulseVentures.com</p>
             </address>
           </div>
           <div className="relative">

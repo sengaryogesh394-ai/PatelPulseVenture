@@ -55,7 +55,7 @@ export default function HeroSection() {
           className="mt-6 max-w-2xl text-lg text-primary-foreground/80 md:text-xl"
           variants={itemVariants}
         >
-          Pate Pulse Venture is a technology and venture innovation firm dedicated to building and scaling the next generation of groundbreaking companies.
+          Patel Pulse Venture is a technology and venture innovation firm dedicated to building and scaling the next generation of groundbreaking companies.
         </motion.p>
         <motion.div className="mt-10 flex gap-4" variants={itemVariants}>
           <Button asChild size="lg" className="rounded-full">

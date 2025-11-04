@@ -4,7 +4,7 @@ import React from "react";
 
 export const Logo = ({ className }: { className?: string }) => (
   <Image
-    src="/logo.svg"
+    src="/logo.png"
     alt="Patel Pulse Ventures Logo"
     width={150}
     height={56}

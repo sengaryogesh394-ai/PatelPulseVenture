@@ -1,72 +1,303 @@
 
-"use client"
+// "use client"
 
-import * as React from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
+// import * as React from "react"
+// import { Button } from "@/components/ui/button"
+// import { Input } from "@/components/ui/input"
+// import { Label } from "@/components/ui/label"
+// import { Switch } from "@/components/ui/switch"
+// import {
+//   Tooltip,
+//   TooltipContent,
+//   TooltipProvider,
+//   TooltipTrigger,
+// } from "@/components/ui/tooltip"
+// import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter, Rocket, Youtube } from "lucide-react"
+// import { ThemeToggle } from "../theme-toggle"
+// import Link from "next/link"
+// import { Logo } from "../ui/logo"
+
+// export default function Footer() {
+//   const currentYear = new Date().getFullYear();
+
+//   return (
+//     <footer className="relative border-t bg-background text-foreground transition-colors duration-300">
+//       <div className="container mx-auto px-4 py-12 md:px-6 lg:px-8">
+//         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+//           <div className="relative">
+//             <Link href="/" className="flex items-center gap-2 font-bold text-lg mb-4">
+//               <Logo className="h-8 w-auto" />
+//               <span className="font-headline">Patel Pulse Ventures</span>
+//             </Link>
+//             <p className="mb-6 text-muted-foreground">
+//               Join our newsletter for the latest updates and exclusive offers.
+//             </p>
+//             <form className="relative">
+//               <Input
+//                 type="email"
+//                 placeholder="Enter your email"
+//                 className="pr-12 backdrop-blur-sm"
+//               />
+//               <Button
+//                 type="submit"
+//                 size="icon"
+//                 className="absolute right-1 top-1 h-8 w-8 rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105"
+//               >
+//                 <Send className="h-4 w-4" />
+//                 <span className="sr-only">Subscribe</span>
+//               </Button>
+//             </form>
+//           </div>
+//           <div>
+//             <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
+//             <nav className="space-y-2 text-sm">
+//                 <li><Link href="/services" className="text-sm text-muted-foreground hover:text-primary">Services</Link></li>
+//                 <li><Link href="/innovation" className="text-sm text-muted-foreground hover:text-primary">Innovation</Link></li>
+//                 <li><Link href="/testimonials" className="text-sm text-muted-foreground hover:text-primary">Testimonials</Link></li>
+//                 <li><Link href="/team" className="text-sm text-muted-foreground hover:text-primary">Team</Link></li>
+//                 <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">Contact</Link></li>
+//             </nav>
+//           </div>
+//           <div>
+//             <h3 className="mb-4 text-lg font-semibold">Contact Us</h3>
+//             <address className="space-y-2 text-sm not-italic">
+//               <p>OC 1125, Sector 4, Greater Noida West, Uttar Pradesh 201009, India</p>
+//               <p>Phone: (+91) 78381 30064</p>
+//               <p>TelePhone: (+91)  120 510 6926</p>
+//               <p>Email: contact@patelpulseVentures.com</p>
+//             </address>
+//           </div>
+//           <div className="relative">
+//             <h3 className="mb-4 text-lg font-semibold">Follow Us</h3>
+//             <div className="mb-6 flex space-x-4">
+//               <TooltipProvider>
+//                 <Tooltip>
+//                   <TooltipTrigger asChild>
+//                     <a href="https://www.facebook.com/profile.php?id=61582011557077" target="_blank" rel="noopener noreferrer">
+//                       <Button variant="outline" size="icon" className="rounded-full">
+//                         <Facebook className="h-4 w-4" />
+//                         <span className="sr-only">Facebook</span>
+//                       </Button>
+//                     </a>
+//                   </TooltipTrigger>
+//                   <TooltipContent>
+//                     <p>Follow us on Facebook</p>
+//                   </TooltipContent>
+//                 </Tooltip>
+//               </TooltipProvider>
+//               <TooltipProvider>
+//                 <Tooltip>
+//                   <TooltipTrigger asChild>
+//                      <a href="https://x.com/patel_puls43877" target="_blank" rel="noopener noreferrer">
+//                       <Button variant="outline" size="icon" className="rounded-full">
+//                         <Twitter className="h-4 w-4" />
+//                         <span className="sr-only">Twitter</span>
+//                       </Button>
+//                      </a>
+//                   </TooltipTrigger>
+//                   <TooltipContent>
+//                     <p>Follow us on Twitter</p>
+//                   </TooltipContent>
+//                 </Tooltip>
+//               </TooltipProvider>
+//               <TooltipProvider>
+//                 <Tooltip>
+//                   <TooltipTrigger asChild>
+//                     <a href="https://www.instagram.com/patel_pulse_ventures/?hl=en" target="_blank" rel="noopener noreferrer">
+//                       <Button variant="outline" size="icon" className="rounded-full">
+//                         <Instagram className="h-4 w-4" />
+//                         <span className="sr-only">Instagram</span>
+//                       </Button>
+//                     </a>
+//                   </TooltipTrigger>
+//                   <TooltipContent>
+//                     <p>Follow us on Instagram</p>
+//                   </TooltipContent>
+//                 </Tooltip>
+//               </TooltipProvider>
+//               <TooltipProvider>
+//                 <Tooltip>
+//                   <TooltipTrigger asChild>
+//                     <a href="https://youtube.com/@patelpulseventures?si=FvwL5VT3tQgmN4IC" target="_blank" rel="noopener noreferrer">
+//                       <Button variant="outline" size="icon" className="rounded-full">
+//                         <Youtube className="h-4 w-4" />
+//                         <span className="sr-only">YouTube</span>
+//                       </Button>
+//                     </a>
+//                   </TooltipTrigger>
+//                   <TooltipContent>
+//                     <p>Subscribe on YouTube</p>
+//                   </TooltipContent>
+//                 </Tooltip>
+//               </TooltipProvider>
+//             </div>
+//             <div className="flex items-center space-x-2">
+//                 <ThemeToggle />
+//                 <Label htmlFor="dark-mode">Toggle theme</Label>
+//             </div>
+//           </div>
+//         </div>
+//         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 text-center md:flex-row">
+//           <p className="text-sm text-muted-foreground">
+//             © {currentYear} Patel Pulse Ventures. All rights reserved.
+//           </p>
+//           <nav className="flex gap-4 text-sm">
+//             <a href="#" className="transition-colors hover:text-primary">
+//               Privacy Policy
+//             </a>
+//             <a href="#" className="transition-colors hover:text-primary">
+//               Terms of Service
+//             </a>
+//           </nav>
+//         </div>
+//       </div>
+//     </footer>
+//   )
+// }
+
+"use client";
+
+import * as React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { Facebook, Instagram, Linkedin, Moon, Send, Sun, Twitter, Rocket, Youtube } from "lucide-react"
-import { ThemeToggle } from "../theme-toggle"
-import Link from "next/link"
-import { Logo } from "../ui/logo"
+} from "@/components/ui/tooltip";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Moon,
+  Send,
+  Sun,
+  Twitter,
+  Rocket,
+  Youtube,
+} from "lucide-react";
+import { ThemeToggle } from "../theme-toggle";
+import Link from "next/link";
+import { Logo } from "../ui/logo";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
+  // ✅ Newsletter form state
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  // ✅ Handle newsletter submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("access_key", "f3735e73-b46a-4877-b951-5a04fdd1ac11");
+      formData.append("email", email);
+      formData.append("name", "Newsletter Subscriber");
+      formData.append(
+        "message",
+        `New newsletter subscription: ${email}`
+      );
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (res.ok) {
+        setSuccess(true);
+        setEmail("");
+      }
+    } catch (error) {
+      console.error("Subscription failed:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <footer className="relative border-t bg-background text-foreground transition-colors duration-300">
       <div className="container mx-auto px-4 py-12 md:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          {/* --------------------------- */}
+          {/* Column 1: Logo + Newsletter */}
+          {/* --------------------------- */}
           <div className="relative">
             <Link href="/" className="flex items-center gap-2 font-bold text-lg mb-4">
               <Logo className="h-8 w-auto" />
               <span className="font-headline">Patel Pulse Ventures</span>
             </Link>
-            <p className="mb-6 text-muted-foreground">
-              Join our newsletter for the latest updates and exclusive offers.
-            </p>
-            <form className="relative">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                className="pr-12 backdrop-blur-sm"
-              />
-              <Button
-                type="submit"
-                size="icon"
-                className="absolute right-1 top-1 h-8 w-8 rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105"
-              >
-                <Send className="h-4 w-4" />
-                <span className="sr-only">Subscribe</span>
-              </Button>
-            </form>
+
+            {!success ? (
+              <>
+                <p className="mb-6 text-muted-foreground">
+                  Join our newsletter for the latest updates and exclusive offers.
+                </p>
+                <form onSubmit={handleSubmit} className="relative">
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    required
+                    className="pr-12 backdrop-blur-sm"
+                  />
+                  <Button
+                    type="submit"
+                    size="icon"
+                    disabled={loading}
+                    className="absolute right-1 top-1 h-8 w-8 rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105"
+                  >
+                    <Send className="h-4 w-4" />
+                    <span className="sr-only">Subscribe</span>
+                  </Button>
+                </form>
+              </>
+            ) : (
+              <p className="text-green-600 font-medium mt-3">
+                ✅ Thanks for subscribing!
+              </p>
+            )}
           </div>
+
+          {/* --------------------------- */}
+          {/* Column 2: Quick Links */}
+          {/* --------------------------- */}
           <div>
             <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
             <nav className="space-y-2 text-sm">
-                <li><Link href="/services" className="text-sm text-muted-foreground hover:text-primary">Services</Link></li>
-                <li><Link href="/innovation" className="text-sm text-muted-foreground hover:text-primary">Innovation</Link></li>
-                <li><Link href="/testimonials" className="text-sm text-muted-foreground hover:text-primary">Testimonials</Link></li>
-                <li><Link href="/team" className="text-sm text-muted-foreground hover:text-primary">Team</Link></li>
-                <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">Contact</Link></li>
+              <li><Link href="/services" className="text-sm text-muted-foreground hover:text-primary">Services</Link></li>
+              <li><Link href="/innovation" className="text-sm text-muted-foreground hover:text-primary">Innovation</Link></li>
+              <li><Link href="/testimonials" className="text-sm text-muted-foreground hover:text-primary">Testimonials</Link></li>
+              <li><Link href="/team" className="text-sm text-muted-foreground hover:text-primary">Team</Link></li>
+              <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">Contact</Link></li>
             </nav>
           </div>
+
+          {/* --------------------------- */}
+          {/* Column 3: Contact Info */}
+          {/* --------------------------- */}
           <div>
             <h3 className="mb-4 text-lg font-semibold">Contact Us</h3>
             <address className="space-y-2 text-sm not-italic">
               <p>OC 1125, Sector 4, Greater Noida West, Uttar Pradesh 201009, India</p>
               <p>Phone: (+91) 78381 30064</p>
-              <p>TelePhone: (+91)  120 510 6926</p>
+              <p>Telephone: (+91) 120 510 6926</p>
               <p>Email: contact@patelpulseVentures.com</p>
             </address>
           </div>
+
+          {/* --------------------------- */}
+          {/* Column 4: Social + Theme */}
+          {/* --------------------------- */}
           <div className="relative">
             <h3 className="mb-4 text-lg font-semibold">Follow Us</h3>
             <div className="mb-6 flex space-x-4">
@@ -80,26 +311,24 @@ export default function Footer() {
                       </Button>
                     </a>
                   </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Follow us on Facebook</p>
-                  </TooltipContent>
+                  <TooltipContent><p>Follow us on Facebook</p></TooltipContent>
                 </Tooltip>
               </TooltipProvider>
+
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                     <a href="https://x.com/patel_puls43877" target="_blank" rel="noopener noreferrer">
+                    <a href="https://x.com/patel_puls43877" target="_blank" rel="noopener noreferrer">
                       <Button variant="outline" size="icon" className="rounded-full">
                         <Twitter className="h-4 w-4" />
                         <span className="sr-only">Twitter</span>
                       </Button>
-                     </a>
+                    </a>
                   </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Follow us on Twitter</p>
-                  </TooltipContent>
+                  <TooltipContent><p>Follow us on Twitter</p></TooltipContent>
                 </Tooltip>
               </TooltipProvider>
+
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -110,11 +339,10 @@ export default function Footer() {
                       </Button>
                     </a>
                   </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Follow us on Instagram</p>
-                  </TooltipContent>
+                  <TooltipContent><p>Follow us on Instagram</p></TooltipContent>
                 </Tooltip>
               </TooltipProvider>
+
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -125,32 +353,31 @@ export default function Footer() {
                       </Button>
                     </a>
                   </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Subscribe on YouTube</p>
-                  </TooltipContent>
+                  <TooltipContent><p>Subscribe on YouTube</p></TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </div>
+
             <div className="flex items-center space-x-2">
-                <ThemeToggle />
-                <Label htmlFor="dark-mode">Toggle theme</Label>
+              <ThemeToggle />
+              <Label htmlFor="dark-mode">Toggle theme</Label>
             </div>
           </div>
         </div>
+
+        {/* --------------------------- */}
+        {/* Bottom Section */}
+        {/* --------------------------- */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 text-center md:flex-row">
           <p className="text-sm text-muted-foreground">
             © {currentYear} Patel Pulse Ventures. All rights reserved.
           </p>
           <nav className="flex gap-4 text-sm">
-            <a href="#" className="transition-colors hover:text-primary">
-              Privacy Policy
-            </a>
-            <a href="#" className="transition-colors hover:text-primary">
-              Terms of Service
-            </a>
+            <a href="#" className="transition-colors hover:text-primary">Privacy Policy</a>
+            <a href="#" className="transition-colors hover:text-primary">Terms of Service</a>
           </nav>
         </div>
       </div>
     </footer>
-  )
+  );
 }

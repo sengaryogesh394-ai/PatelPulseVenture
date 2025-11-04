@@ -33,7 +33,7 @@ export default function IntegrationHero() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.04)_1px,transparent_1px)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:24px_24px]" />
 
       {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-6 text-center">
+      <div className="relative container mx-auto px-6 text-center">
         <span className="inline-block px-3 py-1 mb-4 text-sm rounded-full border border-border bg-background">
           ⚡ Integrations
         </span>

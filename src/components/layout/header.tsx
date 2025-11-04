@@ -1,4 +1,3 @@
-
 'use client';
 
 import * as React from 'react';
@@ -39,7 +38,7 @@ export default function Header() {
         isScrolled ? 'border-border bg-background/80 backdrop-blur-lg' : 'bg-background'
       )}
     >
-      <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
           <Logo className="h-8 w-auto" />
           <span className="font-headline hidden sm:inline-block">Patel Pulse Ventures</span>

@@ -74,7 +74,7 @@ export default function ApplicationDevelopmentSection() {
           </h2>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mx-auto">
           {/* Left Column */}
           <motion.div className="flex flex-col gap-8" variants={sectionVariants}>
             {applicationDevelopmentServices.map(service => (

@@ -97,7 +97,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="py-20 sm:py-28">
-      <div className="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div className="container mx-auto px-4 md:px-8">
         {/* "Get in touch" form */}
         <div className="max-w-lg mx-auto space-y-3 sm:text-center">
           <h3 className="text-primary font-semibold">Contact</h3>
@@ -195,7 +195,7 @@ export default function ContactSection() {
         </div>
 
         {/* "Let's connect" section */}
-        <div className="max-w-screen-xl mx-auto px-4 text-muted-foreground gap-12 mt-20 md:px-8 lg:flex">
+        <div className="container mx-auto px-4 text-muted-foreground gap-12 mt-20 md:px-8 lg:flex">
           <div className="max-w-md">
             <h3 className="text-foreground text-3xl font-semibold sm:text-4xl">Let’s connect</h3>
             <p className="mt-3">
@@ -223,7 +223,7 @@ export default function ContactSection() {
 
         {/* Google Map Embed */}
         <div className="mt-20">
-            <div className="max-w-screen-xl mx-auto px-4 text-muted-foreground gap-12 md:px-8">
+            <div className="container mx-auto px-4 text-muted-foreground gap-12 md:px-8">
                 <div className="rounded-lg overflow-hidden">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.921396951244!2d77.4334333150805!3d28.54203498245598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ceb5059ffffff%3A0x42998a694b8455b3!2sOC%201125%2C%20ACE%20City%2C%20Sector%201%2C%20Greater%20Noida%2C%20Ghaziabad%2C%20Uttar%20Pradesh%20201009!5e0!3m2!1sen!2sin!4v1730624503615!5m2!1sen!2sin"

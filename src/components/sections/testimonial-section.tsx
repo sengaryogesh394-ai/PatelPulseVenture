@@ -44,7 +44,7 @@ const AnimatedTestimonials = ({ testimonials, autoplay = true }: AnimatedTestimo
 
   return (
     <section id="testimonials" className="py-20 sm:py-28">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold tracking-tight text-center font-headline sm:text-4xl">What Our Clients Say</h2>
             <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">
                 We are trusted by leading companies and visionary founders.

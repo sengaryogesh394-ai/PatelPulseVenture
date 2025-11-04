@@ -477,7 +477,7 @@ export default function TechStackSection() {
   
   return (
     <section className="bg-background relative overflow-hidden">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-bold tracking-tight font-headline sm:text-4xl">Technologies We Use</h2>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
           We leverage a modern tech stack to build robust and scalable solutions for our clients.

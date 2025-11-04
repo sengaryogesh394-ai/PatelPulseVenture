@@ -31,7 +31,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div variants={itemVariants}>
           <h2 className="text-3xl font-bold tracking-tight text-center font-headline sm:text-4xl">Our Services</h2>
           <p className="mt-4 text-lg text-center text-muted-foreground max-w-2xl mx-auto">

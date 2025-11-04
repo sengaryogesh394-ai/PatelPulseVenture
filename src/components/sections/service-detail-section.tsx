@@ -16,7 +16,7 @@ export default function ServiceDetailSection({ service }: ServiceDetailProps) {
 
   return (
     <div className="py-20 sm:py-28">
-      <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

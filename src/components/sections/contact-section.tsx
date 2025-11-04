@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -9,9 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
-import { submitContactForm } from '@/lib/actions';
 import { Facebook, Twitter, ArrowRight } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import React from 'react';
 
 const formSchema = z.object({
   firstName: z.string().min(2, { message: 'First name must be at least 2 characters.' }),
@@ -35,26 +34,43 @@ export default function ContactSection() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // The new form has different fields. Let's adapt.
-    const contactData = {
-        name: `${values.firstName} ${values.lastName}`,
-        email: values.email,
-        message: values.message,
-    };
-    const result = await submitContactForm(contactData);
+    const formData = new FormData();
+    formData.append("access_key", "f3735e73-b46a-4877-b951-5a04fdd1ac11");
+    formData.append("name", `${values.firstName} ${values.lastName}`);
+    formData.append("email", values.email);
+    formData.append("phone", values.phoneNumber || "Not provided");
+    formData.append("message", values.message);
+    formData.append("subject", `New Contact Form Submission from ${values.firstName} ${values.lastName}`);
 
-    if (result.success) {
-      toast({
-        title: 'Message Sent!',
-        description: "Thank you for reaching out. We'll get back to you soon.",
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
       });
-      form.reset();
-    } else {
-      toast({
-        title: 'Error',
-        description: result.message || 'There was an error sending your message.',
-        variant: 'destructive',
-      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: 'Message Sent!',
+          description: "Thank you for reaching out. We'll get back to you soon.",
+        });
+        form.reset();
+      } else {
+        console.error("Error submitting form:", result);
+        toast({
+          title: 'Error',
+          description: result.message || 'There was an error sending your message.',
+          variant: 'destructive',
+        });
+      }
+    } catch (error) {
+        console.error("Caught error submitting form:", error);
+        toast({
+            title: 'Error',
+            description: 'There was a network error sending your message. Please try again.',
+            variant: 'destructive',
+        });
     }
   }
 

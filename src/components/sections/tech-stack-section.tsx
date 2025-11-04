@@ -1015,7 +1015,7 @@ export default function TechStackSection() {
   }
   
  return (
-  <section className="bg-background relative overflow-hidden">
+  <section className="bg-background relative overflow-hidden mt-10">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-3xl font-bold tracking-tight font-headline sm:text-4xl">
         Technologies We Use

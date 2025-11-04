@@ -606,6 +606,15 @@ export const projects: Project[] = [
       imageId: 'project-ecom-2',
     },
     {
+      id: 'ecom-3',
+      title: 'Luxe Threads',
+      description: 'An exclusive online boutique for high-end fashion, featuring a curated collection of designer apparel.',
+      link: '#',
+      technologies: ['Shopify Plus', 'Headless CMS', 'React'],
+      category: 'E-Commerce',
+      imageId: 'project-ecom-3',
+    },
+    {
       id: 'edu-1',
       title: 'Eurotech Maritime',
       description: 'A comprehensive educational platform for maritime studies and certifications.',
@@ -622,6 +631,15 @@ export const projects: Project[] = [
       technologies: ['Angular', 'Node.js', 'MongoDB'],
       category: 'Education',
       imageId: 'project-edu-2',
+    },
+    {
+      id: 'edu-3',
+      title: 'SkillSphere',
+      description: 'An online learning platform offering a wide range of courses and certifications in tech and business.',
+      link: '#',
+      technologies: ['Next.js', 'Firebase', 'Vercel'],
+      category: 'Education',
+      imageId: 'project-edu-3',
     },
     {
       id: 'llm-1',
@@ -642,6 +660,15 @@ export const projects: Project[] = [
       imageId: 'project-llm-2',
     },
     {
+      id: 'llm-3',
+      title: 'InsightBot',
+      description: 'An AI tool that analyzes customer feedback from multiple sources to provide actionable business insights.',
+      link: '#',
+      technologies: ['Python', 'Flask', 'React', 'AI/ML'],
+      category: 'LLM (ML/AI)',
+      imageId: 'project-llm-3',
+    },
+    {
       id: 'crypto-1',
       title: 'Cryptoland',
       description: 'A blockchain-based gaming platform where users can trade and own virtual assets.',
@@ -660,6 +687,15 @@ export const projects: Project[] = [
       imageId: 'project-crypto-2',
     },
     {
+      id: 'crypto-3',
+      title: 'DeFi-Wallet',
+      description: 'A secure, non-custodial wallet for managing decentralized finance assets across multiple chains.',
+      link: '#',
+      technologies: ['React Native', 'ethers.js', 'Solidity'],
+      category: 'Blockchain (Crypto)',
+      imageId: 'project-crypto-3',
+    },
+    {
       id: 'cms-1',
       title: 'Pinki Dashboard',
       description: 'A custom content management system with a focus on intuitive UI and flexible content modeling.',
@@ -676,5 +712,14 @@ export const projects: Project[] = [
       technologies: ['React', 'Node.js', 'PostgreSQL', 'Charts'],
       category: 'Dashboards (CMS)',
       imageId: 'project-cms-2',
+    },
+    {
+      id: 'cms-3',
+      title: 'DataViz',
+      description: 'A real-time analytics dashboard for visualizing complex datasets and business metrics.',
+      link: '#',
+      technologies: ['React', 'D3.js', 'Node.js', 'WebSocket'],
+      category: 'Dashboards (CMS)',
+      imageId: 'project-cms-3',
     },
 ];

@@ -45,7 +45,7 @@
     {
       "id": "innovation-3",
       "description": "Placeholder for innovation 3",
-      "imageUrl": "https://images.unsplash.com/photo-1667487935540-f59515f6c7fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxdWFudHVtJTIwY29tcHV0aW5nfGVufDB8fHx8MTc2MjE0NDUxMHww&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1667487935540-f59515f6c7fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxdWFudHVtJTIwY29tcHV0aW5nfGVufDB8fHx8MTc2MjE0NDUxMHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "quantum computing"
     },
     {
@@ -111,7 +111,7 @@
     {
       "id": "graphic-design-1",
       "description": "Abstract graphic design elements",
-      "imageUrl": "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxncmFwaGljJTIwZGVzaWdufGVufDB8fHx8MTc2MjA2NjkxMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxncmFwaGljJTIwZGVzaWdufGVufDB8fHx8MTc2MjA2NjkxMnww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "graphic design"
     },
     {
@@ -123,7 +123,7 @@
     {
       "id": "project-ecom-2",
       "description": "Shopping cart",
-      "imageUrl": "https://images.unsplash.com/photo-1575898201154-d65111ab78b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzaG9wcGluZyUyMGNhcnR8ZW58MHx8fHwxNzYyMDk2ODg0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1575898201154-d65111ab78b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzaG9wcGluZyUyMGNhcnR8ZW58MHx8fHwxNzYyMDk2ODg0fDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "shopping cart"
     },
     {
@@ -147,7 +147,7 @@
     {
       "id": "project-llm-2",
       "description": "Conversational AI",
-      "imageUrl": "https://images.unsplash.com/photo-1683104691469-7b40f22caec1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjaGF0Ym90JTIwY29udmVyc2F0aW9ufGVufDB8fHx8MTc2MjE2NzA1NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1683104691469-7b40f22caec1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjaGF0Ym90JTIwY29udmVyc2F0aW9ufGVufDB8fHx8MTc2MjE2NzA1NXww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "chatbot conversation"
     },
     {
@@ -159,7 +159,7 @@
     {
       "id": "project-crypto-2",
       "description": "NFT Marketplace",
-      "imageUrl": "https://images.unsplash.com/photo-1757940059931-6e3c6572d989?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxuZnQlMjBtYXJrZXRwbGFjZXxlbnwwfHx8fDE3NjIxNjcwNTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1757940059931-6e3c6572d989?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxuZnQlMjBtYXJrZXRwbGFjZXxlbnwwfHx8fDE3NjIxNjcwNTV8MA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "nft marketplace"
     },
     {
@@ -173,6 +173,36 @@
       "description": "Admin Panel",
       "imageUrl": "https://images.unsplash.com/photo-1511995352296-e02a292767e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhZG1pbiUyMHBhbmVsfGVufDB8fHx8MTc2MjE2NzA1NXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "admin panel"
+    },
+    {
+      "id": "project-ecom-3",
+      "description": "Luxury fashion e-commerce",
+      "imageUrl": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzE3MDB8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBmYXNoaW9ufGVufDB8fHx8MTcyOTk5MjQ3Mnww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "luxury fashion"
+    },
+    {
+      "id": "project-edu-3",
+      "description": "Online learning platform",
+      "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c62c6933de6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzE3MDB8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZ3xlbnwwfHx8fDE3Mjk5OTI1MDZ8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "online learning"
+    },
+    {
+      "id": "project-llm-3",
+      "description": "AI for customer feedback",
+      "imageUrl": "https://images.unsplash.com/photo-1556155092-490a1ba16284?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzE3MDB8MHwxfHNlYXJjaHwxfHxjustomerJTIwZmVlZGJhY2t8ZW58MHx8fHwxNzI5OTkyNTMxfDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "customer feedback"
+    },
+    {
+      "id": "project-crypto-3",
+      "description": "DeFi wallet",
+      "imageUrl": "https://images.unsplash.com/photo-1639755490714-82a17b075b9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzE3MDB8MHwxfHNlYXJjaHwxfHxEZUZpJTIwd2FsbGV0fGVufDB8fHx8MTcyOTk5MjU1NXww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "defi wallet"
+    },
+    {
+      "id": "project-cms-3",
+      "description": "Data visualization dashboard",
+      "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzE3MDB8MHwxfHNlYXJjaHwxfHxkYXRhJTIwdmlzdWFsaXphdGlvbnxlbnwwfHx8fDE3Mjk5OTI1Nzh8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "data visualization"
     }
   ]
 }

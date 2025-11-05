@@ -175,15 +175,15 @@ export default function Header() {
           >
             <ThemeToggle />
             <span
-              className={cn(
-                'absolute left-full ml-2 text-sm transition-opacity duration-300',
-                showHoverText ? 'opacity-100' : 'opacity-0',
-                // dark/light mode color control:
-                'text-foreground'
-              )}
-            >
-              Toggle Theme
-            </span>
+  className={cn(
+    'absolute left-full ml-2 text-sm transition-opacity duration-300 hidden md:inline-block',
+    showHoverText ? 'opacity-100' : 'opacity-0',
+    'text-foreground'
+  )}
+>
+  Toggle Theme
+</span>
+
           </div>
 
           {/* Mobile Menu */}

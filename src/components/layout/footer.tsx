@@ -273,7 +273,7 @@ export default function Footer() {
           {/* --------------------------- */}
           <div>
             <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
-            <nav className="space-y-2 text-sm">
+            <nav className="space-y-2 pl-5 text-sm">
               <li><Link href="/services" className="text-sm text-muted-foreground hover:text-primary">Services</Link></li>
               <li><Link href="/innovation" className="text-sm text-muted-foreground hover:text-primary">Innovation</Link></li>
               <li><Link href="/testimonials" className="text-sm text-muted-foreground hover:text-primary">Testimonials</Link></li>

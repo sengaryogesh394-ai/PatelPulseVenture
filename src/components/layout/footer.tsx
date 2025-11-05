@@ -155,6 +155,7 @@
 //   )
 // }
 
+
 "use client";
 
 import * as React from "react";
@@ -372,10 +373,21 @@ export default function Footer() {
           <p className="text-sm text-muted-foreground">
             © {currentYear} Patel Pulse Ventures. All rights reserved.
           </p>
-          <nav className="flex gap-4 text-sm">
-            <a href="#" className="transition-colors hover:text-primary">Privacy Policy</a>
-            <a href="#" className="transition-colors hover:text-primary">Terms of Service</a>
-          </nav>
+       <nav className="flex gap-4 text-sm">
+  <Link href="/privacy-policy" className="transition-colors hover:text-primary">
+    Privacy Policy
+  </Link>
+  <Link href="/about" className="transition-colors hover:text-primary">
+    About us
+  </Link>
+  <Link href="/terms-and-conditions" className="transition-colors hover:text-primary">
+    Terms & Conditions
+  </Link>
+  <Link href="/refund-policy" className="transition-colors hover:text-primary">
+    Return & Refund Policy
+  </Link>
+</nav>
+
         </div>
       </div>
     </footer>

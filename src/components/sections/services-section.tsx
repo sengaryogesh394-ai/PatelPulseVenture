@@ -118,26 +118,16 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
     },
   };
 
-  const itemVariants = (index: number) => {
-    const directions = [
-      { x: -100, y: 0 },
-      { x: 100, y: 0 },
-      { x: 0, y: 100 },
-      { x: 0, y: -100 },
-    ];
-    const dir = directions[index % directions.length];
-    return {
-      hidden: { opacity: 0, ...dir },
-      visible: {
-        opacity: 1,
-        x: 0,
-        y: 0,
-        transition: {
-          duration: 0.8,
-          ease: [0.33, 1, 0.68, 1],
-        },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.33, 1, 0.68, 1],
       },
-    };
+    },
   };
 
   return (
@@ -147,7 +137,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }} // 👈 animation triggers only when 30% of the section is visible
+      viewport={{ once: true, amount: 0.1 }} // 👈 animation triggers when 10% visible (better for mobile)
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -175,7 +165,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
             return (
               <Link href={`/services/${service.slug}`} key={service.id} className="block">
                 <motion.div
-                  variants={itemVariants(index)}
+                  variants={itemVariants}
                   whileHover={{ scale: 1.05, y: -5 }}
                   transition={{ type: 'spring', stiffness: 200, damping: 15 }}
                   className="h-full"

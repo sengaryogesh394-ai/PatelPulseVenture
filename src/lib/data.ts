@@ -446,6 +446,158 @@ export const services: Service[] = [
             ]
         }
     ]
+  },
+  {
+    id: '10',
+    name: 'User Generated Content (UGC)',
+    slug: 'user-generated-content',
+    description: 'We create authentic, engaging user-generated content strategies that build trust, boost engagement, and drive conversions through real customer experiences.',
+    imageId: 'venture-3',
+    longDescription: 'User Generated Content is the most authentic form of marketing. We help brands leverage customer voices, reviews, testimonials, and social media content to build trust and drive engagement. Our UGC strategies turn your customers into brand advocates.',
+    details: [
+        {
+            title: 'UGC Strategy & Planning',
+            points: [
+                'UGC Campaign Strategy Development',
+                'Content Guidelines & Brand Standards',
+                'Hashtag Campaign Creation',
+                'Influencer & Creator Outreach',
+                'Community Building & Engagement',
+                'UGC Rights & Permissions Management',
+            ]
+        },
+        {
+            title: 'Content Collection & Curation',
+            points: [
+                'Social Media Content Monitoring',
+                'Review & Testimonial Collection',
+                'Photo & Video Submissions',
+                'Contest & Challenge Management',
+                'Content Moderation & Quality Control',
+                'User Story & Case Study Development',
+            ]
+        },
+        {
+            title: 'UGC Distribution & Amplification',
+            points: [
+                'Social Media Reposting Strategy',
+                'Website Integration & Galleries',
+                'Email Marketing Integration',
+                'Paid Ad Campaigns with UGC',
+                'Product Page Reviews & Ratings',
+                'Influencer Collaboration Content',
+            ]
+        },
+        {
+            title: 'Video Testimonials & Reviews',
+            points: [
+                'Customer Video Testimonials',
+                'Unboxing Videos',
+                'Product Review Videos',
+                'Before & After Transformations',
+                'Tutorial & How-to Videos',
+                'Live Stream & Q&A Sessions',
+            ]
+        },
+        {
+            title: 'Social Proof & Trust Building',
+            points: [
+                'Review Widget Integration',
+                'Social Media Wall Display',
+                'Customer Success Stories',
+                'Case Study Development',
+                'Trust Badge & Certification Display',
+                'Influencer Partnership Content',
+            ]
+        },
+        {
+            title: 'Analytics & Performance',
+            points: [
+                'UGC Engagement Tracking',
+                'Conversion Rate Analysis',
+                'Sentiment Analysis',
+                'ROI Measurement',
+                'A/B Testing UGC vs Brand Content',
+                'Performance Reports & Insights',
+            ]
+        }
+    ]
+  },
+  {
+    id: '11',
+    name: 'Computer Generated Imagery (CGI)',
+    slug: 'computer-generated-imagery',
+    description: 'We create stunning photorealistic CGI and 3D visualizations for products, architecture, and marketing that bring your vision to life with unparalleled detail.',
+    imageId: 'venture-4',
+    longDescription: 'Our CGI services combine artistic vision with cutting-edge technology to create photorealistic 3D renders, animations, and visual effects. From product visualization to architectural renders, we bring ideas to life with stunning detail and realism.',
+    details: [
+        {
+            title: '3D Product Visualization',
+            points: [
+                'Photorealistic Product Renders',
+                '360° Product Views',
+                'Product Configurators',
+                'Exploded View Diagrams',
+                'Material & Texture Rendering',
+                'Lifestyle & Context Renders',
+            ]
+        },
+        {
+            title: 'Architectural Visualization',
+            points: [
+                'Exterior Building Renders',
+                'Interior Design Visualization',
+                'Landscape & Environment Design',
+                'Virtual Tours & Walkthroughs',
+                'Day & Night Lighting Scenarios',
+                'Aerial & Drone View Renders',
+            ]
+        },
+        {
+            title: '3D Animation & Motion Graphics',
+            points: [
+                'Product Animation Videos',
+                'Explainer Animations',
+                'Logo & Brand Animations',
+                'Character Animation',
+                'Mechanical & Technical Animations',
+                'Cinematic Sequences',
+            ]
+        },
+        {
+            title: 'Virtual & Augmented Reality',
+            points: [
+                'VR Experience Development',
+                'AR Product Visualization',
+                '3D Model Optimization for AR/VR',
+                'Interactive 3D Configurators',
+                'Virtual Showrooms',
+                'Immersive Brand Experiences',
+            ]
+        },
+        {
+            title: 'Visual Effects (VFX)',
+            points: [
+                'Compositing & Green Screen',
+                'Particle Effects & Simulations',
+                'Motion Tracking & Match Moving',
+                'Color Grading & Correction',
+                'CGI Integration with Live Footage',
+                'Special Effects for Video',
+            ]
+        },
+        {
+            title: 'Game Assets & Metaverse',
+            points: [
+                '3D Game Asset Creation',
+                'Character & Environment Modeling',
+                'Texture & Material Creation',
+                'Metaverse Environment Design',
+                'NFT 3D Art & Collectibles',
+                'Virtual World Development',
+            ]
+        }
+    ]
   }
 ];
 

@@ -101,9 +101,10 @@ import Link from 'next/link';
 
 interface ServicesSectionProps {
   services: Service[];
+  showSeeMore?: boolean;
 }
 
-export default function ServicesSection({ services }: ServicesSectionProps) {
+export default function ServicesSection({ services, showSeeMore = false }: ServicesSectionProps) {
   const sectionVariants = {
     hidden: { opacity: 0, y: 60 },
     visible: {
@@ -217,6 +218,27 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
             );
           })}
         </div>
+
+        {/* See More Button - Only show on home page */}
+        {showSeeMore && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <Link href="/services">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                See More Services
+              </motion.button>
+            </Link>
+          </motion.div>
+        )}
       </div>
     </motion.section>
   );

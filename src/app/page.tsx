@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <ServicesSection services={services.slice(0, 4)} />
+      <ServicesSection services={services.slice(0, 4)} showSeeMore={true} />
       <ApplicationDevelopmentSection />
       <IntegrationHero />
       <InnovationSection />

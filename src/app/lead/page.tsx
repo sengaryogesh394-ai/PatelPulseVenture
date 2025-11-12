@@ -138,7 +138,7 @@ export default function LeadPage() {
         formData.append("access_key", "f3735e73-b46a-4877-b951-5a04fdd1ac11");
         formData.append("name", form.name);
         formData.append("email", form.email);
-        formData.append("phone", form.phone || "Not provided");
+        formData.append("phone", form.phone);
         formData.append("company", form.company || "Not provided");
         formData.append("service", form.service);
         formData.append("serviceDetail", form.serviceDetail || "Not specified");
@@ -321,12 +321,13 @@ export default function LeadPage() {
 
                         <div className="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block font-medium">Phone Number</label>
+                                <label className="block font-medium">Phone Number *</label>
                                 <input
                                     type="tel"
                                     name="phone"
                                     value={form.phone}
                                     onChange={handleChange}
+                                    required
                                     className="w-full mt-2 p-3 rounded-lg border border-border focus:ring-2 focus:ring-primary focus:outline-none"
                                     placeholder="+91 9876543210"
                                 />

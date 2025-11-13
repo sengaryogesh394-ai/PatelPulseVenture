@@ -89,8 +89,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // ✅ Enables static export mode (replaces next export)
-  output: "export",
+  // ✅ Remove static export to enable API routes
+  // output: "export", // Commented out to enable API routes
   
   // ✅ Adds trailing slashes to URLs for better static hosting compatibility
   trailingSlash: true,

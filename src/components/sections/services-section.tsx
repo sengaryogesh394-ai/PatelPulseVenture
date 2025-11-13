@@ -160,9 +160,8 @@ export default function ServicesSection({ services, showSeeMore = false }: Servi
         {/* Cards grid */}
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
           {services.map((service, index) => {
-            const serviceImage = PlaceHolderImages.find(
-              (p) => p.id === service.imageId
-            );
+            const serviceImage = PlaceHolderImages.find((p) => p.id === service.imageId);
+            const customImageUrl = (service.imageUrl && service.imageUrl.trim() !== '') ? service.imageUrl : undefined;
             return (
               <Link href={`/services/${service.slug}`} key={service.id} className="block">
                 <motion.div
@@ -172,7 +171,7 @@ export default function ServicesSection({ services, showSeeMore = false }: Servi
                   className="h-full"
                 >
                   <Card className="overflow-hidden h-full flex flex-col rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 bg-background">
-                    {serviceImage && (
+                    {(customImageUrl || serviceImage) && (
                       <div className="aspect-video relative overflow-hidden">
                         <motion.div
                           className="absolute inset-0"
@@ -181,13 +180,22 @@ export default function ServicesSection({ services, showSeeMore = false }: Servi
                           transition={{ duration: 1.2, ease: 'easeOut' }}
                           viewport={{ once: true }}
                         >
-                          <Image
-                            src={serviceImage.imageUrl}
-                            alt={serviceImage.description}
-                            data-ai-hint={serviceImage.imageHint}
-                            fill
-                            className="object-cover"
-                          />
+                          {customImageUrl ? (
+                            <Image
+                              src={customImageUrl}
+                              alt={service.name}
+                              fill
+                              className="object-cover"
+                            />
+                          ) : (
+                            <Image
+                              src={serviceImage!.imageUrl}
+                              alt={serviceImage!.description}
+                              data-ai-hint={serviceImage!.imageHint}
+                              fill
+                              className="object-cover"
+                            />
+                          )}
                         </motion.div>
                       </div>
                     )}

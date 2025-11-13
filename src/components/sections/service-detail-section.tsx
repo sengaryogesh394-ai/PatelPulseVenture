@@ -13,6 +13,7 @@ interface ServiceDetailProps {
 
 export default function ServiceDetailSection({ service }: ServiceDetailProps) {
   const serviceImage = PlaceHolderImages.find((p) => p.id === service.imageId);
+  const customImageUrl = (service.imageUrl && service.imageUrl.trim() !== '') ? service.imageUrl : undefined;
 
   return (
     <div className="py-20 sm:py-28">
@@ -36,15 +37,28 @@ export default function ServiceDetailSection({ service }: ServiceDetailProps) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          {serviceImage && (
+          {(customImageUrl || serviceImage) && (
             <div className="aspect-video relative rounded-xl overflow-hidden shadow-2xl">
-              <Image
-                src={serviceImage.imageUrl}
-                alt={service.name}
-                data-ai-hint={serviceImage.imageHint}
-                fill
-                className="object-cover"
-              />
+              {customImageUrl ? (
+                <Image
+                  src={customImageUrl}
+                  alt={service.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  unoptimized
+                  loader={({ src }) => src}
+                  className="object-cover"
+                />
+              ) : (
+                <Image
+                  src={serviceImage!.imageUrl}
+                  alt={service.name}
+                  data-ai-hint={serviceImage!.imageHint}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  className="object-cover"
+                />
+              )}
             </div>
           )}
         </motion.div>

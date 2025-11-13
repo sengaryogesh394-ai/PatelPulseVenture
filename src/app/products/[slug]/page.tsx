@@ -1,20 +1,19 @@
 import { notFound } from 'next/navigation';
-import ServiceDetailSection from '@/components/sections/service-detail-section';
+import ProductDetailSection from '@/components/sections/product-detail-section';
 import connectDB from '@/lib/mongodb';
-import Service from '@/models/Service';
+import Product from '@/models/Product';
 
 export const dynamic = 'force-dynamic';
 
-export default async function ServicePage({ params }: { params: { slug: string } }) {
+export default async function ProductPage({ params }: { params: { slug: string } }) {
   await connectDB();
-  const doc = await Service.findOne({ slug: params.slug }).lean();
+  const doc = await Product.findOne({ slug: params.slug }).lean();
 
   if (!doc) {
     notFound();
   }
 
-  // Normalize to plain object matching the public Service type
-  const service = {
+  const product = {
     id: doc.id,
     name: doc.name,
     slug: doc.slug,
@@ -26,5 +25,5 @@ export default async function ServicePage({ params }: { params: { slug: string }
     status: doc.status || 'active',
   };
 
-  return <ServiceDetailSection service={service} />;
+  return <ProductDetailSection product={product} />;
 }

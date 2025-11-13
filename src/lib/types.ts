@@ -5,11 +5,28 @@ export interface Service {
   slug: string;
   description: string;
   imageId: string;
+  imageUrl?: string;
   longDescription: string;
   details: {
     title: string;
     points: string[];
   }[];
+  status?: 'active' | 'inactive';
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  imageId: string;
+  imageUrl?: string;
+  longDescription: string;
+  details: {
+    title: string;
+    points: string[];
+  }[];
+  status?: 'active' | 'inactive';
 }
 
 export interface Innovation {

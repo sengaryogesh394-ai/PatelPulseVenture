@@ -2,10 +2,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
+import ClientLayout from './client-layout';
 
 export const metadata: Metadata = {
   title: 'Patel Pulse Ventures',
@@ -32,11 +31,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
         >
-          <div className="relative flex min-h-dvh flex-col bg-background">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <ClientLayout>{children}</ClientLayout>
           <Toaster />
         </ThemeProvider>
       </body>

@@ -1,5 +1,5 @@
 
-import type { Service, Innovation, TeamMember, Venture, Testimonial, Project } from './types';
+import type { Service, Innovation, TeamMember, Venture, Testimonial, Project, Product } from './types';
 
 export const services: Service[] = [
   {
@@ -9,6 +9,7 @@ export const services: Service[] = [
     description: 'We empower our clients with dynamic, responsive website builds using PHP, Java, .NET, Wordpress, React JS, React Native, Drupal, CMS, and more.',
     imageId: 'venture-1',
     longDescription: 'From simple landing pages to complex web applications, our team builds fast, interactive, and responsive user interfaces that deliver an exceptional user experience across all devices. We stay at the forefront of frontend technologies to ensure your project is modern, scalable, and maintainable.',
+    status: 'active',
     details: [
         {
           title: 'Frontend Development',
@@ -94,6 +95,39 @@ export const services: Service[] = [
               'Workflow Automation Tools',
             ],
           },
+          {
+            title: 'Security & Performance',
+            points: [
+              'SSL Certificate Implementation',
+              'Data Encryption & GDPR Compliance',
+              'Security Audits & Vulnerability Testing',
+              'Performance Monitoring & Analytics',
+              'Load Testing & Optimization',
+              'DDoS Protection & Firewall Setup',
+            ],
+          },
+          {
+            title: 'Advanced Integrations',
+            points: [
+              'Third-party API Integrations',
+              'Social Media Login (Google, Facebook, GitHub)',
+              'Email Marketing Integration (Mailchimp, SendGrid)',
+              'Analytics Integration (Google Analytics, Mixpanel)',
+              'CRM Integration (Salesforce, HubSpot)',
+              'Payment Processing (Stripe, Razorpay, PayPal)',
+            ],
+          },
+          {
+            title: 'Content Management',
+            points: [
+              'Custom CMS Development',
+              'WordPress & Headless CMS',
+              'Content Versioning & Workflow',
+              'Multi-language Support (i18n)',
+              'SEO-friendly Content Structure',
+              'Media Management & CDN Integration',
+            ],
+          },
     ],
   },
   {
@@ -103,6 +137,7 @@ export const services: Service[] = [
     description: 'We build high-performance Android and iOS apps with seamless user experiences, ensuring innovation and scalability for your business.',
     imageId: 'venture-2',
     longDescription: 'We specialize in creating beautiful, high-performance mobile applications for both iOS and Android. Using modern frameworks like React Native and Flutter, we deliver native-like experiences with a single codebase, reducing development time and cost while ensuring wide-reaching market compatibility.',
+    status: 'active',
     details: [
         {
             title: 'Cross-Platform Development',
@@ -164,6 +199,39 @@ export const services: Service[] = [
                 'User acceptance testing (UAT)',
             ]
         },
+        {
+            title: 'Mobile App Security',
+            points: [
+                'Data Encryption & Secure Storage',
+                'Biometric Authentication Integration',
+                'API Security & Token Management',
+                'Code Obfuscation & Anti-tampering',
+                'OWASP Mobile Security Guidelines',
+                'Penetration Testing & Vulnerability Assessment',
+            ]
+        },
+        {
+            title: 'Performance Optimization',
+            points: [
+                'App Size Optimization & Bundle Splitting',
+                'Memory Management & Leak Prevention',
+                'Battery Usage Optimization',
+                'Network Request Optimization',
+                'Image & Asset Compression',
+                'Lazy Loading & Caching Strategies',
+            ]
+        },
+        {
+            title: 'Analytics & Monitoring',
+            points: [
+                'Crash Reporting (Crashlytics, Sentry)',
+                'User Analytics (Firebase, Mixpanel)',
+                'Performance Monitoring & APM',
+                'A/B Testing Implementation',
+                'User Behavior Tracking',
+                'Custom Event Tracking & Funnels',
+            ]
+        },
     ]
   },
   {
@@ -173,6 +241,7 @@ export const services: Service[] = [
     description: 'We craft data-driven digital marketing strategies that boost visibility, engage audiences, and drive scalable growth for your business across all online platforms.',
     imageId: 'venture-3',
     longDescription: 'Our digital marketing services are designed to increase your online presence and drive measurable results. We combine SEO, SEM, and content strategy to attract, engage, and convert your target audience. We believe in a data-driven approach, constantly analyzing and optimizing for the best possible ROI.',
+    status: 'active',
     details: [
         {
             title: 'Search Engine Optimization (SEO)',
@@ -233,6 +302,39 @@ export const services: Service[] = [
                 'Data analysis to identify growth opportunities',
                 'Regular performance reports and insights',
             ]
+        },
+        {
+            title: 'Marketing Automation',
+            points: [
+                'Lead Generation & Nurturing Workflows',
+                'CRM Integration (HubSpot, Salesforce)',
+                'Behavioral Trigger Campaigns',
+                'Customer Journey Mapping',
+                'Personalization & Dynamic Content',
+                'Marketing Qualified Lead (MQL) Scoring',
+            ]
+        },
+        {
+            title: 'Conversion Optimization',
+            points: [
+                'Landing Page Design & Testing',
+                'A/B Testing & Multivariate Testing',
+                'User Experience (UX) Optimization',
+                'Funnel Analysis & Optimization',
+                'Heat Mapping & User Session Recording',
+                'Conversion Rate Optimization (CRO) Audits',
+            ]
+        },
+        {
+            title: 'Brand Management',
+            points: [
+                'Brand Identity & Positioning Strategy',
+                'Online Reputation Management',
+                'Crisis Communication Planning',
+                'Brand Monitoring & Sentiment Analysis',
+                'Competitor Analysis & Benchmarking',
+                'Brand Guidelines & Style Guide Creation',
+            ]
         }
     ]
   },
@@ -243,6 +345,7 @@ export const services: Service[] = [
     description: 'We provide powerful online store solutions, from custom builds to Shopify and WooCommerce, to help you sell more effectively online.',
     imageId: 'venture-4',
     longDescription: 'We build powerful e-commerce solutions that drive sales and provide a seamless shopping experience for your customers. Whether you need a custom-built store, a Shopify or WooCommerce implementation, or complex integrations, our team has the expertise to deliver a platform that is scalable, secure, and easy to manage.',
+    status: 'active',
     details: [
         {
             title: 'Platform Development',
@@ -599,6 +702,97 @@ export const services: Service[] = [
         }
     ]
   }
+];
+
+// Seed products similar to services structure
+export const products: Product[] = [
+  {
+    id: 'p-1',
+    name: 'AI Chatbot Platform',
+    slug: 'ai-chatbot-platform',
+    description: 'Deploy intelligent chatbots for customer support, lead capture, and automation.',
+    imageId: 'venture-1',
+    imageUrl: '',
+    longDescription:
+      'Our AI Chatbot Platform enables businesses to automate customer interactions with natural, human-like conversations. Integrate across your website, WhatsApp, and social channels with analytics and handoff to human agents.',
+    details: [
+      {
+        title: 'Core Features',
+        points: [
+          'Multichannel support (Web, WhatsApp, Messenger)',
+          'Knowledge base ingestion and FAQ automation',
+          'Human handoff and ticketing integration',
+        ],
+      },
+      {
+        title: 'Admin & Analytics',
+        points: [
+          'Conversation analytics and CSAT tracking',
+          'Intent detection and training tools',
+          'Role-based access control',
+        ],
+      },
+    ],
+    status: 'active',
+  },
+  {
+    id: 'p-2',
+    name: 'E‑Commerce Accelerator',
+    slug: 'ecommerce-accelerator',
+    description: 'A prebuilt kit to launch high-performance online stores faster.',
+    imageId: 'venture-4',
+    imageUrl: '',
+    longDescription:
+      'Launch scalable online stores with prebuilt modules for catalog, checkout, payments, and order tracking. Built on Next.js with best practices for SEO and performance.',
+    details: [
+      {
+        title: 'What’s Included',
+        points: [
+          'Product catalog with filters and search',
+          'Secure checkout with Stripe/Razorpay',
+          'Order management dashboard',
+        ],
+      },
+      {
+        title: 'Optimization',
+        points: [
+          'Image optimization and CDN integration',
+          'Core Web Vitals and SEO ready',
+          'Analytics and events tracking',
+        ],
+      },
+    ],
+    status: 'active',
+  },
+  {
+    id: 'p-3',
+    name: 'Analytics Insights Hub',
+    slug: 'analytics-insights-hub',
+    description: 'Unified analytics dashboard for websites, apps, and marketing campaigns.',
+    imageId: 'project-cms-1',
+    imageUrl: '',
+    longDescription:
+      'Centralize metrics from web, mobile, and ad platforms into an actionable dashboard. Create custom reports, track KPIs, and share insights with stakeholders.',
+    details: [
+      {
+        title: 'Integrations',
+        points: [
+          'Google Analytics 4, Search Console',
+          'Meta/LinkedIn Ads and UTM tracking',
+          'Webhook and CSV import',
+        ],
+      },
+      {
+        title: 'Dashboards',
+        points: [
+          'Real-time metrics and alerts',
+          'Custom KPIs and report scheduling',
+          'Role-based view permissions',
+        ],
+      },
+    ],
+    status: 'active',
+  },
 ];
 
 export const innovations: Innovation[] = [

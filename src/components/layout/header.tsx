@@ -125,13 +125,15 @@ const navLinks = [
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/team', label: 'Team' },
   { href: '/contact', label: 'Contact' },
-   { href: '/blog', label: 'Blogs' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/blog', label: 'Blogs' },
 ];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [showHoverText, setShowHoverText] = React.useState(false);
+  const [user, setUser] = React.useState<null | { id: string; email: string; name?: string; role?: string }>(null);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -140,6 +142,20 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  React.useEffect(() => {
+    try {
+      const raw = typeof window !== 'undefined' ? localStorage.getItem('ppv_user') : null;
+      if (raw) setUser(JSON.parse(raw));
+    } catch {}
+  }, []);
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem('ppv_user');
+      setUser(null);
+    } catch {}
+  };
 
   return (
     <header
@@ -174,15 +190,7 @@ export default function Header() {
             onMouseLeave={() => setShowHoverText(false)}
           >
             <ThemeToggle />
-            <span
-  className={cn(
-    'absolute left-full ml-2 text-sm transition-opacity duration-300 hidden md:inline-block',
-    showHoverText ? 'opacity-100' : 'opacity-0',
-    'text-foreground'
-  )}
->
-  Toggle Theme
-</span>
+           
 
           </div>
 
@@ -222,9 +230,37 @@ export default function Header() {
                     </Link>
                   ))}
                 </nav>
+
+                {/* Auth actions - Mobile */}
+                <div className="mt-6 flex flex-col gap-3">
+                  <Link href="/auth/login" onClick={() => setMobileMenuOpen(false)}>
+                    <Button variant="outline" className="w-full">Login</Button>
+                  </Link>
+                  <Link href="/auth/register" onClick={() => setMobileMenuOpen(false)}>
+                    <Button className="w-full">Register</Button>
+                  </Link>
+                </div>
               </div>
             </SheetContent>
           </Sheet>
+          {/* Auth/Profile actions - Desktop */}
+          <div className="hidden md:flex items-center gap-3">
+            {!user ? (
+              <>
+                <Link href="/auth/login">
+                  <Button variant="outline" size="sm">Login</Button>
+                </Link>
+                <Link href="/auth/register">
+                  <Button size="sm">Register</Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <span className="text-sm text-muted-foreground">Hi, {user.name || user.email}</span>
+                <Button variant="outline" size="sm" onClick={handleLogout}>Logout</Button>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </header>

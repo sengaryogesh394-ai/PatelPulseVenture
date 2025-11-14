@@ -1,5 +1,5 @@
 
-import type { Service, Innovation, TeamMember, Venture, Testimonial, Project, Product } from './types';
+import type { Service, Innovation, TeamMember, Venture, Testimonial, Project } from './types';
 
 export const services: Service[] = [
   {
@@ -704,96 +704,6 @@ export const services: Service[] = [
   }
 ];
 
-// Seed products similar to services structure
-export const products: Product[] = [
-  {
-    id: 'p-1',
-    name: 'AI Chatbot Platform',
-    slug: 'ai-chatbot-platform',
-    description: 'Deploy intelligent chatbots for customer support, lead capture, and automation.',
-    imageId: 'venture-1',
-    imageUrl: '',
-    longDescription:
-      'Our AI Chatbot Platform enables businesses to automate customer interactions with natural, human-like conversations. Integrate across your website, WhatsApp, and social channels with analytics and handoff to human agents.',
-    details: [
-      {
-        title: 'Core Features',
-        points: [
-          'Multichannel support (Web, WhatsApp, Messenger)',
-          'Knowledge base ingestion and FAQ automation',
-          'Human handoff and ticketing integration',
-        ],
-      },
-      {
-        title: 'Admin & Analytics',
-        points: [
-          'Conversation analytics and CSAT tracking',
-          'Intent detection and training tools',
-          'Role-based access control',
-        ],
-      },
-    ],
-    status: 'active',
-  },
-  {
-    id: 'p-2',
-    name: 'E‑Commerce Accelerator',
-    slug: 'ecommerce-accelerator',
-    description: 'A prebuilt kit to launch high-performance online stores faster.',
-    imageId: 'venture-4',
-    imageUrl: '',
-    longDescription:
-      'Launch scalable online stores with prebuilt modules for catalog, checkout, payments, and order tracking. Built on Next.js with best practices for SEO and performance.',
-    details: [
-      {
-        title: 'What’s Included',
-        points: [
-          'Product catalog with filters and search',
-          'Secure checkout with Stripe/Razorpay',
-          'Order management dashboard',
-        ],
-      },
-      {
-        title: 'Optimization',
-        points: [
-          'Image optimization and CDN integration',
-          'Core Web Vitals and SEO ready',
-          'Analytics and events tracking',
-        ],
-      },
-    ],
-    status: 'active',
-  },
-  {
-    id: 'p-3',
-    name: 'Analytics Insights Hub',
-    slug: 'analytics-insights-hub',
-    description: 'Unified analytics dashboard for websites, apps, and marketing campaigns.',
-    imageId: 'project-cms-1',
-    imageUrl: '',
-    longDescription:
-      'Centralize metrics from web, mobile, and ad platforms into an actionable dashboard. Create custom reports, track KPIs, and share insights with stakeholders.',
-    details: [
-      {
-        title: 'Integrations',
-        points: [
-          'Google Analytics 4, Search Console',
-          'Meta/LinkedIn Ads and UTM tracking',
-          'Webhook and CSV import',
-        ],
-      },
-      {
-        title: 'Dashboards',
-        points: [
-          'Real-time metrics and alerts',
-          'Custom KPIs and report scheduling',
-          'Role-based view permissions',
-        ],
-      },
-    ],
-    status: 'active',
-  },
-];
 
 export const innovations: Innovation[] = [
   {

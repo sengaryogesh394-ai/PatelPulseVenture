@@ -22,6 +22,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { createService } from '@/lib/services-api';
+import ImageUpload from '@/components/ui/image-upload';
 
 const serviceSchema = z.object({
   name: z.string().min(1, 'Service name is required'),
@@ -29,10 +30,11 @@ const serviceSchema = z.object({
   description: z.string().min(1, 'Description is required'),
   longDescription: z.string().min(1, 'Long description is required'),
   imageId: z.string().min(1, 'Image ID is required'),
+  imageUrl: z.string().optional(),
   details: z.array(z.object({
     title: z.string().min(1, 'Detail title is required'),
     points: z.array(z.string().min(1, 'Point cannot be empty'))
-  }))
+  })).min(1, 'At least one detail section is required')
 });
 
 type ServiceFormData = z.infer<typeof serviceSchema>;
@@ -46,6 +48,7 @@ export default function NewService() {
   const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
   const [isGeneratingSlug, setIsGeneratingSlug] = useState(false);
   const [slugSuggestions, setSlugSuggestions] = useState<string[]>([]);
+  const [cloudinaryPublicId, setCloudinaryPublicId] = useState<string>('');
 
   const {
     register,
@@ -225,7 +228,10 @@ export default function NewService() {
       
       // Let backend generate unique slug, don't send frontend slug
       const { slug, ...serviceDataWithoutSlug } = data;
-      const serviceData = serviceDataWithoutSlug;
+      const serviceData = {
+        ...serviceDataWithoutSlug,
+        cloudinaryPublicId: cloudinaryPublicId || undefined
+      };
       
       // Create service via API
       const createdService = await createService(serviceData);
@@ -507,16 +513,41 @@ export default function NewService() {
                 <p className="text-sm text-destructive">{errors.longDescription.message}</p>
               )}
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="imageId">Image ID</Label>
-              <Input
-                id="imageId"
-                {...register('imageId')}
-                placeholder="venture-1"
+            <div className="space-y-4">
+              <ImageUpload
+                value={watch('imageUrl')}
+                onChange={(url, publicId) => {
+                  setValue('imageUrl', url);
+                  if (publicId) {
+                    setCloudinaryPublicId(publicId);
+                  }
+                }}
+                onRemove={() => {
+                  setValue('imageUrl', '');
+                  setCloudinaryPublicId('');
+                }}
+                disabled={isSubmitting}
+                folder="services"
+                label="Service Image"
+                description="Upload a high-quality image showcasing your service or provide an image URL"
               />
-              {errors.imageId && (
-                <p className="text-sm text-destructive">{errors.imageId.message}</p>
-              )}
+              
+              {/* Fallback Image ID */}
+              <div className="space-y-2">
+                <Label htmlFor="imageId">Fallback Image ID</Label>
+                <Input
+                  id="imageId"
+                  {...register('imageId')}
+                  placeholder="service-default"
+                  disabled={isSubmitting}
+                />
+                <p className="text-xs text-gray-500">
+                  Used as fallback if no image URL is provided
+                </p>
+                {errors.imageId && (
+                  <p className="text-sm text-destructive">{errors.imageId.message}</p>
+                )}
+              </div>
             </div>
           </CardContent>
         </Card>

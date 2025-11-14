@@ -382,182 +382,122 @@ export default function ContactSection() {
   return (
     <section id="contact" className="py-20 sm:py-28">
       <div className="container mx-auto px-4 md:px-8">
-        {/* Contact form */}
         <div className="max-w-lg mx-auto space-y-3 sm:text-center">
           <h3 className="text-primary font-semibold">Contact</h3>
           <p className="text-foreground text-3xl font-semibold sm:text-4xl">Get in touch</p>
           <p className="text-muted-foreground">We’d love to hear from you! Please fill out the form below.</p>
         </div>
-
-        <div className="mt-12 max-w-lg mx-auto">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-              <div className="flex flex-col items-center gap-y-5 gap-x-6 [&>*]:w-full sm:flex-row">
-                <FormField
-                  control={form.control}
-                  name="firstName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>First name</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="lastName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Last name</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input type="email" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone number</FormLabel>
-                    <FormControl>
-                      <div className="relative mt-2">
-                        <div className="absolute inset-y-0 left-3 my-auto h-6 flex items-center border-r pr-2">
-                          <Select defaultValue="IN">
-                            <SelectTrigger className="border-none bg-transparent outline-none p-0 h-full text-sm !ring-0 !ring-offset-0 !focus:ring-0 !focus:ring-offset-0">
-                              <SelectValue placeholder="IN" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="IN">IN</SelectItem>
-                              <SelectItem value="US">US</SelectItem>
-                              <SelectItem value="ES">ES</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <Input type="tel" placeholder="+91 98765 43210" className="w-full pl-[5.5rem]" {...field} />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Message</FormLabel>
-                    <FormControl>
-                      <Textarea rows={5} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? 'Submitting...' : 'Submit'}
-              </Button>
-            </form>
-          </Form>
-        </div>
-
-        {/* FAQ Section Integrated */}
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-start justify-center gap-10 px-4 md:px-0 py-16">
-  {/* Image Stack */}
-  <div className="relative w-full max-w-sm">
-    {/* Back Image */}
-    <img
-      className="absolute bottom-10 right-10 w-full h-auto rounded-xl "
-      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=830&h=844&auto=format&fit=crop"
-      alt="Background Illustration"
-    />
-
-    {/* Front Image */}
-    <img
-      className="relative z-10 w-full rounded-xl h-auto shadow-xl"
-      src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=830&h=844&auto=format&fit=crop"
-      alt="FAQ Illustration"
-    />
-  </div>
-
-  {/* Text Content */}
-  <div>
-    <p className="text-indigo-600 text-sm font-medium mb-1">FAQ's</p>
-    <h1 className="text-3xl font-semibold mb-3">Looking for answers?</h1>
-    <p className="text-sm text-slate-500 mb-6 max-w-md">
-      Ship Beautiful Frontends Without the Overhead — Customizable, Scalable, and Developer-Friendly UI Components.
-    </p>
-  
-            {faqs.map((faq, index) => (
-              <div
-                className="border-b border-slate-200 py-4 cursor-pointer"
-                key={index}
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              >
-                <div className="flex items-center justify-between">
-                  <h3 className="text-base font-medium">{faq.question}</h3>
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`${openIndex === index ? "rotate-180" : ""} transition-all duration-500 ease-in-out`}
-                  >
-                    <path
-                      d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2"
-                      stroke="#1D293D"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="max-w-xl border border-slate-200 rounded-lg p-6">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                <div className="flex flex-col items-center gap-y-5 gap-x-6 [&>*]:w-full sm:flex-row">
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>First name</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Last name</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
-                <p
-                  className={`text-sm text-slate-500 transition-all duration-500 ease-in-out max-w-md ${
-                    openIndex === index
-                      ? "opacity-100 max-h-[300px] translate-y-0 pt-3"
-                      : "opacity-0 max-h-0 -translate-y-2"
-                  }`}
-                >
-                  {faq.answer}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Google Map */}
-        <div className="mt-20">
-          <div className="container mx-auto px-4 text-muted-foreground gap-12 md:px-8">
-            <div className="rounded-lg overflow-hidden">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input type="email" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="phoneNumber"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone number</FormLabel>
+                      <FormControl>
+                        <div className="relative mt-2">
+                          <div className="absolute inset-y-0 left-3 my-auto h-6 flex items-center border-r pr-2">
+                            <Select defaultValue="IN">
+                              <SelectTrigger className="border-none bg-transparent outline-none p-0 h-full text-sm !ring-0 !ring-offset-0 !focus:ring-0 !focus:ring-offset-0">
+                                <SelectValue placeholder="IN" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="IN">IN</SelectItem>
+                                <SelectItem value="US">US</SelectItem>
+                                <SelectItem value="ES">ES</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <Input type="tel" placeholder="+91 98765 43210" className="w-full pl-[5.5rem]" {...field} />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea rows={5} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+                  {form.formState.isSubmitting ? 'Submitting...' : 'Submit'}
+                </Button>
+              </form>
+            </Form>
+          </div>
+
+          <div className="space-y-6">
+            <div className="rounded-2xl border p-6">
+              <h4 className="text-xl font-semibold mb-4">Company Information</h4>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>OC 1125, Sector 4, Greater Noida West, Uttar Pradesh 201009, India</p>
+                <p>Phone: (+91) 78381 30064</p>
+                <p>Telephone: (+91) 120 510 6926</p>
+                <p>Email: contact@patelpulseVentures.com</p>
+              </div>
+            </div>
+            <div className="rounded-2xl overflow-hidden border">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.7306898607335!2d77.43030497616368!3d28.607854985199676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cefc4629e38df%3A0xa1a995102f10bb69!2sPatel%20Pulse%20Ventures!5e0!3m2!1sen!2sin!4v1762232300062!5m2!1sen!2sin"
                 width="100%"
-                height="450"
+                height="350"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"

@@ -1,105 +1,64 @@
 import { NextRequest, NextResponse } from 'next/server';
-import connectDB from '@/lib/mongodb';
-import Product from '@/models/Product';
-import { generateUniqueProductSlug } from '@/lib/product-slug-generator';
-import mongoose from 'mongoose';
+import { ProductController } from '@/lib/productController';
 
-export const dynamic = 'force-dynamic';
-
-// GET /api/products - Get all products
-export async function GET() {
+// GET /api/products - Get all products with filtering
+export async function GET(request: NextRequest) {
   try {
-    await connectDB();
-    const products = await Product.find({}).sort({ createdAt: 1 });
-    return NextResponse.json({ success: true, data: products });
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    return NextResponse.json({ success: true, data: [], fallback: true, message: 'Using empty list - MongoDB connection failed' });
+    const searchParams = request.nextUrl.searchParams;
+    
+    const statusParam = searchParams.get('status');
+    
+    // Determine status filter:
+    // - 'all' = undefined (fetch all statuses)
+    // - specific status = use that status
+    // - no param = default to 'active' (for customer-facing pages)
+    let statusFilter: string | undefined;
+    if (statusParam === 'all') {
+      statusFilter = undefined; // Fetch all statuses
+    } else if (statusParam) {
+      statusFilter = statusParam; // Use specific status
+    } else {
+      statusFilter = 'active'; // Default for customer pages
+    }
+    
+    const company = searchParams.get('company') || undefined;
+
+    const options = {
+      page: parseInt(searchParams.get('page') || '1'),
+      limit: parseInt(searchParams.get('limit') || '12'),
+      category: searchParams.get('category') || undefined,
+      isFeatured: searchParams.get('isFeatured') === 'true' ? true : undefined,
+      status: statusFilter,
+      search: searchParams.get('search') || undefined,
+      sortBy: searchParams.get('sortBy') || 'createdAt',
+      sortOrder: (searchParams.get('sortOrder') as 'asc' | 'desc') || 'desc',
+      company,
+    };
+
+    const result = await ProductController.getAllProducts(options);
+    return NextResponse.json(result);
+  } catch (error: any) {
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 500 }
+    );
   }
 }
 
-// POST /api/products - Create a new product
+// POST /api/products - Create new product
 export async function POST(request: NextRequest) {
   try {
-    await connectDB();
-
+    const url = new URL(request.url);
+    const company = url.searchParams.get('company') || undefined;
     const body = await request.json();
-
-    if (!body.name || !body.description) {
-      return NextResponse.json(
-        { success: false, error: 'Product name and description are required' },
-        { status: 400 }
-      );
-    }
-
-    // Check duplicate name only (case-insensitive)
-    const existingByName = await Product.findOne({
-      name: { $regex: new RegExp(`^${(body.name as string).trim()}$`, 'i') }
+    const result = await ProductController.createProduct(body, company || (body as any)?.company);
+    
+    return NextResponse.json(result, { 
+      status: result.success ? 201 : 400 
     });
-
-    if (existingByName) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: `A product with the name "${body.name}" already exists. Please choose a different name.`,
-          conflictField: 'name',
-          existingProduct: { name: existingByName.name, slug: existingByName.slug }
-        },
-        { status: 409 }
-      );
-    }
-
-    // Always generate initial unique slug
-    body.slug = await generateUniqueProductSlug(body.name);
-
-    const MAX_ATTEMPTS = 5;
-    let attempt = 0;
-    while (attempt < MAX_ATTEMPTS) {
-      try {
-        if (!body.id || attempt > 0) {
-          body.id = new mongoose.Types.ObjectId().toHexString();
-        }
-        if (attempt > 0) {
-          body.slug = await generateUniqueProductSlug(body.name);
-        }
-
-        const product = new Product(body);
-        await product.save();
-
-        return NextResponse.json({ success: true, data: product, message: 'Product created successfully' }, { status: 201 });
-      } catch (err: any) {
-        if (err?.code === 11000) {
-          attempt++;
-          console.warn(`Duplicate key product on attempt ${attempt}, retrying...`, err?.keyValue);
-          continue;
-        }
-        throw err;
-      }
-    }
-
-    return NextResponse.json(
-      { success: false, error: 'Could not generate a unique slug/id for product after multiple attempts. Please try again.' },
-      { status: 409 }
-    );
   } catch (error: any) {
-    console.error('Error creating product:', error);
-    if (error.code === 11000) {
-      const fields = Object.keys(error.keyPattern || {});
-      const fieldList = fields.length ? fields.join(', ') : 'unique field';
-      return NextResponse.json(
-        { success: false, error: `Conflict on ${fieldList}. Please try again.` },
-        { status: 409 }
-      );
-    }
-    if (error.name === 'ValidationError') {
-      const validationErrors = Object.values(error.errors).map((err: any) => err.message);
-      return NextResponse.json(
-        { success: false, error: 'Validation failed', details: validationErrors },
-        { status: 400 }
-      );
-    }
     return NextResponse.json(
-      { success: false, error: 'Failed to create product', details: error.message },
+      { success: false, error: error.message },
       { status: 500 }
     );
   }

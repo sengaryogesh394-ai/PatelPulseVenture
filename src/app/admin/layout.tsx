@@ -1,21 +1,20 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, 
   Briefcase, 
   FolderOpen, 
   Users, 
   FileText, 
-  MessageSquare,
   LogOut,
   Menu,
   X,
   User
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { FloatingActionButton } from '@/components/ui/floating-action-button';
@@ -47,9 +46,14 @@ const sidebarItems = [
     icon: FileText,
   },
   {
-    title: 'Contacts',
-    href: '/admin/contacts',
-    icon: MessageSquare,
+    title: 'Products',
+    href: '/admin/products',
+    icon: Briefcase,
+  },
+  {
+    title: 'Reviews',
+    href: '/admin/reviews',
+    icon: FileText,
   },
 ];
 
@@ -60,11 +64,33 @@ export default function AdminLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
-  // No authentication - direct access to admin
-  const user = { username: 'admin', loginTime: new Date().toISOString() };
+  const router = useRouter();
+  const [user, setUser] = useState<{ username: string } | null>(null);
+  const isLoginPage = pathname === '/admin/login';
   const logout = () => {
-    // Do nothing for now
+    try { localStorage.removeItem('ppv_user'); } catch {}
+    router.replace('/admin/login');
   };
+
+  // Guard: only allow admins, otherwise redirect to admin login
+  useEffect(() => {
+    if (isLoginPage) return; // Do not guard the login page itself
+    try {
+      const raw = typeof window !== 'undefined' ? localStorage.getItem('ppv_user') : null;
+      if (!raw) {
+        router.replace('/admin/login');
+        return;
+      }
+      const u = JSON.parse(raw);
+      if (u?.role !== 'admin') {
+        router.replace('/admin/login');
+        return;
+      }
+      setUser({ username: u.name || u.email || 'admin' });
+    } catch {
+      router.replace('/admin/login');
+    }
+  }, [router, pathname, isLoginPage]);
 
   // Quick actions for floating button
   const quickActions = [
@@ -73,6 +99,15 @@ export default function AdminLayout({
     { icon: Users, label: 'Add Member', href: '/admin/team/new', color: 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700' },
     { icon: FileText, label: 'Write Post', href: '/admin/blogs/new', color: 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700' },
   ];
+
+  // Render bare page without sidebar/header on login page
+  if (isLoginPage) {
+    return (
+      <div className="min-h-screen">
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen bg-background">
@@ -148,19 +183,19 @@ export default function AdminLayout({
                 <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-sm font-medium text-white">{user?.username}</span>
+                <span className="text-sm font-medium text-white">{user?.username || 'Admin'}</span>
               </div>
               <div className="flex items-center gap-2">
-                <ThemeToggle />
+               
                 <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  title="Logout" 
+                  variant="destructive" 
+                  size="sm" 
                   onClick={logout}
-                  className="hover:bg-red-500/20 hover:text-red-300 transition-all duration-300"
+                  className="hidden md:inline-flex"
                 >
-                  <LogOut className="w-5 h-5" />
+                  Logout
                 </Button>
+               
               </div>
             </div>
           </div>

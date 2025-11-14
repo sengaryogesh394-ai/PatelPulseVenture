@@ -22,6 +22,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { getService, updateService } from '@/lib/services-api';
 import type { Service } from '@/lib/types';
+import ImageUpload from '@/components/ui/image-upload';
 
 const serviceSchema = z.object({
   name: z.string().min(1, 'Service name is required'),
@@ -47,6 +48,7 @@ export default function EditService() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isPreview, setIsPreview] = useState(false);
+  const [cloudinaryPublicId, setCloudinaryPublicId] = useState<string>('');
 
   const {
     register,
@@ -81,6 +83,11 @@ export default function EditService() {
       try {
         setLoading(true);
         const service = await getService(serviceId);
+        
+        // Set cloudinary public ID if available
+        if (service.cloudinaryPublicId) {
+          setCloudinaryPublicId(service.cloudinaryPublicId);
+        }
         
         // Reset form with service data
         reset({
@@ -119,8 +126,14 @@ export default function EditService() {
 
   const onSubmit = async (data: ServiceFormData) => {
     try {
+      // Add cloudinaryPublicId to the data
+      const serviceData = {
+        ...data,
+        cloudinaryPublicId: cloudinaryPublicId || undefined
+      };
+      
       // Update service via API
-      await updateService(serviceId, data);
+      await updateService(serviceId, serviceData);
       
       // Redirect to services list
       router.push('/admin/services');
@@ -210,74 +223,43 @@ export default function EditService() {
           <CardHeader>
             <CardTitle>Service Image</CardTitle>
             <CardDescription>
-              Manage the service image and visual representation
+              Upload a service image or provide a URL for the service showcase.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="imageId">Image ID</Label>
-                  <Input
-                    id="imageId"
-                    {...register('imageId')}
-                    placeholder="e.g., service-1, venture-2"
-                  />
-                  {errors.imageId && (
-                    <p className="text-sm text-red-600">{errors.imageId.message}</p>
-                  )}
-                  <p className="text-xs text-muted-foreground">
-                    Reference ID for placeholder images in the system
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="imageUrl">Custom Image URL (Optional)</Label>
-                  <Input
-                    id="imageUrl"
-                    {...register('imageUrl')}
-                    placeholder="https://example.com/image.jpg"
-                    type="url"
-                  />
-                  {errors.imageUrl && (
-                    <p className="text-sm text-red-600">{errors.imageUrl.message}</p>
-                  )}
-                  <p className="text-xs text-muted-foreground">
-                    Override placeholder with custom image URL
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <Label>Image Preview</Label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                  {watch('imageUrl') ? (
-                    <div className="space-y-2">
-                      <img
-                        src={watch('imageUrl')}
-                        alt="Service preview"
-                        className="max-w-full h-32 object-cover rounded-lg mx-auto"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
-                      <p className="text-sm text-green-600">Custom image loaded</p>
-                    </div>
-                  ) : (
-                    <div className="space-y-2">
-                      <div className="w-16 h-16 bg-gray-200 rounded-lg mx-auto flex items-center justify-center">
-                        <Eye className="w-6 h-6 text-gray-400" />
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        {watch('imageId') 
-                          ? `Using placeholder: ${watch('imageId')}`
-                          : 'No image selected'
-                        }
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
+          <CardContent>
+            <ImageUpload
+              value={watch('imageUrl')}
+              onChange={(url, publicId) => {
+                setValue('imageUrl', url);
+                if (publicId) {
+                  setCloudinaryPublicId(publicId);
+                }
+              }}
+              onRemove={() => {
+                setValue('imageUrl', '');
+                setCloudinaryPublicId('');
+              }}
+              disabled={isSubmitting}
+              folder="services"
+              label="Service Image"
+              description="Upload a high-quality image showcasing your service or provide an image URL"
+            />
+            
+            {/* Fallback Image ID */}
+            <div className="mt-4 space-y-2">
+              <Label htmlFor="imageId">Fallback Image ID</Label>
+              <Input
+                id="imageId"
+                {...register('imageId')}
+                placeholder="service-default"
+                disabled={isSubmitting}
+              />
+              <p className="text-xs text-gray-500">
+                Used as fallback if no image URL is provided
+              </p>
+              {errors.imageId && (
+                <p className="text-sm text-destructive">{errors.imageId.message}</p>
+              )}
             </div>
           </CardContent>
         </Card>

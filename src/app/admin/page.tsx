@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -8,74 +9,119 @@ import {
   FolderOpen, 
   Users, 
   FileText, 
-  MessageSquare,
   TrendingUp,
   Eye,
-  Plus
+  Plus,
+  RefreshCw
 } from 'lucide-react';
 import Link from 'next/link';
-import { services, teamMembers, projects, testimonials } from '@/lib/data';
+
+interface DashboardStats {
+  services: { total: number; href: string };
+  projects: { total: number; href: string };
+  team: { total: number; href: string };
+  blogs: { total: number; published: number; drafts: number; featured: number; href: string };
+}
+
+interface Activity {
+  action: string;
+  time: string;
+  type: 'service' | 'project' | 'team' | 'blog';
+}
 
 export default function AdminDashboard() {
-  // Mock data for demonstration
-  const stats = [
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [activities, setActivities] = useState<Activity[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch dashboard data
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Fetch stats and activities in parallel
+        const [statsResponse, activitiesResponse] = await Promise.all([
+          fetch('/api/dashboard/stats'),
+          fetch('/api/dashboard/activities')
+        ]);
+
+        if (!statsResponse.ok) {
+          throw new Error('Failed to fetch stats');
+        }
+        if (!activitiesResponse.ok) {
+          throw new Error('Failed to fetch activities');
+        }
+
+        const statsData = await statsResponse.json();
+        const activitiesData = await activitiesResponse.json();
+
+        if (statsData.success) {
+          setStats(statsData.data);
+        }
+        if (activitiesData.success) {
+          setActivities(activitiesData.data);
+        }
+
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+        setError(error instanceof Error ? error.message : 'Failed to load dashboard data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+  // Create stats cards from real data
+  const statsCards = stats ? [
     {
       title: 'Total Services',
-      value: services.length,
+      value: stats.services.total,
       icon: Briefcase,
       color: 'text-blue-600',
       bgColor: 'bg-blue-100',
-      href: '/admin/services'
+      href: stats.services.href
     },
     {
-      title: 'Active Projects',
-      value: projects.length,
+      title: 'Total Projects',
+      value: stats.projects.total,
       icon: FolderOpen,
       color: 'text-green-600',
       bgColor: 'bg-green-100',
-      href: '/admin/projects'
+      href: stats.projects.href
     },
     {
       title: 'Team Members',
-      value: teamMembers.length,
+      value: stats.team.total,
       icon: Users,
       color: 'text-purple-600',
       bgColor: 'bg-purple-100',
-      href: '/admin/team'
+      href: stats.team.href
     },
     {
       title: 'Blog Posts',
-      value: 12, // Mock data
+      value: stats.blogs.total,
+      subtitle: `${stats.blogs.published} published, ${stats.blogs.drafts} drafts`,
       icon: FileText,
       color: 'text-orange-600',
       bgColor: 'bg-orange-100',
-      href: '/admin/blogs'
+      href: stats.blogs.href
     },
     {
-      title: 'Contact Inquiries',
-      value: 28, // Mock data
-      icon: MessageSquare,
-      color: 'text-red-600',
-      bgColor: 'bg-red-100',
-      href: '/admin/contacts'
-    },
-    {
-      title: 'Monthly Views',
-      value: '2.4K',
-      icon: Eye,
+      title: 'Featured Blogs',
+      value: stats.blogs.featured,
+      icon: TrendingUp,
       color: 'text-indigo-600',
       bgColor: 'bg-indigo-100',
-      href: '/admin'
+      href: stats.blogs.href
     }
-  ];
+  ] : [];
 
-  const recentActivities = [
-    { action: 'New contact inquiry from John Doe', time: '2 hours ago', type: 'contact' },
-    { action: 'Blog post "AI in Web Development" published', time: '1 day ago', type: 'blog' },
-    { action: 'Project "TechPyro" updated', time: '2 days ago', type: 'project' },
-    { action: 'New team member added', time: '3 days ago', type: 'team' },
-    { action: 'Service "Mobile App Development" updated', time: '1 week ago', type: 'service' }
-  ];
+  // Use activities directly since they already have the right structure
 
   const quickActions = [
     { title: 'Add New Service', href: '/admin/services/new', icon: Plus, color: 'bg-blue-600' },
@@ -84,21 +130,48 @@ export default function AdminDashboard() {
     { title: 'Write Blog Post', href: '/admin/blogs/new', icon: Plus, color: 'bg-orange-600' }
   ];
 
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="flex items-center gap-2">
+          <RefreshCw className="w-6 h-6 animate-spin" />
+          <span>Loading dashboard...</span>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">Error loading dashboard: {error}</p>
+          <Button onClick={() => window.location.reload()}>
+            <RefreshCw className="w-4 h-4 mr-2" />
+            Retry
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
             Dashboard
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-2 text-lg">
+          <p className="text-slate-600 dark:text-slate-400 mt-2">
             Welcome back! Here's what's happening with your website.
           </p>
         </div>
         <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-          <Link href="/">
-            <Eye className="w-4 h-4 mr-2" />
+          <Link href="/" target="_blank" className="flex items-center gap-2">
+            <Eye className="w-4 h-4" />
             View Website
           </Link>
         </Button>
@@ -106,7 +179,7 @@ export default function AdminDashboard() {
 
       {/* Stats Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {stats.map((stat, index) => (
+        {statsCards.map((stat, index) => (
           <Card key={stat.title} className="group hover:shadow-2xl transition-all duration-500 transform hover:scale-105 border-0 bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 overflow-hidden relative">
             <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500"
                  style={{
@@ -129,6 +202,11 @@ export default function AdminDashboard() {
               <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-slate-800 dark:group-hover:text-slate-100 transition-colors duration-300">
                 {stat.value}
               </div>
+              {stat.subtitle && (
+                <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">
+                  {stat.subtitle}
+                </p>
+              )}
               <Button variant="link" asChild className="p-0 h-auto text-xs font-medium text-slate-600 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                 <Link href={stat.href}>View details →</Link>
               </Button>
@@ -186,10 +264,9 @@ export default function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {recentActivities.map((activity, index) => (
+              {activities.map((activity, index) => (
                 <div key={index} className="flex items-start space-x-4 p-3 rounded-xl bg-gradient-to-r from-white to-slate-50 dark:from-slate-700 dark:to-slate-800 shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-102 group">
                   <div className={`w-3 h-3 rounded-full mt-2 flex-shrink-0 shadow-sm ${
-                    activity.type === 'contact' ? 'bg-gradient-to-br from-blue-400 to-blue-500' :
                     activity.type === 'blog' ? 'bg-gradient-to-br from-green-400 to-green-500' :
                     activity.type === 'project' ? 'bg-gradient-to-br from-purple-400 to-purple-500' :
                     activity.type === 'team' ? 'bg-gradient-to-br from-orange-400 to-orange-500' :
@@ -204,11 +281,10 @@ export default function AdminDashboard() {
                     </p>
                   </div>
                   <Badge variant="secondary" className={`text-xs font-medium shadow-sm ${
-                    activity.type === 'contact' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' :
                     activity.type === 'blog' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' :
                     activity.type === 'project' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300' :
                     activity.type === 'team' ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300' :
-                    'bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300'
+                    'bg-slate-100 text-slate-700 dark:bg-slate-900/30 dark:text-slate-300'
                   }`}>
                     {activity.type}
                   </Badge>

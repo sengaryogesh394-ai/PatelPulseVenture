@@ -1,107 +1,79 @@
 import { NextRequest, NextResponse } from 'next/server';
-import connectDB from '@/lib/mongodb';
-import Product from '@/models/Product';
+import { ProductController } from '@/lib/productController';
 
-export const dynamic = 'force-dynamic';
-
-// GET /api/products/[id] - Get a specific product
+// GET /api/products/[id] - Get product by ID or slug
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await connectDB();
-
-    const product = await Product.findOne({ id: params.id });
-
-    if (!product) {
-      return NextResponse.json(
-        { success: false, error: 'Product not found' },
-        { status: 404 }
-      );
+    const { id } = await params;
+    const company = request.nextUrl.searchParams.get('company') || undefined;
+    
+    // Try to get by slug first (for URLs like /shop/canva-templates)
+    // If that fails, try by ID (for admin operations)
+    let result = await ProductController.getProductBySlug(id, company);
+    
+    if (!result.success) {
+      // If slug lookup failed, try by ID
+      result = await ProductController.getProductById(id, company);
     }
-
-    return NextResponse.json({ success: true, data: product });
-  } catch (error) {
-    console.error('Error fetching product:', error);
+    
+    if (!result.success) {
+      return NextResponse.json(result, { status: 404 });
+    }
+    
+    return NextResponse.json(result);
+  } catch (error: any) {
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch product' },
+      { success: false, error: error.message },
       { status: 500 }
     );
   }
 }
 
-// PUT /api/products/[id] - Update a specific product
+// PUT /api/products/[id] - Update product
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await connectDB();
-
+    const { id } = await params;
     const body = await request.json();
-
-    // Basic slug generation if name updated but slug not provided
-    if (body.name && !body.slug) {
-      body.slug = body.name
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '');
+    const company = request.nextUrl.searchParams.get('company') || (body as any)?.company;
+    const result = await ProductController.updateProduct(id, body, company);
+    
+    if (!result.success) {
+      return NextResponse.json(result, { status: 404 });
     }
-
-    const product = await Product.findOneAndUpdate(
-      { id: params.id },
-      body,
-      { new: true, runValidators: true }
-    );
-
-    if (!product) {
-      return NextResponse.json(
-        { success: false, error: 'Product not found' },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json({ success: true, data: product });
+    
+    return NextResponse.json(result);
   } catch (error: any) {
-    console.error('Error updating product:', error);
-
-    if (error.code === 11000) {
-      return NextResponse.json(
-        { success: false, error: 'Product with this name or slug already exists' },
-        { status: 400 }
-      );
-    }
-
     return NextResponse.json(
-      { success: false, error: 'Failed to update product' },
+      { success: false, error: error.message },
       { status: 500 }
     );
   }
 }
 
-// DELETE /api/products/[id] - Delete a specific product
+// DELETE /api/products/[id] - Delete product
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await connectDB();
-
-    const product = await Product.findOneAndDelete({ id: params.id });
-
-    if (!product) {
-      return NextResponse.json(
-        { success: false, error: 'Product not found' },
-        { status: 404 }
-      );
+    const { id } = await params;
+    const company = request.nextUrl.searchParams.get('company') || undefined;
+    const result = await ProductController.deleteProduct(id, company);
+    
+    if (!result.success) {
+      return NextResponse.json(result, { status: 404 });
     }
-
-    return NextResponse.json({ success: true, message: 'Product deleted successfully' });
-  } catch (error) {
-    console.error('Error deleting product:', error);
+    
+    return NextResponse.json(result);
+  } catch (error: any) {
     return NextResponse.json(
-      { success: false, error: 'Failed to delete product' },
+      { success: false, error: error.message },
       { status: 500 }
     );
   }

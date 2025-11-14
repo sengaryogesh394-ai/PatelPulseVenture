@@ -69,6 +69,10 @@ const ServiceSchema = new Schema({
     trim: true,
     default: ''
   },
+  cloudinaryPublicId: {
+    type: String,
+    required: false,
+  },
   longDescription: {
     type: String,
     required: true,

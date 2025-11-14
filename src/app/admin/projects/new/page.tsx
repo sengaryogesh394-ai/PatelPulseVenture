@@ -14,12 +14,15 @@ import {
   Plus, 
   Trash2,
   Eye,
-  X
+  X,
+  RefreshCw
 } from 'lucide-react';
 import Link from 'next/link';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { createProject } from '@/lib/projects-api';
+import ImageUpload from '@/components/ui/image-upload';
 import {
   Select,
   SelectContent,
@@ -34,7 +37,16 @@ const projectSchema = z.object({
   link: z.string().url('Must be a valid URL').or(z.literal('#')),
   technologies: z.array(z.string()).min(1, 'At least one technology is required'),
   category: z.string().min(1, 'Category is required'),
-  imageId: z.string().min(1, 'Image ID is required'),
+  imageId: z.string().optional(),
+  imageUrl: z.string().optional(),
+}).refine((data) => {
+  // Allow either imageId or imageUrl, but at least one should be provided
+  const hasImageId = data.imageId && data.imageId.trim() !== '';
+  const hasImageUrl = data.imageUrl && data.imageUrl.trim() !== '';
+  return hasImageId || hasImageUrl;
+}, {
+  message: "Either Image ID or Image URL is required",
+  path: ["imageId"],
 });
 
 type ProjectFormData = z.infer<typeof projectSchema>;
@@ -43,18 +55,14 @@ const categories = [
   'E-Commerce',
   'Education', 
   'LLM (ML/AI)',
-  'Crypto',
-  'Healthcare',
-  'Finance',
-  'Entertainment',
-  'Social Media',
-  'Productivity',
-  'Other'
+  'Blockchain (Crypto)',
+  'Dashboards (CMS)'
 ];
 
 export default function NewProject() {
   const router = useRouter();
   const [isPreview, setIsPreview] = useState(false);
+  const [cloudinaryPublicId, setCloudinaryPublicId] = useState<string>('');
 
   const {
     register,
@@ -72,6 +80,7 @@ export default function NewProject() {
       technologies: [''],
       category: '',
       imageId: 'project-1',
+      imageUrl: '',
     }
   });
 
@@ -89,17 +98,25 @@ export default function NewProject() {
       // Filter out empty technologies
       const cleanedData = {
         ...data,
-        technologies: data.technologies.filter(tech => tech.trim() !== '')
+        technologies: data.technologies.filter(tech => tech.trim() !== ''),
+        category: data.category as 'E-Commerce' | 'Education' | 'LLM (ML/AI)' | 'Blockchain (Crypto)' | 'Dashboards (CMS)',
+        // Clean up imageId and imageUrl
+        imageId: (data.imageId && data.imageId.trim()) || 'project-default',
+        imageUrl: (data.imageUrl && data.imageUrl.trim()) || undefined,
+        cloudinaryPublicId: cloudinaryPublicId || undefined,
+        status: 'active' as const
       };
 
-      console.log('Project data:', cleanedData);
+      console.log('Creating project with cleaned data:', cleanedData);
+      console.log('ImageURL being sent:', cleanedData.imageUrl);
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Create project using API
+      await createProject(cleanedData);
       
       router.push('/admin/projects');
     } catch (error) {
       console.error('Error creating project:', error);
+      alert('Failed to create project. Please try again.');
     }
   };
 
@@ -136,6 +153,20 @@ export default function NewProject() {
                 ))}
               </div>
             </div>
+            
+            {formData.imageUrl && (
+              <div>
+                <h3 className="text-sm font-medium mb-2">Project Image:</h3>
+                <img 
+                  src={formData.imageUrl} 
+                  alt={formData.title} 
+                  className="w-full max-w-md h-48 object-cover rounded"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
             
             <div>
               <h3 className="text-sm font-medium mb-2">Project Link:</h3>
@@ -247,17 +278,6 @@ export default function NewProject() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="imageId">Image ID</Label>
-              <Input
-                id="imageId"
-                {...register('imageId')}
-                placeholder="project-1"
-              />
-              {errors.imageId && (
-                <p className="text-sm text-destructive">{errors.imageId.message}</p>
-              )}
-            </div>
           </CardContent>
         </Card>
 
@@ -271,7 +291,7 @@ export default function NewProject() {
                   Add the technologies and tools used in this project.
                 </CardDescription>
               </div>
-              <Button type="button" variant="outline" onClick={addTechnology}>
+              <Button type="button" variant="outline" onClick={addTechnology} className="shrink-0">
                 <Plus className="w-4 h-4 mr-2" />
                 Add Technology
               </Button>
@@ -291,7 +311,7 @@ export default function NewProject() {
                     variant="ghost"
                     size="icon"
                     onClick={() => removeTech(index)}
-                    className="text-destructive hover:text-destructive"
+                    className="text-destructive hover:text-destructive shrink-0"
                   >
                     <X className="w-4 h-4" />
                   </Button>
@@ -301,6 +321,55 @@ export default function NewProject() {
             {errors.technologies && (
               <p className="text-sm text-destructive">{errors.technologies.message}</p>
             )}
+            
+            {/* Add more space below */}
+            <div className="h-4"></div>
+          </CardContent>
+        </Card>
+
+        {/* Project Image */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Project Image</CardTitle>
+            <CardDescription>
+              Upload a project image or provide a URL for the project showcase.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ImageUpload
+              value={watch('imageUrl')}
+              onChange={(url, publicId) => {
+                setValue('imageUrl', url);
+                if (publicId) {
+                  setCloudinaryPublicId(publicId);
+                }
+              }}
+              onRemove={() => {
+                setValue('imageUrl', '');
+                setCloudinaryPublicId('');
+              }}
+              disabled={isSubmitting}
+              folder="projects"
+              label="Project Image"
+              description="Upload a high-quality image showcasing your project or provide an image URL"
+            />
+            
+            {/* Fallback Image ID */}
+            <div className="mt-4 space-y-2">
+              <Label htmlFor="imageId">Fallback Image ID (Optional)</Label>
+              <Input
+                id="imageId"
+                {...register('imageId')}
+                placeholder="project-default"
+                disabled={isSubmitting}
+              />
+              <p className="text-xs text-gray-500">
+                Used as fallback if no image URL is provided
+              </p>
+              {errors.imageId && (
+                <p className="text-sm text-destructive">{errors.imageId.message}</p>
+              )}
+            </div>
           </CardContent>
         </Card>
       </form>

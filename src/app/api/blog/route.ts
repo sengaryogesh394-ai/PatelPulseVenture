@@ -1,21 +1,51 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 
 export const dynamic = 'force-dynamic';
 
-// GET /api/blog - Get all blog posts
-export async function GET() {
+// GET /api/blog - Get blog posts with optional search and pagination
+export async function GET(request: NextRequest) {
   try {
     await connectDB();
-    
-    const blogs = await Blog.find({})
+    const { searchParams } = new URL(request.url);
+    const q = (searchParams.get('q') || '').trim();
+    const status = searchParams.get('status') || undefined;
+    const category = searchParams.get('category') || undefined;
+    const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
+    const pageSize = Math.min(50, Math.max(1, parseInt(searchParams.get('pageSize') || '9', 10)));
+
+    const filter: any = {};
+    if (status) filter.status = status;
+    if (category) filter.category = category;
+    if (q) {
+      filter.$or = [
+        { title: { $regex: q, $options: 'i' } },
+        { excerpt: { $regex: q, $options: 'i' } },
+        { content: { $regex: q, $options: 'i' } },
+        { tags: { $elemMatch: { $regex: q, $options: 'i' } } },
+      ];
+    }
+
+    const total = await Blog.countDocuments(filter);
+    const blogs = await Blog.find(filter)
       .sort({ createdAt: -1 })
+      .skip((page - 1) * pageSize)
+      .limit(pageSize)
       .lean();
-    
+
     return NextResponse.json({
       success: true,
       data: blogs,
+      meta: {
+        total,
+        page,
+        pageSize,
+        totalPages: Math.ceil(total / pageSize),
+        q,
+        status: status || null,
+        category: category || null,
+      },
     });
     
   } catch (error: any) {

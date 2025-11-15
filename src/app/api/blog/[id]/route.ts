@@ -5,11 +5,21 @@ import Blog from '@/models/Blog';
 export const dynamic = 'force-dynamic';
 
 // GET /api/blog/[id] - Get a specific blog post
+function buildBlogFilter(idOrSlug: string) {
+  const isObjectId = /^[a-fA-F0-9]{24}$/.test(idOrSlug);
+  const or: any[] = [
+    { id: idOrSlug },
+    { slug: idOrSlug },
+  ];
+  if (isObjectId) or.push({ _id: idOrSlug });
+  return { $or: or };
+}
+
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
     const { id } = await params;
-    const blog = await Blog.findOne({ id });
+    const blog = await Blog.findOne(buildBlogFilter(id));
     
     if (!blog) {
       return NextResponse.json(
@@ -71,10 +81,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       updatedAt: new Date()
     };
     
-    const updateResult = await Blog.updateOne(
-      { id },
-      { $set: updateData }
-    );
+    const updateResult = await Blog.updateOne(buildBlogFilter(id), { $set: updateData });
     
     if (updateResult.matchedCount === 0) {
       return NextResponse.json(
@@ -83,7 +90,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       );
     }
     
-    const updatedBlog = await Blog.findOne({ id });
+    const updatedBlog = await Blog.findOne(buildBlogFilter(id));
     
     return NextResponse.json({
       success: true,
@@ -105,7 +112,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
   try {
     await connectDB();
     const { id } = await params;
-    const deletedBlog = await Blog.findOneAndDelete({ id });
+    const deletedBlog = await Blog.findOneAndDelete(buildBlogFilter(id));
     
     if (!deletedBlog) {
       return NextResponse.json(

@@ -228,6 +228,10 @@ export default function BlogPage() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [blogs, setBlogs] = useState<Array<{ _id?: string; title: string; excerpt: string; image?: string; slug?: string }>>([]);
   const [loading, setLoading] = useState(true);
+  const [q, setQ] = useState('');
+  const [page, setPage] = useState(1);
+  const [pageSize] = useState(9);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -265,7 +269,11 @@ export default function BlogPage() {
     let ignore = false;
     (async () => {
       try {
-        const res = await fetch('/api/blog');
+        const params = new URLSearchParams();
+        if (q.trim()) params.set('q', q.trim());
+        params.set('page', String(page));
+        params.set('pageSize', String(pageSize));
+        const res = await fetch(`/api/blog?${params.toString()}`);
         const json = await res.json();
         if (!ignore && json?.success && Array.isArray(json.data)) {
           const list = json.data.map((b: any) => ({
@@ -276,6 +284,7 @@ export default function BlogPage() {
             slug: b.slug,
           }));
           setBlogs(list);
+          if (json.meta?.totalPages) setTotalPages(json.meta.totalPages);
         }
       } catch {
         // ignore, will use fallback
@@ -284,7 +293,7 @@ export default function BlogPage() {
       }
     })();
     return () => { ignore = true; };
-  }, []);
+  }, [q, page, pageSize]);
 
   const items = useMemo(() => {
     if (blogs.length) return blogs; // show all
@@ -305,12 +314,12 @@ export default function BlogPage() {
       />
 
       {/* Section Header */}
-      <div className="max-w-6xl mx-auto text-center mb-16 relative z-10 blog-header">
+      <div className="relative z-10 text-center mb-12">
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl sm:text-5xl font-bold mb-4"
+          transition={{ duration: 0.8 }}
+          className="blog-header text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground"
         >
           Our Latest Insights
         </motion.h1>
@@ -318,6 +327,14 @@ export default function BlogPage() {
           Stay updated with Patel Pulse Ventures. Read the latest blogs on technology, innovation,
           and business strategy.
         </p>
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <input
+            value={q}
+            onChange={(e) => { setPage(1); setQ(e.target.value); }}
+            placeholder="Search blogs..."
+            className="w-full max-w-md rounded-md border border-border bg-background px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
+          />
+        </div>
       </div>
 
       {/* Blog Cards */}
@@ -335,7 +352,7 @@ export default function BlogPage() {
                   className="w-full h-full"
                 >
                   {blog.image ? (
-                    <Image src={blog.image} alt={blog.title} fill className="object-cover" unoptimized loader={({ src }) => src} />
+                    <Image src={blog.image} alt={blog.title} fill className="object-cover" unoptimized />
                   ) : (
                     <div className="w-full h-full bg-muted" />
                   )}
@@ -356,6 +373,29 @@ export default function BlogPage() {
           </Link>
         ))}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="mt-10 flex items-center justify-center gap-3">
+          <button
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page <= 1}
+            className="px-4 py-2 rounded-md border border-border disabled:opacity-60"
+          >
+            Prev
+          </button>
+          <span className="text-sm text-muted-foreground">
+            Page {page} of {totalPages}
+          </span>
+          <button
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page >= totalPages}
+            className="px-4 py-2 rounded-md border border-border disabled:opacity-60"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </section>
   );
 }

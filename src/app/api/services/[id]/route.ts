@@ -5,6 +5,17 @@ import Service from '@/models/Service';
 // Force dynamic rendering for API routes
 export const dynamic = 'force-dynamic';
 
+// Helper to build a flexible filter supporting custom id, slug, or Mongo _id
+function buildServiceFilter(idOrSlug: string) {
+  const isObjectId = /^[a-fA-F0-9]{24}$/.test(idOrSlug);
+  const or: any[] = [
+    { id: idOrSlug },
+    { slug: idOrSlug },
+  ];
+  if (isObjectId) or.push({ _id: idOrSlug });
+  return { $or: or };
+}
+
 // GET /api/services/[id] - Get a specific service
 export async function GET(
   request: NextRequest,
@@ -13,7 +24,7 @@ export async function GET(
   try {
     await connectDB();
     
-    const service = await Service.findOne({ id: params.id });
+    const service = await Service.findOne(buildServiceFilter(params.id));
     
     if (!service) {
       return NextResponse.json(
@@ -54,7 +65,7 @@ export async function PUT(
     }
     
     const service = await Service.findOneAndUpdate(
-      { id: params.id },
+      buildServiceFilter(params.id),
       body,
       { new: true, runValidators: true }
     );
@@ -96,7 +107,7 @@ export async function DELETE(
   try {
     await connectDB();
     
-    const service = await Service.findOneAndDelete({ id: params.id });
+    const service = await Service.findOneAndDelete(buildServiceFilter(params.id));
     
     if (!service) {
       return NextResponse.json(

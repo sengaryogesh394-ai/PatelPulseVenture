@@ -9,7 +9,7 @@
 
 // gsap.registerPlugin(ScrollTrigger);
 
-// const blogs = [
+// const fallbackBlogs = [
 //   {
 //     id: 1,
 //     title: 'Harnessing the Power of AI in Modern Business',
@@ -166,14 +166,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const blogs = [
+const fallbackBlogs = [
   {
     id: 1,
     title: 'Harnessing the Power of AI in Modern Business',
@@ -226,6 +226,8 @@ const blogs = [
 
 export default function BlogPage() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [blogs, setBlogs] = useState<Array<{ _id?: string; title: string; excerpt: string; image?: string; slug?: string }>>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -258,6 +260,37 @@ export default function BlogPage() {
     return () => ctx.revert();
   }, []);
 
+  // Fetch real blogs from API
+  useEffect(() => {
+    let ignore = false;
+    (async () => {
+      try {
+        const res = await fetch('/api/blog');
+        const json = await res.json();
+        if (!ignore && json?.success && Array.isArray(json.data)) {
+          const list = json.data.map((b: any) => ({
+            _id: b._id,
+            title: b.title || 'Untitled',
+            excerpt: b.excerpt || b.summary || '',
+            image: b.imageUrl || b.coverImage || b.image || b.thumbnail,
+            slug: b.slug,
+          }));
+          setBlogs(list);
+        }
+      } catch {
+        // ignore, will use fallback
+      } finally {
+        if (!ignore) setLoading(false);
+      }
+    })();
+    return () => { ignore = true; };
+  }, []);
+
+  const items = useMemo(() => {
+    if (blogs.length) return blogs; // show all
+    return fallbackBlogs;
+  }, [blogs]);
+
   return (
     <section
       ref={sectionRef}
@@ -289,8 +322,8 @@ export default function BlogPage() {
 
       {/* Blog Cards */}
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 relative z-10">
-        {blogs.map((blog) => (
-          <Link key={blog.id} href={blog.link} className="group">
+        {items.map((blog: any, idx: number) => (
+          <Link key={blog._id || blog.id || idx} href={blog.slug ? `/blog/${blog.slug}` : (blog.link || '/blog')} className="group">
             <motion.div
               className="blog-card rounded-2xl overflow-hidden shadow-lg bg-card border border-border hover:shadow-2xl transition-all duration-300 flex flex-col cursor-pointer"
               whileHover={{ y: -8 }}
@@ -301,7 +334,11 @@ export default function BlogPage() {
                   transition={{ duration: 0.6, ease: 'easeOut' }}
                   className="w-full h-full"
                 >
-                  <Image src={blog.image} alt={blog.title} fill className="object-cover" />
+                  {blog.image ? (
+                    <Image src={blog.image} alt={blog.title} fill className="object-cover" unoptimized loader={({ src }) => src} />
+                  ) : (
+                    <div className="w-full h-full bg-muted" />
+                  )}
                 </motion.div>
               </div>
 

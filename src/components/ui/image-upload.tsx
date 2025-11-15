@@ -30,26 +30,81 @@ export default function ImageUpload({
   const [urlInput, setUrlInput] = useState(value || '');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Client-side compression using canvas
+  const compressImage = async (file: File, opts = { maxWidth: 1600, maxHeight: 1600, quality: 0.8 }): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let { width, height } = img;
+        const ratio = Math.min(opts.maxWidth / width, opts.maxHeight / height, 1);
+        width = Math.floor(width * ratio);
+        height = Math.floor(height * ratio);
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return reject(new Error('Canvas not supported'));
+        ctx.drawImage(img, 0, 0, width, height);
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) return reject(new Error('Compression failed'));
+            const compressed = new File([blob], file.name.replace(/\.(\w+)$/, '-compressed.$1'), { type: blob.type });
+            resolve(compressed);
+          },
+          file.type || 'image/jpeg',
+          opts.quality
+        );
+      };
+      img.onerror = () => reject(new Error('Image load error'));
+      const reader = new FileReader();
+      reader.onload = () => {
+        img.src = reader.result as string;
+      };
+      reader.onerror = () => reject(new Error('File read error'));
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleFileUpload = async (file: File) => {
     if (!file) return;
 
     setIsUploading(true);
     try {
-      const formData = new FormData();
-      formData.append('image', file);
-      formData.append('folder', folder);
+      // Compress client-side first to reduce payload and avoid 413
+      const compressed = await compressImage(file);
 
-      const response = await fetch('/api/upload/image', {
-        method: 'POST',
-        body: formData,
-      });
+      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+      const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 
-      const result = await response.json();
+      if (cloudName && uploadPreset) {
+        // Direct upload to Cloudinary (recommended for production)
+        const directForm = new FormData();
+        directForm.append('file', compressed);
+        directForm.append('upload_preset', uploadPreset);
+        if (folder) directForm.append('folder', folder);
 
-      if (result.success) {
-        onChange(result.imageUrl, result.publicId);
+        const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+        const res = await fetch(cloudinaryUrl, { method: 'POST', body: directForm });
+        const json = await res.json();
+        if (!res.ok || json.error) throw new Error(json.error?.message || 'Cloudinary upload failed');
+        onChange(json.secure_url || json.url, json.public_id);
       } else {
-        throw new Error(result.error || 'Upload failed');
+        // Fallback to our API route
+        const formData = new FormData();
+        formData.append('image', compressed);
+        formData.append('folder', folder);
+
+        const response = await fetch('/api/upload/image', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          onChange(result.imageUrl, result.publicId);
+        } else {
+          throw new Error(result.error || 'Upload failed');
+        }
       }
     } catch (error) {
       console.error('Upload error:', error);
@@ -195,7 +250,7 @@ export default function ImageUpload({
       )}
 
       <p className="text-xs text-gray-500">
-        Supported formats: JPEG, PNG, GIF, WebP (max 10MB)
+        Supported formats: JPEG, PNG, GIF, WebP. Images are compressed client-side and uploaded directly to Cloudinary when configured.
       </p>
     </div>
   );

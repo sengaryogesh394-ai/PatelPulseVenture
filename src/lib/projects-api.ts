@@ -84,21 +84,31 @@ export const resetProjects = async (): Promise<void> => {
 
 // Upload image for project
 export const uploadProjectImage = async (file: File): Promise<{ imageUrl: string; fileName: string }> => {
-  const formData = new FormData();
-  formData.append('image', file);
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+  try {
+    if (cloudName && uploadPreset) {
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('upload_preset', uploadPreset);
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, { method: 'POST', body: fd });
+      const json = await res.json();
+      if (!res.ok || json.error) throw new Error(json.error?.message || 'Cloudinary upload failed');
+      return { imageUrl: json.secure_url || json.url, fileName: json.public_id };
+    }
 
-  const response = await fetch('/api/upload/image', {
-    method: 'POST',
-    body: formData,
-  });
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.error || 'Failed to upload image');
+    const formData = new FormData();
+    formData.append('image', file);
+    const response = await fetch('/api/upload/image', { method: 'POST', body: formData });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to upload image');
+    }
+    const data = await response.json();
+    return { imageUrl: data.imageUrl, fileName: data.publicId || data.fileName };
+  } catch (e) {
+    throw e;
   }
-
-  const data = await response.json();
-  return { imageUrl: data.imageUrl, fileName: data.fileName };
 };
 
 // Delete uploaded image

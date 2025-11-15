@@ -67,7 +67,7 @@ export default function Home() {
       <TeamSection 
         title="Our commitment to integrity and innovation"
         description="A collective of scientists, investors, and innovators driven by a shared passion for technology."
-        members={animatedTeamMembers.slice(0,3)} 
+        members={animatedTeamMembers.slice(0, 15)}
       />
       <ContactSection />
     </>

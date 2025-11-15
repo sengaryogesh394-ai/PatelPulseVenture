@@ -23,9 +23,10 @@ export async function GET(request: NextRequest) {
     
     const company = searchParams.get('company') || undefined;
 
+    const limitParam = searchParams.get('limit');
     const options = {
       page: parseInt(searchParams.get('page') || '1'),
-      limit: parseInt(searchParams.get('limit') || '12'),
+      limit: limitParam === 'all' ? 100000 : parseInt(limitParam || '12'),
       category: searchParams.get('category') || undefined,
       isFeatured: searchParams.get('isFeatured') === 'true' ? true : undefined,
       status: statusFilter,

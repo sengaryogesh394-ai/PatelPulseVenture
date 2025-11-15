@@ -22,7 +22,7 @@ interface Product {
   isFeatured: boolean;
 }
 
-export default function ShopPageContent({ company = 'ppv' as 'ppv' | 'digiworldadda' }) {
+export default function ShopPageContent({ company = 'ppv' as 'ppv' | 'digiworldadda', status = 'active' as 'active' | 'all', limit = 12 }: { company?: 'ppv' | 'digiworldadda'; status?: 'active' | 'all'; limit?: number }) {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category');
   
@@ -30,15 +30,15 @@ export default function ShopPageContent({ company = 'ppv' as 'ppv' | 'digiworlda
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState<string[]>(initialCategory ? [initialCategory] : []);
-  const [priceRange, setPriceRange] = useState<number[]>([300]);
+  const [priceRange, setPriceRange] = useState<number[]>([0]);
 
   useEffect(() => {
     fetchProducts();
-  }, [company]);
+  }, [company, status, limit]);
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`/api/products?status=active&company=${company}`);
+      const response = await fetch(`/api/products?status=${status}&company=${company}&limit=${encodeURIComponent(String(limit))}`);
       const result = await response.json();
       
       if (result.success) {
@@ -55,12 +55,17 @@ export default function ShopPageContent({ company = 'ppv' as 'ppv' | 'digiworlda
   };
 
   const maxPrice = useMemo(() => {
-    if (products.length === 0) return 300;
-    return Math.ceil(Math.max(...products.map(p => p.price)) / 10) * 10;
+    if (products.length === 0) return 0;
+    const numericPrices = products
+      .map((p) => Number(p.price))
+      .filter((n) => Number.isFinite(n) && n >= 0);
+    if (numericPrices.length === 0) return 0;
+    const m = Math.max(...numericPrices);
+    return Math.ceil(m / 10) * 10;
   }, [products]);
 
   useEffect(() => {
-    setPriceRange([maxPrice]);
+    if (maxPrice > 0) setPriceRange([maxPrice]);
   }, [maxPrice]);
   
   useEffect(() => {
@@ -83,7 +88,10 @@ export default function ShopPageContent({ company = 'ppv' as 'ppv' | 'digiworlda
       const categoryMatch =
         selectedCategories.length === 0 ||
         selectedCategories.includes(product.category);
-      const priceMatch = product.price <= priceRange[0];
+      const currentCap = priceRange?.[0];
+      const applyPrice = Number.isFinite(currentCap) && currentCap > 0;
+      const productPrice = Number(product.price);
+      const priceMatch = !applyPrice || (Number.isFinite(productPrice) && productPrice <= currentCap);
       return categoryMatch && priceMatch;
     });
   }, [products, selectedCategories, priceRange]);

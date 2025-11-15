@@ -28,7 +28,7 @@ function DigiShopSkeleton() {
 export default function DigiworldaddaShopPage() {
   return (
     <Suspense fallback={<DigiShopSkeleton />}>
-      <ShopPageContent company="digiworldadda" />
+      <ShopPageContent company="digiworldadda" status="all" limit={60} />
     </Suspense>
   );
 }

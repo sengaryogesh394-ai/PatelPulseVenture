@@ -145,14 +145,19 @@ export default function Header() {
 
   React.useEffect(() => {
     try {
-      const raw = typeof window !== 'undefined' ? localStorage.getItem('ppv_user') : null;
-      if (raw) setUser(JSON.parse(raw));
+      if (typeof window !== 'undefined') {
+        const raw1 = localStorage.getItem('ppv_user');
+        const raw2 = localStorage.getItem('user');
+        const raw = raw1 || raw2;
+        if (raw) setUser(JSON.parse(raw));
+      }
     } catch {}
   }, []);
 
   const handleLogout = () => {
     try {
       localStorage.removeItem('ppv_user');
+      localStorage.removeItem('user');
       setUser(null);
     } catch {}
   };
@@ -231,14 +236,28 @@ export default function Header() {
                   ))}
                 </nav>
 
-                {/* Auth actions - Mobile */}
+                {/* Auth/Profile actions - Mobile */}
                 <div className="mt-6 flex flex-col gap-3">
-                  <Link href="/auth/login" onClick={() => setMobileMenuOpen(false)}>
-                    <Button variant="outline" className="w-full">Login</Button>
-                  </Link>
-                  <Link href="/auth/register" onClick={() => setMobileMenuOpen(false)}>
-                    <Button className="w-full">Register</Button>
-                  </Link>
+                  {!user ? (
+                    <>
+                      <Link href="/auth/login" onClick={() => setMobileMenuOpen(false)}>
+                        <Button variant="outline" className="w-full">Login</Button>
+                      </Link>
+                      <Link href="/auth/register" onClick={() => setMobileMenuOpen(false)}>
+                        <Button className="w-full">Register</Button>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link href="/profile" onClick={() => setMobileMenuOpen(false)}>
+                        <Button variant="outline" className="w-full">Profile</Button>
+                      </Link>
+                      <Link href="/purchases" onClick={() => setMobileMenuOpen(false)}>
+                        <Button className="w-full">My Purchases</Button>
+                      </Link>
+                      <Button variant="destructive" className="w-full" onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>Logout</Button>
+                    </>
+                  )}
                 </div>
               </div>
             </SheetContent>
@@ -256,7 +275,13 @@ export default function Header() {
               </>
             ) : (
               <>
-                <span className="text-sm text-muted-foreground">Hi, {user.name || user.email}</span>
+                <Link href="/profile">
+                  <Button variant="ghost" size="sm">Profile</Button>
+                </Link>
+                <Link href="/purchases">
+                  <Button variant="ghost" size="sm">My Purchases</Button>
+                </Link>
+                <span className="text-sm text-muted-foreground hidden lg:inline">Hi, {user.name || user.email}</span>
                 <Button variant="outline" size="sm" onClick={handleLogout}>Logout</Button>
               </>
             )}

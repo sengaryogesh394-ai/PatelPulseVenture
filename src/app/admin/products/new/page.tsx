@@ -875,12 +875,28 @@ function NewProductPageInner() {
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Courses & E-books">Courses & E-books</SelectItem>
-                      <SelectItem value="Graphic Design">Graphic Design</SelectItem>
-                      <SelectItem value="AI Reels">AI Reels</SelectItem>
-                      <SelectItem value="Video Editing">Video Editing</SelectItem>
-                      <SelectItem value="Social Media">Social Media</SelectItem>
-                      <SelectItem value="Templates">Templates</SelectItem>
+                     <SelectItem value="Web Development">Web Development</SelectItem>
+                     <SelectItem value="Courses & E-books">Courses & E-books</SelectItem> <SelectItem value="Graphic Design">Graphic Design</SelectItem> <SelectItem value="AI Reels">AI Reels</SelectItem> <SelectItem value="Video Editing">Video Editing</SelectItem> <SelectItem value="Social Media">Social Media</SelectItem> <SelectItem value="Templates">Templates</SelectItem>
+<SelectItem value="App Development">App Development</SelectItem>
+<SelectItem value="UI/UX Design">UI/UX Design</SelectItem>
+<SelectItem value="Digital Marketing">Digital Marketing</SelectItem>
+<SelectItem value="Business & Startups">Business & Startups</SelectItem>
+<SelectItem value="Photography">Photography</SelectItem>
+<SelectItem value="Music & Audio Editing">Music & Audio Editing</SelectItem>
+<SelectItem value="Copywriting">Copywriting</SelectItem>
+<SelectItem value="SEO Tools">SEO Tools</SelectItem>
+<SelectItem value="Canva Templates">Canva Templates</SelectItem>
+<SelectItem value="3D Models & Assets">3D Models & Assets</SelectItem>
+<SelectItem value="Wallpapers & Icons">Wallpapers & Icons</SelectItem>
+<SelectItem value="Branding Kits">Branding Kits</SelectItem>
+<SelectItem value="Marketing Tools">Marketing Tools</SelectItem>
+<SelectItem value="Automation Tools">Automation Tools</SelectItem>
+<SelectItem value="ChatGPT Prompts">ChatGPT Prompts</SelectItem>
+<SelectItem value="Printable Files">Printable Files</SelectItem>
+<SelectItem value="Fitness & Lifestyle">Fitness & Lifestyle</SelectItem>
+<SelectItem value="Finance & Investing">Finance & Investing</SelectItem>
+<SelectItem value="Software Tools">Software Tools</SelectItem>
+
                     </SelectContent>
                   </Select>
                 </div>

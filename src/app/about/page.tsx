@@ -1,169 +1,287 @@
-// "use client";
 
-// import React from "react";
-
-// export default function AboutPage() {
-//   return (
-//     <main className="container mx-auto px-4 py-16 prose dark:prose-invert">
-//       <h1>About Patel Pulse Ventures</h1>
-//       <p>
-//         At <strong>Patel Pulse Ventures</strong>, we believe technology has the power to transform
-//         businesses, drive growth, and create meaningful impact. Based in Greater Noida, Uttar Pradesh,
-//         we are a passionate team of engineers, designers, and strategists committed to delivering
-//         world-class digital solutions for web, mobile and cloud platforms.
-//       </p>
-
-//       <h2>Our Story</h2>
-//       <p>
-//         Founded in 2021, our journey began with a simple idea: make enterprise-grade
-//         digital technology accessible to small and medium businesses across India and beyond.
-//         What started as a two-person start-up rapidly expanded into a multi-disciplinary team,
-//         serving clients in e-commerce, SaaS, app-development, and IoT. We incorporated
-//         as “Patel Pulse Ventures Private Limited” (CIN: U73100UP2025PTC235660) based in
-//         Greater Noida.
-//       </p>
-
-//       <h2>What We Do</h2>
-//       <ul>
-//         <li>Web & Mobile Application Development: From idea to launch, we build robust and scalable solutions.</li>
-//         <li>Digital Transformation: We help businesses adopt the latest tech – AI, blockchain, IoT – to stay ahead.</li>
-//         <li>Custom Software Solutions: Tailor-made applications to address your unique business challenges.</li>
-//         <li>Maintenance & Support: We don’t just build it—we support it. We help you grow, scale, and evolve.</li>
-//       </ul>
-
-//       <h2>Our Mission & Values</h2>
-//       <p>
-//         <strong>Mission:</strong> Empower businesses with cutting-edge technology that drives innovation, efficiency and growth.<br/>
-//         <strong>Values:</strong> Integrity, Excellence, Collaboration and Customer-centric innovation.
-//       </p>
-
-//       <h2>Why Choose Us?</h2>
-//       <p>
-//         • Proven team and fresh ideas<br/>
-//         • Transparent processes & timely delivery<br/>
-//         • Commitment to quality and performance<br/>
-//         • Post-launch support and long-term partnership
-//       </p>
-
-//       <h2>Meet the Team</h2>
-//       <p>
-//         Our team is a blend of young innovators and experienced professionals who bring
-//         cross-industry expertise in software, design, and business. Because we understand
-//         both technology and the market.
-//       </p>
-
-//       <h2>Contact Us</h2>
-//       <p>
-//         Let’s bring your next digital idea to life. Reach out at{" "}
-//         <a href="mailto:contact@patelpulseventures.com">
-//           contact@patelpulseventures.com
-//         </a> or visit our <a href="/contact">Contact Page</a>.
-//       </p>
-//     </main>
-//   );
-// }
 
 "use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 48 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.8, ease: "easeOut" },
+  }),
+};
+
+const services = [
+  {
+    title: "Product Strategy & Advisory",
+    desc: "CX research, product roadmaps, and investment-ready documentation for founders.",
+  },
+  {
+    title: "Web & Mobile Engineering",
+    desc: "Modern web apps, mobile products, and cloud-native platforms optimized for scale.",
+  },
+  {
+    title: "Brand & Experience Design",
+    desc: "Immersive UI/UX, brand systems, and content frameworks that accelerate trust.",
+  },
+  {
+    title: "Growth & GTM Pods",
+    desc: "Performance marketing, automation, and CRM journeys that translate to revenue.",
+  },
+];
+
+const milestones = [
+  { year: "2021", label: "Founded in Greater Noida with a two-member team." },
+  { year: "2022", label: "Launched flagship web & mobile labs, 30+ client releases." },
+  { year: "2023", label: "Expanded to marketing automation and AI-led analytics." },
+  { year: "2024", label: "Crossed 120 projects and incorporated as Patel Pulse Ventures Pvt. Ltd." },
+];
+
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-800">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-24 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-5xl font-extrabold text-primary mb-4"
-        >
-          About Patel Pulse Ventures
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="max-w-2xl mx-auto text-lg text-gray-600"
-        >
-          At Patel Pulse Ventures, we are dedicated to driving digital transformation through innovative
-          web development, mobile app solutions, and strategic digital marketing.
-        </motion.p>
-
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="mt-12 flex justify-center"
-        >
-          <Image
-            src="/about-team.jpg"
-            alt="Patel Pulse Ventures Team"
-            width={700}
-            height={400}
-            className="rounded-2xl shadow-2xl"
-          />
-        </motion.div>
-      </section>
-
-      {/* Mission & Vision Section */}
-      <section className="py-20 px-6 md:px-20 bg-white">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl font-bold mb-4 text-primary">Our Mission</h2>
-            <p className="text-gray-600 leading-relaxed">
-              Our mission is to empower businesses by crafting impactful digital experiences that drive
-              growth and engagement. From startups to enterprises, we tailor digital strategies that
-              resonate with audiences and create long-lasting impact.
+    <main className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100 text-gray-900">
+      {/* Hero */}
+      <section className="relative overflow-hidden py-24 px-6 md:px-12">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+          <motion.div initial="hidden" animate="visible" variants={fadeUp} custom={0}>
+            <p className="uppercase tracking-[0.4em] text-sm text-primary/80 mb-4">About Us</p>
+            <h1 className="text-4xl md:text-5xl font-black leading-tight text-primary mb-6">
+              We design technology that feels human, scalable, and unmistakably premium.
+            </h1>
+            <p className="text-lg text-gray-600">
+              Patel Pulse Ventures is a full-stack digital studio based in Greater Noida. We blend
+              consulting, engineering, and creative energy to help ambitious companies launch new
+              ventures, modernize legacy stacks, and unlock growth across web, mobile, and emerging tech.
             </p>
+            <div className="mt-8 grid sm:grid-cols-3 gap-4">
+              {[
+                { label: "Products shipped", value: "120+" },
+                { label: "Active clients", value: "45" },
+                { label: "Retention", value: "92%" },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  initial="hidden"
+                  animate="visible"
+                  variants={fadeUp}
+                  custom={i + 1}
+                  className="rounded-2xl bg-white shadow-md px-4 py-5"
+                >
+                  <p className="text-3xl font-bold text-primary">{item.value}</p>
+                  <p className="text-xs uppercase tracking-wide text-gray-500">{item.label}</p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
-
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            className="relative"
           >
-            <Image
-              src="/mission.jpg"
-              alt="Our Mission"
-              width={550}
-              height={350}
-              className="rounded-2xl shadow-lg"
-            />
+            <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full" />
+            <div className="relative rounded-[32px] overflow-hidden shadow-2xl border border-white/40">
+              <Image
+                src="/about-team.jpg"
+                alt="Team collaborating"
+                width={900}
+                height={600}
+                className="object-cover"
+                priority
+              />
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Contact Information */}
-      <section className="py-20 px-6 md:px-20 bg-gradient-to-br from-primary/5 to-primary/10 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-3xl font-bold mb-6"
-        >
-          Get in Touch
-        </motion.h2>
-        <p className="text-lg text-gray-700">
-          📍 OC 1125, Sector 4, Greater Noida West, Uttar Pradesh 201009, India
-        </p>
-        <p className="mt-2 text-gray-700">📞 (+91) 78381 30064 | ☎️ (+91) 120 510 6926</p>
-        <p className="mt-2 text-gray-700">
-          📧{" "}
-          <a
-            href="mailto:contact@patelpulseVentures.com"
-            className="text-primary hover:underline"
+      {/* Mission + Vision */}
+      <section className="py-20 px-6 md:px-12 bg-white">
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+            variants={fadeUp}
+            custom={0}
+            className="space-y-6"
           >
-            contact@patelpulseVentures.com
-          </a>
-        </p>
+            <h2 className="text-3xl font-bold text-primary">Mission</h2>
+            <p className="text-gray-600 leading-relaxed">
+              Deliver enterprise-grade craftsmanship to founders, SMEs, and Fortune 500s alike. We align
+              user empathy, experimentation, and engineering discipline to release lovable products faster.
+            </p>
+            <h2 className="text-3xl font-bold text-primary">Vision</h2>
+            <p className="text-gray-600 leading-relaxed">
+              Build an ecosystem where Indian talent, design thinking, and cutting-edge research converge
+              to power the next generation of global digital businesses.
+            </p>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+            variants={fadeUp}
+            custom={1}
+            className="rounded-3xl bg-gradient-to-br from-primary/5 to-primary/10 p-10 shadow-lg"
+          >
+            <h3 className="text-xl font-semibold text-primary mb-4">What makes us different?</h3>
+            <ul className="space-y-4 text-gray-700">
+              <li className="flex gap-3">
+                <span className="text-primary">●</span>
+                <span>Product-minded team that codes, designs, and thinks business-first.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-primary">●</span>
+                <span>Modular delivery pods for discovery, build, growth, and support.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-primary">●</span>
+                <span>Transparent communication, sprint reviews, and measurable ROI.</span>
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services grid */}
+      <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-6xl mx-auto text-center mb-12">
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={0}
+            className="text-sm uppercase tracking-[0.4em] text-primary/70"
+          >
+            Services
+          </motion.p>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={1}
+            className="text-4xl font-bold text-primary mt-4 mb-4"
+          >
+            What we ship from Greater Noida to the world
+          </motion.h2>
+          <p className="text-gray-600 max-w-3xl mx-auto">
+            From discovery workshops to multi-year managed squads, we co-create digital experiences that
+            compound value for SaaS, fintech, retail, healthcare, and manufacturing partners.
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.title}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={index}
+              className="rounded-2xl bg-white shadow-lg p-6 text-left border border-gray-100"
+            >
+              <p className="text-sm font-semibold text-primary tracking-wide mb-2">0{index + 1}</p>
+              <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">{service.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-20 px-6 md:px-12 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={0}
+            className="text-3xl font-bold text-primary text-center mb-12"
+          >
+            Growth Milestones
+          </motion.h2>
+          <div className="relative pl-6 border-l-2 border-primary/20 space-y-10">
+            {milestones.map((item, index) => (
+              <motion.div
+                key={item.year}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                custom={index}
+                className="bg-gray-50 rounded-2xl p-6 shadow-sm"
+              >
+                <p className="text-primary font-semibold text-lg">{item.year}</p>
+                <p className="text-gray-700 mt-2">{item.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership highlight */}
+      <section className="py-20 px-6 md:px-12 bg-gradient-to-r from-primary/5 via-white to-primary/5">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={0}
+          >
+            <h2 className="text-3xl font-bold text-primary mb-4">Leadership & Culture</h2>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              We are a tight-knit crew of strategists, engineers, and creatives who have shipped multi-market
+              experiences for unicorns and early-stage startups alike. Every squad inside Patel Pulse Ventures
+              is multidisciplinary and accountable, which keeps projects nimble without sacrificing rigor.
+            </p>
+            <ul className="space-y-3 text-gray-700">
+              <li>✔ Cross-functional pods with dedicated delivery leads</li>
+              <li>✔ ISO-inspired processes for quality and security</li>
+              <li>✔ Mentorship programs and innovation guilds for R&D</li>
+            </ul>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={1}
+            className="rounded-3xl bg-white shadow-2xl p-8 border border-primary/10"
+          >
+            <p className="text-xl font-semibold mb-2">“We measure success in adoption, revenue, and relationships—not vanity metrics.”</p>
+            <p className="text-sm uppercase tracking-wide text-gray-500">Leadership message</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section className="py-20 px-6 md:px-12 bg-primary/5">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0}
+          className="max-w-4xl mx-auto text-center bg-white rounded-[32px] shadow-xl p-10 border border-primary/10"
+        >
+          <h2 className="text-3xl font-bold text-primary mb-4">Contact Us</h2>
+          <p className="text-sm uppercase tracking-[0.4em] text-gray-500 mb-6">Patel Pulse Ventures</p>
+          <div className="space-y-2 text-gray-700 leading-relaxed">
+            <p>OC 1125, Sector 4, Greater Noida West, Uttar Pradesh 201009, India</p>
+            <p>📞 Phone: (+91) 78381 30064</p>
+            <p>☎️ Telephone: (+91) 120 510 6926</p>
+            <p>
+              📧 Email: <a href="mailto:contact@patelpulseVentures.com" className="text-primary font-semibold">contact@patelpulseVentures.com</a>
+            </p>
+          </div>
+        </motion.div>
       </section>
     </main>
   );

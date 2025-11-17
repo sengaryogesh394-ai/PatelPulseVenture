@@ -372,22 +372,25 @@ export default function Footer() {
         {/* --------------------------- */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 text-center md:flex-row">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Patel Pulse Ventures. All rights reserved.
+            {currentYear} Patel Pulse Ventures. All rights reserved.
           </p>
        <nav className="flex gap-4 text-sm">
-  <Link href="/privacy-policy" className="transition-colors hover:text-primary">
-    Privacy Policy
-  </Link>
-  <Link href="/about" className="transition-colors hover:text-primary">
-    About us
-  </Link>
-  <Link href="/terms-and-conditions" className="transition-colors hover:text-primary">
-    Terms & Conditions
-  </Link>
-  <Link href="/refund-policy" className="transition-colors hover:text-primary">
-    Return & Refund Policy
-  </Link>
-</nav>
+    <Link href="/privacy-policy" className="transition-colors hover:text-primary">
+      Privacy Policy
+    </Link>
+    <Link href="/about" className="transition-colors hover:text-primary">
+      About us
+    </Link>
+    <Link href="/terms-and-conditions" className="transition-colors hover:text-primary">
+      Terms & Conditions
+    </Link>
+    <Link href="/refund-policy" className="transition-colors hover:text-primary">
+      Return & Refund Policy
+    </Link>
+    <Link href="/shipping-policy" className="transition-colors hover:text-primary">
+      Shipping Policy
+    </Link>
+  </nav>
 
         </div>
       </div>

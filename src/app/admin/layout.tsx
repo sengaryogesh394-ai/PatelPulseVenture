@@ -51,6 +51,11 @@ const sidebarItems = [
     icon: Briefcase,
   },
   {
+    title: 'Sales',
+    href: '/admin/sales',
+    icon: FileText,
+  },
+  {
     title: 'Reviews',
     href: '/admin/reviews',
     icon: FileText,

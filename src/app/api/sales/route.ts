@@ -4,15 +4,16 @@ import Sale from '@/models/Sale';
 
 export const dynamic = 'force-dynamic';
 
-// GET /api/sales?userId=... | ?email=...
+// GET /api/sales?userId=... | ?email=... | ?all=1
 export async function GET(request: NextRequest) {
   try {
     await connectDB();
     const searchParams = request.nextUrl.searchParams;
     const userId = searchParams.get('userId') || undefined;
     const email = searchParams.get('email') || undefined;
+    const all = searchParams.get('all') === '1';
 
-    if (!userId && !email) {
+    if (!userId && !email && !all) {
       return NextResponse.json({ success: false, error: 'Missing userId or email' }, { status: 400 });
     }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -31,6 +32,8 @@ export default function ProductsManagement() {
   const [error, setError] = useState<string | null>(null);
   const [products, setProducts] = useState<any[]>([]);
   const [counts, setCounts] = useState({ ppv: 0, digi: 0 });
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [search, setSearch] = useState('');
 
   // Import from Digiworldadda state
   const [importOpen, setImportOpen] = useState(false);
@@ -78,6 +81,16 @@ export default function ProductsManagement() {
     // Navigate to the appropriate new product page (propagate company)
     window.location.href = `/admin/products/new?company=${platform}`;
   };
+
+  const filteredProducts = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return products;
+    return products.filter((p: any) =>
+      (p.name || '').toLowerCase().includes(q) ||
+      (p.category || '').toLowerCase().includes(q) ||
+      (p.description || '').toLowerCase().includes(q)
+    );
+  }, [products, search]);
 
   // Fetch list for selected company
   useEffect(() => {
@@ -205,6 +218,30 @@ export default function ProductsManagement() {
     fetchCounts();
   }, []);
 
+  const handleDelete = async (id: string) => {
+    if (typeof window !== 'undefined') {
+      const ok = window.confirm('Are you sure you want to delete this product?');
+      if (!ok) return;
+    }
+    setDeletingId(id);
+    try {
+      const res = await fetch(`/api/products/${id}?company=${company}`, {
+        method: 'DELETE',
+      });
+      const json = await res.json();
+      if (!json.success) {
+        throw new Error(json.error || 'Failed to delete product');
+      }
+      setProducts((prev) => prev.filter((p: any) => p._id !== id));
+    } catch (e: any) {
+      if (typeof window !== 'undefined') {
+        alert(e?.message || 'Failed to delete product');
+      }
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -280,12 +317,22 @@ export default function ProductsManagement() {
       {/* Products */}
       <Card className="border-0 shadow-lg">
         <CardHeader className="bg-gradient-to-r from-gray-50 to-white border-b">
-          <div className="flex items-center gap-2">
-            <CardTitle className="text-xl font-semibold flex items-center gap-2">
-              <Package className="h-5 w-5 text-primary" />
-              {company === 'ppv' ? 'PPV Products' : 'Digiworldadda Products'}
-            </CardTitle>
-            <Badge variant="secondary" className="ml-2">{products.length}</Badge>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-center gap-2">
+              <CardTitle className="text-xl font-semibold flex items-center gap-2">
+                <Package className="h-5 w-5 text-primary" />
+                {company === 'ppv' ? 'PPV Products' : 'Digiworldadda Products'}
+              </CardTitle>
+              <Badge variant="secondary" className="ml-2">{filteredProducts.length}/{products.length}</Badge>
+            </div>
+            <div className="w-full md:w-80">
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search products by name, category, or description..."
+                className="w-full rounded-md border px-3 py-2 text-sm"
+              />
+            </div>
           </div>
         </CardHeader>
         <CardContent>
@@ -349,31 +396,58 @@ export default function ProductsManagement() {
             <div className="py-10 text-center text-sm text-muted-foreground">Loading products...</div>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {products.map((p: any) => (
-                <Card key={p._id} className="hover:shadow-md transition">
-                  <CardHeader className="pb-3 flex flex-row items-start justify-between gap-2">
-                    <div>
-                      <CardTitle className="text-base">{p.name}</CardTitle>
-                      <CardDescription>{p.category}</CardDescription>
-                    </div>
-                    <Badge variant="secondary">{company === 'ppv' ? 'PPV' : 'Digiworldadda'}</Badge>
-                  </CardHeader>
-                  <CardContent className="flex items-center justify-between">
-                    <div className="text-sm">
-                      <div className="font-semibold">₹{p.price}</div>
-                      <div className="text-muted-foreground">{p.status}</div>
-                    </div>
-                    <div className="flex gap-2">
-                      <Link href={`/admin/products/${p._id}`}>
-                        <Button variant="outline" size="icon"><Eye className="h-4 w-4" /></Button>
-                      </Link>
-                      <Link href={`/admin/products/${p._id}/edit`}>
-                        <Button variant="outline" size="icon"><Edit className="h-4 w-4" /></Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+              {filteredProducts.map((p: any) => {
+                const thumbUrl = (p.media && p.media[0]?.url) || 'https://res.cloudinary.com/dssmutzly/image/upload/v1763116120/photo-1587567818566-3272be7d64c9_qoz5mq.webp';
+                return (
+                  <Card key={p._id} className="hover:shadow-md transition">
+                    <CardHeader className="pb-3 flex flex-row items-start justify-between gap-3">
+                      <div className="flex items-start gap-3">
+                        <div className="relative w-14 h-14 rounded-md overflow-hidden bg-muted flex-shrink-0">
+                          <Image
+                            src={thumbUrl}
+                            alt={p.name || 'Product image'}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                            loader={({ src }) => src}
+                          />
+                        </div>
+                        <div>
+                          <CardTitle className="text-base line-clamp-2">{p.name}</CardTitle>
+                          <CardDescription className="text-xs text-muted-foreground">{p.category}</CardDescription>
+                        </div>
+                      </div>
+                      <Badge variant="secondary">{company === 'ppv' ? 'PPV' : 'Digiworldadda'}</Badge>
+                    </CardHeader>
+                    <CardContent className="flex items-center justify-between gap-3">
+                      <div className="text-sm">
+                        <div className="font-semibold">₹{p.price}</div>
+                        <div className="text-muted-foreground capitalize text-xs">{p.status}</div>
+                      </div>
+                      <div className="flex gap-2">
+                        <Link href={`/admin/products/${p._id}`}>
+                          <Button variant="outline" size="icon">
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                        </Link>
+                        <Link href={`/admin/products/${p._id}/edit`}>
+                          <Button variant="outline" size="icon">
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                        </Link>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => handleDelete(p._id)}
+                          disabled={deletingId === p._id}
+                        >
+                          <Trash2 className="h-4 w-4 text-red-600" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           )}
         </CardContent>

@@ -28,6 +28,8 @@ const serviceSchema = z.object({
   name: z.string().min(1, 'Service name is required'),
   slug: z.string().min(1, 'Slug is required'),
   description: z.string().min(1, 'Description is required'),
+  priceFrom: z.coerce.number().min(0, 'Price must be >= 0').optional(),
+  priceTo: z.coerce.number().min(0, 'Price must be >= 0').optional(),
   longDescription: z.string().min(1, 'Long description is required'),
   imageId: z.string().min(1, 'Image ID is required'),
   imageUrl: z.string().optional(),
@@ -35,6 +37,14 @@ const serviceSchema = z.object({
     title: z.string().min(1, 'Detail title is required'),
     points: z.array(z.string().min(1, 'Point cannot be empty'))
   })).min(1, 'At least one detail section is required')
+}).refine((data) => {
+  if (data.priceFrom !== undefined && data.priceTo !== undefined) {
+    return data.priceFrom <= data.priceTo;
+  }
+  return true;
+}, {
+  message: 'Price From must be less than or equal to Price To',
+  path: ['priceTo']
 });
 
 type ServiceFormData = z.infer<typeof serviceSchema>;
@@ -63,6 +73,8 @@ export default function NewService() {
       name: '',
       slug: '',
       description: '',
+      priceFrom: undefined,
+      priceTo: undefined,
       longDescription: '',
       imageId: 'venture-1',
       details: [
@@ -500,6 +512,34 @@ export default function NewService() {
               {errors.description && (
                 <p className="text-sm text-destructive">{errors.description.message}</p>
               )}
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="priceFrom">Price From (Rs)</Label>
+                <Input
+                  id="priceFrom"
+                  type="number"
+                  step="0.01"
+                  {...register('priceFrom')}
+                  placeholder="e.g., 4999"
+                />
+                {errors.priceFrom && (
+                  <p className="text-sm text-destructive">{errors.priceFrom.message as string}</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="priceTo">Price To (Rs)</Label>
+                <Input
+                  id="priceTo"
+                  type="number"
+                  step="0.01"
+                  {...register('priceTo')}
+                  placeholder="e.g., 24999"
+                />
+                {errors.priceTo && (
+                  <p className="text-sm text-destructive">{errors.priceTo.message as string}</p>
+                )}
+              </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="longDescription">Long Description</Label>

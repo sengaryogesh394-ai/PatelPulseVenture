@@ -98,6 +98,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { motion } from 'framer-motion';
 import { Briefcase } from 'lucide-react';
 import Link from 'next/link';
+import { usePayment } from '@/hooks/usePayment';
 
 interface ServicesSectionProps {
   services: Service[];
@@ -105,6 +106,7 @@ interface ServicesSectionProps {
 }
 
 export default function ServicesSection({ services, showSeeMore = false }: ServicesSectionProps) {
+  const { initiatePaymentWithModal, loading } = usePayment();
   const sectionVariants = {
     hidden: { opacity: 0, y: 60 },
     visible: {
@@ -162,6 +164,21 @@ export default function ServicesSection({ services, showSeeMore = false }: Servi
           {services.map((service, index) => {
             const serviceImage = PlaceHolderImages.find((p) => p.id === service.imageId);
             const customImageUrl = (service.imageUrl && service.imageUrl.trim() !== '') ? service.imageUrl : undefined;
+            const hasRange = typeof service.priceFrom === 'number' || typeof service.priceTo === 'number';
+            const priceFrom = typeof service.priceFrom === 'number' ? service.priceFrom : undefined;
+            const priceTo = typeof service.priceTo === 'number' ? service.priceTo : undefined;
+            const priceLabel = hasRange
+              ? (priceFrom && priceTo
+                  ? `₹${priceFrom.toLocaleString()} - ₹${priceTo.toLocaleString()}`
+                  : `₹${(priceFrom ?? priceTo)?.toLocaleString()}`)
+              : undefined;
+
+            const onBuy = async (e: React.MouseEvent) => {
+              e.preventDefault();
+              e.stopPropagation();
+              await initiatePaymentWithModal({ serviceId: service.id });
+            };
+
             return (
               <Link href={`/services/${service.slug}`} key={service.id} className="block">
                 <motion.div
@@ -215,10 +232,22 @@ export default function ServicesSection({ services, showSeeMore = false }: Servi
                         </CardTitle>
                       </div>
                     </CardHeader>
-                    <CardContent className="flex-grow flex flex-col">
+                    <CardContent className="flex-grow flex flex-col gap-4">
                       <CardDescription className="flex-grow text-muted-foreground">
                         {service.description}
                       </CardDescription>
+                      <div className="flex items-center justify-between">
+                        <div className="text-sm font-medium text-foreground">
+                          {priceLabel ? priceLabel : 'Contact for pricing'}
+                        </div>
+                        <button
+                          onClick={onBuy}
+                          disabled={loading || !priceFrom && !priceTo}
+                          className="px-4 py-2 rounded-lg text-white bg-primary hover:bg-primary/90 disabled:opacity-50"
+                        >
+                          {loading ? 'Processing...' : 'Buy'}
+                        </button>
+                      </div>
                     </CardContent>
                   </Card>
                 </motion.div>

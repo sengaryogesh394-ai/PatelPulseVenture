@@ -5,7 +5,7 @@ import Sale from '../../../../models/Sale';
 
 export async function POST(request: NextRequest) {
   try {
-    const { productId, customerEmail, customerPhone } = await request.json();
+    const { productId, serviceId, customerEmail, customerPhone } = await request.json();
 
     // No authentication required: use provided customer details
     const userId = null;
@@ -13,9 +13,9 @@ export async function POST(request: NextRequest) {
     const userName = '';
 
     // Validate required fields
-    if (!productId) {
+    if (!productId && !serviceId) {
       return NextResponse.json(
-        { success: false, error: 'Product ID is required' },
+        { success: false, error: 'Either productId or serviceId is required' },
         { status: 400 }
       );
     }
@@ -54,34 +54,50 @@ export async function POST(request: NextRequest) {
       || process.env.NEXT_PUBLIC_BASE_URL
       || 'http://localhost:3000';
 
-    // Try to get product from both collections (PPV first, then Digiworldadda)
-    let product: any = null;
-    try {
-      let resp = await fetch(`${baseUrl}/api/products/${productId}?company=ppv`);
-      let resJson = await resp.json();
-      if (resJson?.success && resJson?.data) {
-        product = resJson.data;
-      } else {
-        resp = await fetch(`${baseUrl}/api/products/${productId}?company=digiworldadda`);
-        resJson = await resp.json();
+    // Resolve item (product or service)
+    let item: any = null;
+    let itemType: 'product' | 'service' = 'product';
+    if (serviceId) {
+      try {
+        const resp = await fetch(`${baseUrl}/api/services/${serviceId}`);
+        const resJson = await resp.json();
         if (resJson?.success && resJson?.data) {
-          product = resJson.data;
+          item = resJson.data;
+          itemType = 'service';
         }
-      }
-    } catch {}
+      } catch {}
+    } else if (productId) {
+      try {
+        let resp = await fetch(`${baseUrl}/api/products/${productId}?company=ppv`);
+        let resJson = await resp.json();
+        if (resJson?.success && resJson?.data) {
+          item = resJson.data;
+        } else {
+          resp = await fetch(`${baseUrl}/api/products/${productId}?company=digiworldadda`);
+          resJson = await resp.json();
+          if (resJson?.success && resJson?.data) {
+            item = resJson.data;
+          }
+        }
+      } catch {}
+    }
 
-    if (!product) {
+    if (!item) {
       return NextResponse.json(
-        { success: false, error: 'Product not found' },
+        { success: false, error: itemType === 'service' ? 'Service not found' : 'Product not found' },
         { status: 404 }
       );
     }
 
     // Generate receipt ID for Razorpay
-    const receiptId = razorpayService.generateReceiptId(productId);
+    const baseId = productId || serviceId;
+    const receiptId = razorpayService.generateReceiptId(baseId);
 
     // Convert amount to paise (Razorpay uses paise)
-    const amountInPaise = Math.round(product.price * 100);
+    const unitAmount = itemType === 'service' 
+      ? (typeof item.priceFrom === 'number' ? item.priceFrom : (typeof item.priceTo === 'number' ? item.priceTo : 0))
+      : item.price;
+    const amountInPaise = Math.round((unitAmount || 0) * 100);
 
     try {
       // Create Razorpay order
@@ -90,12 +106,13 @@ export async function POST(request: NextRequest) {
         currency: 'INR',
         receipt: receiptId,
         notes: {
-          productId: productId,
-          productName: product.name,
+          productId: productId || '',
+          serviceId: serviceId || '',
+          productName: item.name,
           customerEmail: customerEmail || '',
           customerPhone: customerPhone || '',
-          downloadLink: product.downloadLink || '',
-          instructions: `Download your purchase: ${product.downloadLink || 'Link will be provided'}`,
+          downloadLink: item.downloadLink || '',
+          instructions: itemType === 'product' ? `Download your purchase: ${item.downloadLink || 'Link will be provided'}` : 'We will contact you to fulfill your service shortly',
           supportEmail: 'support@digiaddaworld.com'
         }
       });
@@ -103,9 +120,9 @@ export async function POST(request: NextRequest) {
       // Debug logging
       console.log('Razorpay order created:', {
         orderId: razorpayOrder.id,
-        amount: product.price,
+        amount: unitAmount,
         amountInPaise,
-        productName: product.name,
+        productName: item.name,
         receiptId,
         customerEmail,
         customerPhone
@@ -115,26 +132,27 @@ export async function POST(request: NextRequest) {
       try {
         await connectDB();
         
-        const saleData = {
-          productId: productId,
-          productName: product.name,
-          productCategory: product.category || 'Digital Product',
-          productPrice: product.price,
-          downloadLink: product.downloadLink,
+        const saleData: any = {
+          productId: itemType === 'product' ? productId : undefined,
+          productName: item.name,
+          productCategory: itemType === 'product' ? (item.category || 'Digital Product') : 'Service',
+          productPrice: unitAmount,
+          downloadLink: item.downloadLink,
           userId: userId,
           customerEmail: userEmail,
           customerPhone: customerPhone || '',
           customerName: userName,
           orderId: receiptId, // Using receipt ID as our internal order ID
           razorpayOrderId: razorpayOrder.id,
-          amount: product.price,
+          amount: unitAmount,
           currency: 'INR',
           receiptId: receiptId,
           notes: {
             razorpayOrderId: razorpayOrder.id,
             productId: productId,
-            productName: product.name,
-            downloadLink: product.downloadLink,
+            serviceId: serviceId,
+            productName: item.name,
+            downloadLink: item.downloadLink,
             userId: userId,
             userEmail: userEmail
           },
@@ -144,6 +162,9 @@ export async function POST(request: NextRequest) {
           paymentStatus: 'pending',
           orderStatus: 'created'
         };
+        if (itemType === 'service') {
+          saleData.serviceId = serviceId;
+        }
 
         const sale = new Sale(saleData);
         await sale.save();
@@ -158,11 +179,12 @@ export async function POST(request: NextRequest) {
         success: true,
         data: {
           orderId: razorpayOrder.id,
-          amount: product.price,
+          amount: unitAmount,
           amountInPaise: razorpayOrder.amount,
           currency: razorpayOrder.currency,
-          productName: product.name,
+          productName: item.name,
           productId: productId,
+          serviceId: serviceId,
           keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
           customerEmail,
           customerPhone,

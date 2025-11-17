@@ -3,7 +3,8 @@
 import { useState } from 'react';
 
 interface PaymentData {
-  productId: string;
+  productId?: string;
+  serviceId?: string;
   customerEmail?: string;
   customerPhone?: string;
 }
@@ -16,7 +17,8 @@ interface PaymentResponse {
     amountInPaise: number;
     currency: string;
     productName: string;
-    productId: string;
+    productId?: string;
+    serviceId?: string;
     keyId: string;
     customerEmail?: string;
     customerPhone?: string;
@@ -57,11 +59,49 @@ const openRazorpayCheckout = (paymentData: any): Promise<any> => {
         name: 'DigiAdda',
         description: paymentData.productName,
         order_id: paymentData.orderId,
-        handler: function (response: any) {
+        handler: async function (response: any) {
           console.log('Payment successful:', response);
-          // Redirect to success page with product ID
-          window.location.href = `/payment/success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&productId=${paymentData.productId}&amount=${paymentData.amount}`;
-          resolve(response);
+          try {
+            let userId = '';
+            let email = paymentData.customerEmail || '';
+            let phone = paymentData.customerPhone || '';
+            try {
+              const raw1 = typeof window !== 'undefined' ? localStorage.getItem('ppv_user') : null;
+              const raw2 = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+              const raw = raw1 || raw2;
+              if (raw) {
+                const u = JSON.parse(raw);
+                userId = u?._id || u?.id || '';
+                email = email || u?.email || '';
+              }
+            } catch {}
+
+            await fetch('/api/payment/confirm', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpayOrderId: response.razorpay_order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                status: 'success',
+                productId: paymentData.productId,
+                serviceId: paymentData.serviceId,
+                userId,
+                customerEmail: email,
+                customerPhone: phone,
+                amount: paymentData.amount,
+              }),
+            });
+          } catch (e) {
+            console.warn('Failed to confirm payment server-side', e);
+          } finally {
+            // Redirect to appropriate success page
+            if (paymentData.serviceId) {
+              window.location.href = `/payment/service/success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&serviceId=${paymentData.serviceId}&amount=${paymentData.amount}`;
+            } else {
+              window.location.href = `/payment/success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&productId=${paymentData.productId}&amount=${paymentData.amount}`;
+            }
+            resolve(response);
+          }
         },
         prefill: {
           name: '',
@@ -79,11 +119,48 @@ const openRazorpayCheckout = (paymentData: any): Promise<any> => {
       };
 
       const rzp = new window.Razorpay(options);
-      rzp.on('payment.failed', function (response: any) {
+      rzp.on('payment.failed', async function (response: any) {
         console.error('Payment failed:', response.error);
-        // Still redirect to success page but with failure status so user can access download
-        window.location.href = `/payment/success?status=failed&productId=${paymentData.productId}&error=${encodeURIComponent(response.error.description)}&amount=${paymentData.amount}`;
-        reject(new Error(response.error.description));
+        try {
+          let userId = '';
+          let email = paymentData.customerEmail || '';
+          let phone = paymentData.customerPhone || '';
+          try {
+            const raw1 = typeof window !== 'undefined' ? localStorage.getItem('ppv_user') : null;
+            const raw2 = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+            const raw = raw1 || raw2;
+            if (raw) {
+              const u = JSON.parse(raw);
+              userId = u?._id || u?.id || '';
+              email = email || u?.email || '';
+            }
+          } catch {}
+
+          await fetch('/api/payment/confirm', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              razorpayOrderId: response.error?.metadata?.order_id || paymentData.orderId,
+              status: 'failed',
+              productId: paymentData.productId,
+              serviceId: paymentData.serviceId,
+              userId,
+              customerEmail: email,
+              customerPhone: phone,
+              amount: paymentData.amount,
+            }),
+          });
+        } catch (e) {
+          console.warn('Failed to report failed payment', e);
+        } finally {
+          // Redirect to failure page
+          if (paymentData.serviceId) {
+            window.location.href = `/payment/service/failed?status=failed&serviceId=${paymentData.serviceId}&error=${encodeURIComponent(response.error.description)}&amount=${paymentData.amount}`;
+          } else {
+            window.location.href = `/payment/success?status=failed&productId=${paymentData.productId}&error=${encodeURIComponent(response.error.description)}&amount=${paymentData.amount}`;
+          }
+          reject(new Error(response.error.description));
+        }
       });
 
       rzp.open();

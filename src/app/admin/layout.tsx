@@ -239,7 +239,7 @@ export default function AdminLayout({
       </div>
 
       {/* Floating Action Button */}
-      <FloatingActionButton actions={quickActions} />
+     
     </div>
   );
 }

@@ -59,6 +59,16 @@ const ServiceSchema = new Schema({
     required: true,
     trim: true
   },
+  priceFrom: {
+    type: Number,
+    required: false,
+    min: 0,
+  },
+  priceTo: {
+    type: Number,
+    required: false,
+    min: 0,
+  },
   imageId: {
     type: String,
     required: true,

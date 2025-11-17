@@ -125,7 +125,7 @@ const navLinks = [
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/team', label: 'Team' },
   { href: '/contact', label: 'Contact' },
-  { href: '/shop', label: 'Shop' },
+ 
   { href: '/blog', label: 'Blogs' },
 ];
 

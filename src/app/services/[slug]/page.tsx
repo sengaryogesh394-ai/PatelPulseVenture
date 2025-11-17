@@ -14,16 +14,19 @@ export default async function ServicePage({ params }: { params: { slug: string }
   }
 
   // Normalize to plain object matching the public Service type
+  const d: any = doc as any;
   const service = {
-    id: doc.id,
-    name: doc.name,
-    slug: doc.slug,
-    description: doc.description,
-    imageId: doc.imageId,
-    imageUrl: doc.imageUrl || '',
-    longDescription: doc.longDescription,
-    details: doc.details || [],
-    status: doc.status || 'active',
+    id: (d._id || d.id)?.toString?.() || d.id,
+    name: d.name,
+    slug: d.slug,
+    description: d.description,
+    priceFrom: typeof d.priceFrom === 'number' ? d.priceFrom : undefined,
+    priceTo: typeof d.priceTo === 'number' ? d.priceTo : undefined,
+    imageId: d.imageId,
+    imageUrl: d.imageUrl || '',
+    longDescription: d.longDescription,
+    details: d.details || [],
+    status: d.status || 'active',
   };
 
   return <ServiceDetailSection service={service} />;

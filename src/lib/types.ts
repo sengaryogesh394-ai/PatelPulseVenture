@@ -4,6 +4,8 @@ export interface Service {
   name: string;
   slug: string;
   description: string;
+  priceFrom?: number;
+  priceTo?: number;
   imageId: string;
   imageUrl?: string;
   cloudinaryPublicId?: string;

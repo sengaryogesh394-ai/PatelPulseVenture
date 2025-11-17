@@ -2,7 +2,8 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface ISale extends Document {
   // Product Information
-  productId: string;
+  productId?: string;
+  serviceId?: string;
   productName: string;
   productCategory: string;
   productPrice: number;
@@ -51,7 +52,12 @@ const SaleSchema = new Schema<ISale>({
   // Product Information
   productId: {
     type: String,
-    required: true,
+    required: false,
+    index: true
+  },
+  serviceId: {
+    type: String,
+    required: false,
     index: true
   },
   productName: {

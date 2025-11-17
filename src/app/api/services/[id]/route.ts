@@ -19,12 +19,12 @@ function buildServiceFilter(idOrSlug: string) {
 // GET /api/services/[id] - Get a specific service
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-    
-    const service = await Service.findOne(buildServiceFilter(params.id));
+    const { id } = await params;
+    const service = await Service.findOne(buildServiceFilter(id));
     
     if (!service) {
       return NextResponse.json(
@@ -49,13 +49,13 @@ export async function GET(
 // PUT /api/services/[id] - Update a specific service
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
     
     const body = await request.json();
-    
+    const { id } = await params;
     // Generate slug if name is updated but slug is not provided
     if (body.name && !body.slug) {
       body.slug = body.name
@@ -65,7 +65,7 @@ export async function PUT(
     }
     
     const service = await Service.findOneAndUpdate(
-      buildServiceFilter(params.id),
+      buildServiceFilter(id),
       body,
       { new: true, runValidators: true }
     );
@@ -102,12 +102,12 @@ export async function PUT(
 // DELETE /api/services/[id] - Delete a specific service
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-    
-    const service = await Service.findOneAndDelete(buildServiceFilter(params.id));
+    const { id } = await params;
+    const service = await Service.findOneAndDelete(buildServiceFilter(id));
     
     if (!service) {
       return NextResponse.json(

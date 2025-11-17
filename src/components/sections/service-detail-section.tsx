@@ -6,14 +6,27 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { usePayment } from '@/hooks/usePayment';
 
 interface ServiceDetailProps {
   service: Service;
 }
 
 export default function ServiceDetailSection({ service }: ServiceDetailProps) {
+  const { initiatePaymentWithModal, loading } = usePayment();
   const serviceImage = PlaceHolderImages.find((p) => p.id === service.imageId);
   const customImageUrl = (service.imageUrl && service.imageUrl.trim() !== '') ? service.imageUrl : undefined;
+  const hasRange = typeof service.priceFrom === 'number' || typeof service.priceTo === 'number';
+  const priceFrom = typeof service.priceFrom === 'number' ? service.priceFrom : undefined;
+  const priceTo = typeof service.priceTo === 'number' ? service.priceTo : undefined;
+  const priceLabel = hasRange
+    ? (priceFrom && priceTo
+        ? `₹${priceFrom.toLocaleString()} - ₹${priceTo.toLocaleString()}`
+        : `₹${(priceFrom ?? priceTo)?.toLocaleString()}`)
+    : undefined;
+  const onBuy = async () => {
+    await initiatePaymentWithModal({ serviceId: service.id });
+  };
 
   return (
     <div className="py-20 sm:py-28">
@@ -29,6 +42,18 @@ export default function ServiceDetailSection({ service }: ServiceDetailProps) {
           <p className="mt-6 text-lg text-center text-muted-foreground max-w-3xl mx-auto">
             {service.longDescription}
           </p>
+          <div className="mt-6 flex items-center justify-center gap-4">
+            <div className="text-xl font-semibold">
+              {priceLabel ? priceLabel : 'Contact for pricing'}
+            </div>
+            <button
+              onClick={onBuy}
+              disabled={loading || !priceFrom && !priceTo}
+              className="px-6 py-3 rounded-xl text-white bg-primary hover:bg-primary/90 disabled:opacity-50"
+            >
+              {loading ? 'Processing...' : 'Buy Now'}
+            </button>
+          </div>
         </motion.div>
 
         <motion.div

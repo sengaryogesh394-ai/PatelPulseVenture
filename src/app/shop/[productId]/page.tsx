@@ -15,7 +15,7 @@ import ReviewSectionWithHeader from '../../../components/ReviewSectionWithHeader
 import { usePayment } from '../../../hooks/usePayment';
 
 import { Zap, Check, ArrowLeft, Home } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface ProductDetailsPageProps {
   params: Promise<{ productId: string }>;
@@ -27,6 +27,8 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
   const [pricing, setPricing] = useState<any>(null);
   const { initiatePaymentWithModal, loading: paymentLoading } = usePayment();
   const router = useRouter();
+  const [showExitModal, setShowExitModal] = useState(false);
+  const allowLeaveRef = useRef(false);
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -77,6 +79,28 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
     loadProduct();
   }, [params, router]);
 
+  // Exit-intent on browser back: show discount modal
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    // Push a new history state so the first back triggers our handler
+    const statePushed = { __ppv_stay__: true };
+    try {
+      window.history.pushState(statePushed, '');
+    } catch {}
+
+    const onPopState = (e: PopStateEvent) => {
+      if (allowLeaveRef.current) return; // allow natural back when requested
+      // Immediately push state again to keep the user on the page, then show modal
+      try { window.history.pushState(statePushed, ''); } catch {}
+      setShowExitModal(true);
+    };
+
+    window.addEventListener('popstate', onPopState);
+    return () => {
+      window.removeEventListener('popstate', onPopState);
+    };
+  }, []);
+
   const handlePayment = async () => {
     if (!product) return;
     
@@ -88,21 +112,6 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
       console.error('Payment error:', error);
     }
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading product...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!product || !pricing) {
-    return null;
-  }
 
   const getImage = (id: string) => {
     const image = PlaceHolderImages.find(img => img.id === id);
@@ -153,7 +162,7 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
                 <div className="hidden overflow-hidden md:flex md:flex-row items-center justify-center gap-12">
                   <div className="flex items-center justify-center text-white text-center">
                     <div className="text-center">
-                      <p className="text-base md:text-lg lg:text-lg font-black uppercase tracking-normal" style={{ fontFamily: '"Roboto Condensed", sans-serif', fontOpticalSizing: 'auto', fontWeight: 600, fontStyle: 'normal' }}>
+                      <p className="text-base md:text-lg font-black uppercase tracking-normal" style={{ fontFamily: '"Roboto Condensed", sans-serif', fontOpticalSizing: 'auto', fontWeight: 600, fontStyle: 'normal' }}>
                         {product.promotionalHeader.topBannerText || 'ATTENTION! PRICE GOES UP AGAIN WHEN TIMER HITS 0!'}
                       </p>
                       {product.promotionalHeader.topBannerSubtext && (

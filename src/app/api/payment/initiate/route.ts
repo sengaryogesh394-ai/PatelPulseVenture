@@ -5,7 +5,14 @@ import Sale from '../../../../models/Sale';
 
 export async function POST(request: NextRequest) {
   try {
-    const { productId, serviceId, customerEmail, customerPhone } = await request.json();
+    const {
+      productId,
+      serviceId,
+      customerEmail,
+      customerPhone,
+      customAmount,
+      promoCode,
+    } = await request.json();
 
     // No authentication required: use provided customer details
     const userId = null;
@@ -94,10 +101,11 @@ export async function POST(request: NextRequest) {
     const receiptId = razorpayService.generateReceiptId(baseId);
 
     // Convert amount to paise (Razorpay uses paise)
-    const unitAmount = itemType === 'service' 
+    const baseAmount = itemType === 'service' 
       ? (typeof item.priceFrom === 'number' ? item.priceFrom : (typeof item.priceTo === 'number' ? item.priceTo : 0))
       : item.price;
-    const amountInPaise = Math.round((unitAmount || 0) * 100);
+    const finalAmount = typeof customAmount === 'number' && customAmount > 0 ? customAmount : baseAmount;
+    const amountInPaise = Math.round((finalAmount || 0) * 100);
 
     try {
       // Create Razorpay order
@@ -113,14 +121,17 @@ export async function POST(request: NextRequest) {
           customerPhone: customerPhone || '',
           downloadLink: item.downloadLink || '',
           instructions: itemType === 'product' ? `Download your purchase: ${item.downloadLink || 'Link will be provided'}` : 'We will contact you to fulfill your service shortly',
-          supportEmail: 'support@digiaddaworld.com'
+          supportEmail: 'support@digiaddaworld.com',
+          promoCode: promoCode || '',
+          baseAmount,
+          finalAmount,
         }
       });
 
       // Debug logging
       console.log('Razorpay order created:', {
         orderId: razorpayOrder.id,
-        amount: unitAmount,
+        amount: finalAmount,
         amountInPaise,
         productName: item.name,
         receiptId,
@@ -136,7 +147,7 @@ export async function POST(request: NextRequest) {
           productId: itemType === 'product' ? productId : undefined,
           productName: item.name,
           productCategory: itemType === 'product' ? (item.category || 'Digital Product') : 'Service',
-          productPrice: unitAmount,
+          productPrice: finalAmount,
           downloadLink: item.downloadLink,
           userId: userId,
           customerEmail: userEmail,
@@ -144,7 +155,7 @@ export async function POST(request: NextRequest) {
           customerName: userName,
           orderId: receiptId, // Using receipt ID as our internal order ID
           razorpayOrderId: razorpayOrder.id,
-          amount: unitAmount,
+          amount: finalAmount,
           currency: 'INR',
           receiptId: receiptId,
           notes: {
@@ -154,7 +165,8 @@ export async function POST(request: NextRequest) {
             productName: item.name,
             downloadLink: item.downloadLink,
             userId: userId,
-            userEmail: userEmail
+            userEmail: userEmail,
+            promoCode: promoCode || '',
           },
           userAgent: request.headers.get('user-agent') || '',
           ipAddress: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || '',
@@ -179,7 +191,7 @@ export async function POST(request: NextRequest) {
         success: true,
         data: {
           orderId: razorpayOrder.id,
-          amount: unitAmount,
+          amount: finalAmount,
           amountInPaise: razorpayOrder.amount,
           currency: razorpayOrder.currency,
           productName: item.name,
@@ -188,7 +200,8 @@ export async function POST(request: NextRequest) {
           keyId: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
           customerEmail,
           customerPhone,
-          receiptId
+          receiptId,
+          promoCode: promoCode || '',
         }
       });
 

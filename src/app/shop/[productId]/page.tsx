@@ -137,9 +137,29 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
     return null;
   }
 
+  const exitDiscountPercent = 10;
+  const exitDiscountedPrice =
+    pricing.currentPrice && pricing.currentPrice > 0
+      ? Math.max(1, Math.round(pricing.currentPrice * (1 - exitDiscountPercent / 100)))
+      : pricing.currentPrice;
+  const exitSavings =
+    pricing.currentPrice && exitDiscountedPrice
+      ? Math.max(0, pricing.currentPrice - exitDiscountedPrice)
+      : 0;
+
   const handleExitConfirmPurchase = async () => {
     setShowExitModal(false);
-    await handlePayment();
+    if (!product) return;
+
+    try {
+      await initiatePaymentWithModal({
+        productId: product._id,
+        customAmount: exitDiscountedPrice || pricing.currentPrice,
+        promoCode: 'EXIT10',
+      });
+    } catch (error) {
+      console.error('Payment error:', error);
+    }
   };
 
   const handleExitLeave = () => {
@@ -155,21 +175,22 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
             <div className="max-w-lg w-full bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-orange-300/60 overflow-hidden">
               <div className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 px-6 py-4 text-white text-center">
                 <p className="text-[10px] uppercase tracking-[0.3em] opacity-90 mb-1">wait! special offer</p>
-                <p className="text-xl md:text-2xl font-black">Before you go, grab {product.name} at our best price</p>
+                <p className="text-xl md:text-2xl font-black">Before you go, enjoy an extra {exitDiscountPercent}% off {product.name}</p>
               </div>
               <div className="p-6 space-y-4">
                 <p className="text-gray-800 dark:text-gray-100 text-sm md:text-base">
-                  You're about to leave this page. Lock in instant access to the complete {product.category || 'digital'} business system with a limited-time discount.
+                  You're about to leave this page. Lock in instant access to the complete {product.category || 'digital'} business system with a built-in exit discount.
                 </p>
                 <div className="rounded-2xl border border-orange-200 dark:border-orange-700 bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/30 dark:to-yellow-900/20 p-4 flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-xs text-gray-600 dark:text-gray-300 line-through mb-0.5">₹{pricing.originalPrice || '997'}</p>
-                    <p className="text-2xl font-black text-orange-600 dark:text-orange-300">Now ₹{pricing.currentPrice || '394'}</p>
-                    {pricing.discountPercentage > 0 && (
-                      <p className="text-xs font-semibold text-red-600 dark:text-red-400 mt-1">
-                        Save {pricing.discountPercentage}% today only
-                      </p>
+                    {pricing.originalPrice && (
+                      <p className="text-xs text-gray-500 dark:text-gray-400 line-through mb-0.5">MRP ₹{pricing.originalPrice}</p>
                     )}
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Standard Price: ₹{pricing.currentPrice || '394'}</p>
+                    <p className="text-2xl font-black text-orange-600 dark:text-orange-300">Exit Price: ₹{exitDiscountedPrice || pricing.currentPrice || '394'}</p>
+                    <p className="text-xs font-semibold text-red-600 dark:text-red-400 mt-1">
+                      Extra {exitDiscountPercent}% OFF applied automatically{exitSavings ? ` (Save ₹${exitSavings})` : ''}
+                    </p>
                   </div>
                   <div className="text-center text-[11px] text-gray-700 dark:text-gray-200">
                     <p className="font-semibold mb-1">Instant Download</p>
@@ -190,7 +211,7 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
                     ) : (
                       <span className="flex items-center justify-center gap-2">
                         <span className="hidden sm:inline">🔥</span>
-                        Yes, Unlock My Discount
+                        Yes, Claim {exitDiscountPercent}% OFF
                       </span>
                     )}
                   </button>

@@ -7,6 +7,8 @@ interface PaymentData {
   serviceId?: string;
   customerEmail?: string;
   customerPhone?: string;
+  promoCode?: string;
+  customAmount?: number;
 }
 
 interface PaymentResponse {

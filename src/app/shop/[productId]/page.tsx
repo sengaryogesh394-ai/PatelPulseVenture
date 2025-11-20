@@ -137,81 +137,162 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
     return null;
   }
 
+  const handleExitConfirmPurchase = async () => {
+    setShowExitModal(false);
+    await handlePayment();
+  };
+
+  const handleExitLeave = () => {
+    allowLeaveRef.current = true;
+    router.back();
+  };
+
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 touch-manipulation" style={{ fontFamily: 'Poppins, sans-serif' }}>
+        {/* Exit-Intent Discount Modal */}
+        {showExitModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
+            <div className="max-w-lg w-full bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-orange-300/60 overflow-hidden">
+              <div className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 px-6 py-4 text-white text-center">
+                <p className="text-[10px] uppercase tracking-[0.3em] opacity-90 mb-1">wait! special offer</p>
+                <p className="text-xl md:text-2xl font-black">Before you go, grab {product.name} at our best price</p>
+              </div>
+              <div className="p-6 space-y-4">
+                <p className="text-gray-800 dark:text-gray-100 text-sm md:text-base">
+                  You're about to leave this page. Lock in instant access to the complete {product.category || 'digital'} business system with a limited-time discount.
+                </p>
+                <div className="rounded-2xl border border-orange-200 dark:border-orange-700 bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/30 dark:to-yellow-900/20 p-4 flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 line-through mb-0.5">₹{pricing.originalPrice || '997'}</p>
+                    <p className="text-2xl font-black text-orange-600 dark:text-orange-300">Now ₹{pricing.currentPrice || '394'}</p>
+                    {pricing.discountPercentage > 0 && (
+                      <p className="text-xs font-semibold text-red-600 dark:text-red-400 mt-1">
+                        Save {pricing.discountPercentage}% today only
+                      </p>
+                    )}
+                  </div>
+                  <div className="text-center text-[11px] text-gray-700 dark:text-gray-200">
+                    <p className="font-semibold mb-1">Instant Download</p>
+                    <p>30-Day Money Back Guarantee</p>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 mt-4">
+                  <button
+                    onClick={handleExitConfirmPurchase}
+                    disabled={paymentLoading}
+                    className="flex-1 bg-gradient-to-r from-red-600 via-orange-600 to-yellow-500 hover:from-red-700 hover:via-orange-700 hover:to-yellow-600 disabled:from-gray-400 disabled:to-gray-500 text-white px-4 py-3 rounded-full text-sm md:text-base font-black shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:transform-none disabled:cursor-not-allowed"
+                  >
+                    {paymentLoading ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <div className="h-4 w-4 border-b-2 border-white rounded-full animate-spin" />
+                        Processing Payment...
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="hidden sm:inline">🔥</span>
+                        Yes, Unlock My Discount
+                      </span>
+                    )}
+                  </button>
+                  <button
+                    onClick={handleExitLeave}
+                    className="flex-1 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 px-4 py-3 rounded-full text-sm md:text-base font-semibold bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  >
+                    No Thanks, Take Me Back
+                  </button>
+                </div>
+                <button
+                  onClick={() => setShowExitModal(false)}
+                  className="mt-2 w-full text-center text-[11px] text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
+                  Continue browsing this page
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         {/* Promotional Header Section - Exact Design from Image */}
         {product.promotionalHeader?.enabled && (
           <section className="w-screen">
             {/* Top Red Banner with Timer */}
             <div className="w-full bg-[#FF0000] py-2 px-2 sm:px-4">
-              <div className="container mx-auto max-w-7xl">
-                {/* Mobile Layout - Stacked */}
-                <div className="flex overflow-hidden flex-col items-center justify-center gap-3 md:hidden">
-                  <div className="text-center text-white">
-                    <p className="text-sm font-black uppercase tracking-normal" style={{ fontFamily: '"Roboto Condensed", sans-serif', fontOpticalSizing: 'auto', fontWeight: 600, fontStyle: 'normal' }}>
+              {/* Mobile Layout - Stacked */}
+              <div className="flex overflow-hidden flex-col items-center justify-center gap-3 md:hidden">
+                <div className="text-center text-white">
+                  <p className="text-sm font-black uppercase tracking-normal" style={{ fontFamily: '"Roboto Condensed", sans-serif', fontOpticalSizing: 'auto', fontWeight: 600, fontStyle: 'normal' }}>
+                    {product.promotionalHeader.topBannerText || 'ATTENTION! PRICE GOES UP AGAIN WHEN TIMER HITS 0!'}
+                  </p>
+                  {product.promotionalHeader.topBannerSubtext && (
+                    <p className="text-xs font-bold uppercase tracking-normal" style={{ fontFamily: '"Roboto Condensed", sans-serif', fontOpticalSizing: 'auto', fontWeight: 600, fontStyle: 'normal' }}>
+                      + {product.promotionalHeader.topBannerSubtext}
+                    </p>
+                  )}
+                </div>
+                
+                {/* Mobile Timer & Button */}
+                <div className="flex items-center gap-3">
+                  <PromotionalHeaderTimer endDate={new Date(pricing.timerEndDate)} />
+                  <button 
+                    onClick={handlePayment}
+                    disabled={paymentLoading}
+                    className="flex flex-col items-center bg-green-500 hover:bg-green-400 disabled:bg-gray-400 text-white px-2 py-2 rounded-full text-center font-extrabold whitespace-nowrap transition-colors shadow-lg border border-green-300" 
+                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 800, boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.2), inset 2px 2px 4px rgba(255,255,255,0.3)' }}
+                  >
+                    <span className="text-xs leading-none">{pricing.buttonText} {pricing.buttonPrice}</span>
+                    <span className="text-[8px] leading-none opacity-90">Risk FREE - 30 Days Money Back Guarantee</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Desktop Layout - Side by Side */}
+              <div className="hidden overflow-hidden md:flex md:flex-row items-center justify-center gap-12">
+                <div className="flex items-center justify-center text-white text-center">
+                  <div className="text-center">
+                    <p className="text-base md:text-lg font-black uppercase tracking-normal" style={{ fontFamily: '"Roboto Condensed", sans-serif', fontOpticalSizing: 'auto', fontWeight: 600, fontStyle: 'normal' }}>
                       {product.promotionalHeader.topBannerText || 'ATTENTION! PRICE GOES UP AGAIN WHEN TIMER HITS 0!'}
                     </p>
                     {product.promotionalHeader.topBannerSubtext && (
-                      <p className="text-xs font-bold uppercase tracking-normal" style={{ fontFamily: '"Roboto Condensed", sans-serif', fontOpticalSizing: 'auto', fontWeight: 600, fontStyle: 'normal' }}>
+                      <p className="text-xs md:text-sm font-bold uppercase tracking-normal" style={{ fontFamily: '"Roboto Condensed", sans-serif', fontOpticalSizing: 'auto', fontWeight: 600, fontStyle: 'normal' }}>
                         + {product.promotionalHeader.topBannerSubtext}
                       </p>
                     )}
                   </div>
-                  
-                  {/* Mobile Timer & Button */}
-                  <div className="flex items-center gap-3">
-                    <PromotionalHeaderTimer endDate={new Date(pricing.timerEndDate)} />
-                    <button 
-                      onClick={handlePayment}
-                      disabled={paymentLoading}
-                      className="flex flex-col items-center bg-green-500 hover:bg-green-400 disabled:bg-gray-400 text-white px-2 py-2 rounded-full text-center font-extrabold whitespace-nowrap transition-colors shadow-lg border border-green-300" 
-                      style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 800, boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.2), inset 2px 2px 4px rgba(255,255,255,0.3)' }}
-                    >
-                      <span className="text-xs leading-none">{pricing.buttonText} {pricing.buttonPrice}</span>
-                      <span className="text-[8px] leading-none opacity-90">Risk FREE - 30 Days Money Back Guarantee</span>
-                    </button>
-                  </div>
                 </div>
-
-                {/* Desktop Layout - Side by Side */}
-                <div className="hidden overflow-hidden md:flex md:flex-row items-center justify-center gap-12">
-                  <div className="flex items-center justify-center text-white text-center">
-                    <div className="text-center">
-                      <p className="text-base md:text-lg font-black uppercase tracking-normal" style={{ fontFamily: '"Roboto Condensed", sans-serif', fontOpticalSizing: 'auto', fontWeight: 600, fontStyle: 'normal' }}>
-                        {product.promotionalHeader.topBannerText || 'ATTENTION! PRICE GOES UP AGAIN WHEN TIMER HITS 0!'}
-                      </p>
-                      {product.promotionalHeader.topBannerSubtext && (
-                        <p className="text-xs md:text-sm font-bold uppercase tracking-normal" style={{ fontFamily: '"Roboto Condensed", sans-serif', fontOpticalSizing: 'auto', fontWeight: 600, fontStyle: 'normal' }}>
-                          + {product.promotionalHeader.topBannerSubtext}
-                        </p>
-                      )}
-                    </div>
-                  </div>
+                
+                {/* Desktop Timer & Button */}
+                <div className="flex items-center gap-4">
+                  <PromotionalHeaderTimer endDate={new Date(pricing.timerEndDate)} />
                   
-                  {/* Desktop Timer & Button */}
-                  <div className="flex items-center gap-4">
-                    <PromotionalHeaderTimer endDate={new Date(pricing.timerEndDate)} />
-                    
-                    {/* Green Button - Desktop */}
-                    <button 
-                      onClick={handlePayment}
-                      disabled={paymentLoading}
-                      className="flex flex-col items-center bg-green-500 hover:bg-green-400 disabled:bg-gray-400 text-white px-6 py-2 rounded-full text-center font-extrabold whitespace-nowrap transition-colors shadow-lg border-2 border-green-300" 
-                      style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 800, boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.2), inset 2px 2px 4px rgba(255,255,255,0.3)' }}
-                    >
-                      <span className="text-sm md:text-base leading-tight">{pricing.buttonText} {pricing.buttonPrice}</span>
-                      <span className="text-xs md:text-sm leading-tight mt-1 opacity-90">Risk FREE - 30 Days Money Back Guarantee</span>
-                    </button>
-                  </div>
+                  {/* Green Button - Desktop */}
+                  <button 
+                    onClick={handlePayment}
+                    disabled={paymentLoading}
+                    className="flex flex-col items-center bg-green-500 hover:bg-green-400 disabled:bg-gray-400 text-white px-6 py-2 rounded-full text-center font-extrabold whitespace-nowrap transition-colors shadow-lg border-2 border-green-300" 
+                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 800, boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.2), inset 2px 2px 4px rgba(255,255,255,0.3)' }}
+                  >
+                    <span className="text-sm md:text-base leading-tight">{pricing.buttonText} {pricing.buttonPrice}</span>
+                    <span className="text-xs md:text-sm leading-tight mt-1 opacity-90">Risk FREE - 30 Days Money Back Guarantee</span>
+                  </button>
                 </div>
               </div>
             </div>
 
             {/* Main Content Area - Beige Background */}
             <div className="w-screen overflow-hidden bg-[#FAF0E6] py-12 md:py-16 px-4">
-              {/* Back Button - Very Left */}
-             
-              
+              {/* Back Button - Very Left (opens exit popup) */}
+              <div className="mb-6 text-left">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="lg"
+                  className="bg-white/90 hover:bg-white border-orange-300 text-orange-700 hover:text-orange-900 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                  onClick={() => setShowExitModal(true)}
+                >
+                  <ArrowLeft className="w-5 h-5 mr-2" />
+                  <span className="font-bold">Back</span>
+                </Button>
+              </div>
+
               <div className="w-screen overflow-hidden ml-[-1rem] mt-[-3rem] md:mt-[-5rem] mx-auto relative">
                 {/* Hero Section Background with Shadow */}
                 <div className="relative bg-gradient-to-br from-orange-50 via-white to-teal-50 md:bg-gradient-to-br md:from-orange-50 md:via-white md:to-teal-50 overflow-hidden md:rounded-none shadow-xl md:shadow-none">

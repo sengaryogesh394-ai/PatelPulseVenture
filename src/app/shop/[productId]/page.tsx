@@ -1166,12 +1166,22 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
 
               {/* Gallery CTA */}
               <div className="text-center">
-                <button className="bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 hover:from-yellow-700 hover:via-orange-700 hover:to-red-700 text-white px-10 py-4 rounded-full text-lg md:text-xl font-black shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}>
-                  <span className="flex items-center justify-center gap-3">
-                   
-                    Get These Templates Now - ₹{pricing.currentPrice || '394'}
-                   
-                  </span>
+                <button
+                  onClick={handlePayment}
+                  disabled={paymentLoading}
+                  className="bg-gradient-to-r from-yellow-600 via-orange-600 to-red-600 hover:from-yellow-700 hover:via-orange-700 hover:to-red-700 text-white px-10 py-4 rounded-full text-lg md:text-xl font-black shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105" 
+                  style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}
+                >
+                  {paymentLoading ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      Processing Payment...
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center gap-3">
+                      Get These Templates Now - ₹{pricing.currentPrice || '394'}
+                    </span>
+                  )}
                 </button>
               </div>
             </div>
@@ -1250,11 +1260,16 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
                     Join thousands who've built successful businesses with {product.name}
                   </p>
                   
-                  <button className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white px-12 py-5 rounded-full text-xl md:text-2xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border-4 border-white/30 animate-pulse" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}>
-                    <span className="flex items-center justify-center gap-3">
-                     
+                  <button
+                    onClick={handlePayment}
+                    disabled={paymentLoading}
+                    className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white lg:px-12 px-4 lg:py-5 py-2 rounded-full text-xl md:text-2xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border-4 border-white/30 animate-pulse" 
+                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}
+                  >
+                    <span className="flex items-center justify-center lg:gap-3 gap-0">
+                      <span className="animate-bounce opacity-0 lg:opacity-100">🛒</span>
                       Start Your Business - ₹{pricing.currentPrice || '394'}
-                      
+                      <span className="animate-bounce opacity-0 lg:opacity-100">🎁</span>
                     </span>
                   </button>
                 </div>
@@ -1355,13 +1370,18 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
                           Complete {product.name} system with {product.features.length}+ premium features
                         </p>
                         
-                        <button className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white lg:px-12 px-4 lg:py-5 py-2 rounded-full text-xl md:text-2xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border-4 border-white/30 animate-pulse" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}>
-                          <span className="flex items-center justify-center lg:gap-3 gap-0">
-                            <span className="animate-bounce opacity-0 lg:opacity-100">🛒</span>
-                            Get Complete Package - ₹{pricing.currentPrice.toFixed(0)}
-                            <span className="animate-bounce opacity-0 lg:opacity-100">🎁</span>
-                          </span>
-                        </button>
+                       <button
+                    onClick={handlePayment}
+                    disabled={paymentLoading}
+                    className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white lg:px-12 px-4 lg:py-5 py-2 rounded-full text-xl md:text-2xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border-4 border-white/30 animate-pulse" 
+                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}
+                  >
+                    <span className="flex items-center justify-center lg:gap-3 gap-0">
+                      <span className="animate-bounce opacity-0 lg:opacity-100">🛒</span>
+                      Get This for - ₹{pricing.currentPrice || '394'}
+                      <span className="animate-bounce opacity-0 lg:opacity-100">🎁</span>
+                    </span>
+                  </button>
                       </div>
                     </div>
                   </div>
@@ -2235,11 +2255,16 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
                     </span>
                   </div>
 
-                  <button className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white px-12 py-5 rounded-full text-xl md:text-2xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border-4 border-white/30 animate-pulse" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}>
-                    <span className="flex items-center justify-center gap-3">
-                      <span className="animate-bounce">🛡️</span>
-                      Start Risk-Free Today - ₹{pricing.currentPrice || '394'}
-                      <span className="animate-bounce">✨</span>
+                  <button
+                    onClick={handlePayment}
+                    disabled={paymentLoading}
+                    className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white lg:px-12 px-4 lg:py-5 py-2 rounded-full text-xl md:text-2xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border-4 border-white/30 animate-pulse" 
+                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}
+                  >
+                    <span className="flex items-center justify-center lg:gap-3 gap-0">
+                      <span className="animate-bounce opacity-0 lg:opacity-100">🛒</span>
+                      Start Risk Free - ₹{pricing.currentPrice || '394'}
+                      <span className="animate-bounce opacity-0 lg:opacity-100">🎁</span>
                     </span>
                   </button>
 
@@ -2324,11 +2349,16 @@ const ProductDetailsPage = ({ params }: ProductDetailsPageProps) => {
                     </div>
                   </div>
 
-                  <button className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white px-12 py-5 rounded-full text-xl md:text-2xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border-4 border-white/30 animate-pulse" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}>
-                    <span className="flex items-center justify-center gap-3">
-                      <span className="animate-bounce">⭐</span>
-                      Join Success Stories - ₹{pricing.currentPrice || '394'}
-                      <span className="animate-bounce">🚀</span>
+                   <button
+                    onClick={handlePayment}
+                    disabled={paymentLoading}
+                    className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 hover:from-yellow-600 hover:via-orange-600 hover:to-red-600 text-white lg:px-12 px-4 lg:py-5 py-2 rounded-full text-xl md:text-2xl font-black shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border-4 border-white/30 animate-pulse" 
+                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}
+                  >
+                    <span className="flex items-center justify-center lg:gap-3 gap-0">
+                      <span className="animate-bounce opacity-0 lg:opacity-100">🛒</span>
+                      Join Risk Free - ₹{pricing.currentPrice || '394'}
+                      <span className="animate-bounce opacity-0 lg:opacity-100">🎁</span>
                     </span>
                   </button>
 

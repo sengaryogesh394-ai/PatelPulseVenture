@@ -290,7 +290,12 @@ export const usePayment = () => {
         }
       }
     } catch (err: any) {
-      setError(err.message);
+      const message = err?.message || 'Payment initiation failed. Please try again.';
+      console.error('initiatePaymentWithModal error:', err);
+      setError(message);
+      if (typeof window !== 'undefined') {
+        alert(message);
+      }
     } finally {
       setLoading(false);
     }

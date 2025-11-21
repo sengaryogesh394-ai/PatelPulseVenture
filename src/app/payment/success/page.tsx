@@ -146,7 +146,7 @@ function PaymentSuccessContent() {
         {/* Next Steps */}
         <div className="mb-6">
           <h3 className="text-lg font-bold text-gray-900 mb-3">
-            {isPaymentSuccess ? "What's Next?" : "Access Your Product"}
+            {isPaymentSuccess ? "What's Next?" : "Payment Issue Details"}
           </h3>
           <div className="text-left space-y-2 text-sm text-gray-600">
             {isPaymentSuccess ? (
@@ -168,15 +168,15 @@ function PaymentSuccessContent() {
               <>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  <span>You can still download your product below</span>
+                  <span>If payment was deducted, contact support with your Order ID</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  <span>Try payment again if needed</span>
+                  <span>You can try the payment again from the product page</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  <span>Contact support for payment assistance</span>
+                  <span>Our team will help you verify and complete your order</span>
                 </div>
               </>
             )}
@@ -190,8 +190,7 @@ function PaymentSuccessContent() {
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-500"></div>
               Loading product details...
             </div>
-          ) : product ? (
-            // Always show download button if we have product info
+          ) : isPaymentSuccess && product ? (
             <a 
               href={product.downloadLink || '#'} 
               target={product.downloadLink ? "_blank" : "_self"}
@@ -212,7 +211,7 @@ function PaymentSuccessContent() {
           ) : (
             <div className="w-full bg-yellow-100 text-yellow-700 py-3 px-6 rounded-full font-bold flex items-center justify-center gap-2">
               <span>📧</span>
-              Download link will be sent via email
+              Download link will be sent after successful payment confirmation
             </div>
           )}
           

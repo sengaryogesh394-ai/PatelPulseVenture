@@ -107,7 +107,7 @@ export default function AdminSalesPage() {
               <th className="text-left p-3 text-sm font-semibold">Name</th>
               <th className="text-left p-3 text-sm font-semibold">Customer</th>
               <th className="text-left p-3 text-sm font-semibold">Amount</th>
-             
+              <th className="text-left p-3 text-sm font-semibold">Payment Status</th>
               <th className="text-left p-3 text-sm font-semibold">Order ID</th>
             </tr>
           </thead>
@@ -137,7 +137,7 @@ export default function AdminSalesPage() {
                       </div>
                     </td>
                     <td className="p-3 text-sm">₹{(s.amount || s.productPrice)?.toLocaleString?.() || s.amount}</td>
-                   
+                    <td className="p-3 text-sm capitalize">{s.paymentStatus}</td>
                     <td className="p-3 text-xs text-gray-600">
                       <div className="flex flex-col">
                         <span>{s.razorpayOrderId || s.orderId}</span>
